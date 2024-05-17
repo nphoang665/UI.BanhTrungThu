@@ -1,0 +1,34 @@
+button {
+    margin: 2px;
+  }
+  .dv_img_previewing {
+    position: relative;
+  }
+  .btn_Delete_Img {
+    position: absolute;
+    right: 2px;
+    top: -2px;
+    border: 0;
+    background-color: red;
+    color: white;
+  }
+  .dv_khung_img {
+    border: 1px solid gray;
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

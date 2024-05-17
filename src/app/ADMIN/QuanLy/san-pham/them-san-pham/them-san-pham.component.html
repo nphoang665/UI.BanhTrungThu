@@ -1,0 +1,52 @@
+<form [formGroup]="themSanPhamForm">
+    <h1 mat-dialog-title>Thêm mới sản phẩm</h1>
+    <div mat-dialog-content>
+        <mat-form-field>
+          <mat-label>Tên loại sản phẩm</mat-label>
+          <input matInput formControlName="tenLoai" />
+        
+        </mat-form-field>
+    
+        <mat-form-field>
+          <mat-label>Mô tả</mat-label>
+          <input matInput formControlName="moTa"/>
+         
+        </mat-form-field>
+        <div class="col-lg-12">
+            <div class="form-group">
+              <button mat-raised-button color="primary" (click)="fileInput.click()">
+                Chọn ảnh
+              </button>
+              <input #fileInput type="file" (change)="onFileSelected($event)" multiple style="display: none;">
+            </div>
+            @if(previewingFileImg.length >0){
+
+            <div class="col-lg-12">
+              <div class="row dv_khung_img p-2">
+
+
+
+                @for(item of previewingFileImg; track $index){
+
+                <div class="dv_img_previewing col-auto gx-2">
+
+                  <img [src]="item"
+                    style="width: 150px; height: 70px; object-fit: cover; border: 1px solid #40679E;" alt="img">
+                  <button (click)="XoaImgPreviewing($index)" class="btn_Delete_Img ps-1 pe-1"><i
+                      class="bi bi-x"></i></button>
+                </div>
+
+                }
+
+              </div>
+            </div>
+            }
+          </div>
+
+    
+      </div>
+      <div mat-dialog-actions align="end">
+        <button  mat-dialog-close mat-raised-button color="warn">Đóng</button>
+        <button mat-raised-button color="primary">Lưu</button>
+      </div>
+</form>

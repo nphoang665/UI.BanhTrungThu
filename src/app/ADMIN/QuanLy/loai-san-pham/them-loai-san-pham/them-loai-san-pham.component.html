@@ -1,0 +1,22 @@
+<form [formGroup]="myForm" (ngSubmit)="themLoaiSanPham()" style="z-index: 999;">
+    <h1 mat-dialog-title>Thêm mới loại sản phẩm</h1>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Tên loại sản phẩm</mat-label>
+        <input matInput formControlName="tenLoai" />
+      
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Mô tả</mat-label>
+        <input matInput formControlName="moTa"/>
+       
+      </mat-form-field>
+  
+  
+    </div>
+    <div mat-dialog-actions align="end">
+      <button (click)="ClosePopup()" mat-dialog-close mat-raised-button color="warn">Đóng</button>
+      <button mat-raised-button color="primary"  [disabled]="myForm.invalid">Lưu</button>
+    </div>
+  </form>

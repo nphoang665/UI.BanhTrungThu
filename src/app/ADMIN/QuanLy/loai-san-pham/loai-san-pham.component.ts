@@ -3,8 +3,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LoaiSanPham } from '../../models/loai-san-pham.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { LoaiSanPhamService } from '../../services/loai-san-pham.service';
 import { MatDialog } from '@angular/material/dialog';
+import { ThemLoaiSanPhamComponent } from './them-loai-san-pham/them-loai-san-pham.component';
+import { SuaLoaiSanPhamComponent } from './sua-loai-san-pham/sua-loai-san-pham.component';
+import { LoaiSanPhamService } from '../../services/LoaiSanPham/loai-san-pham.service';
 
 @Component({
   selector: 'app-loai-san-pham',
@@ -13,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class LoaiSanPhamComponent implements AfterViewInit, OnInit  {
 
-  displayedColumns: string[] = ['maLoai', 'tenLoai', 'khoiLuong', 'action'];
+  displayedColumns: string[] = ['maLoai', 'tenLoai', 'moTa', 'action'];
   dataSource: MatTableDataSource<LoaiSanPham>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -40,6 +42,46 @@ export class LoaiSanPhamComponent implements AfterViewInit, OnInit  {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  OpenPopup(id: any, title: any): void {
+    const _popup = this.dialog.open(ThemLoaiSanPhamComponent, {
+      width: '40%',
+      enterAnimationDuration: '250ms',
+      exitAnimationDuration: '250ms',
+      data: {
+        title: title,
+        idLoaiSanPham: id 
+      },
+    });
+    _popup.afterClosed().subscribe((item) => {
+      // console.log(item);
+      this.getLoaiSanPhamData(); 
+    });
+  }
+  OpenPopupSua(id: any, title: any): void {
+    const _popup = this.dialog.open(SuaLoaiSanPhamComponent, {
+      width: '40%',
+      enterAnimationDuration: '250ms',
+      exitAnimationDuration: '250ms',
+      data: {
+        title: title,
+        idLoaiSanPham: id 
+      },
+    });
+    _popup.afterClosed().subscribe((item) => {
+      // console.log(item);
+      this.getLoaiSanPhamData();
+    });
+  }
+  themLoaiSanPham(): void {
+    this.OpenPopup(0, 'Thêm mới loại sản phẩm');
+  }
+  suaLoaiSanPham(id: any): void {
+    this.OpenPopupSua(id, 'Sửa loại sản phẩm');
+    console.log(id);
+    
+  }
+
 
   getLoaiSanPhamData(){
     this.loaiSanPhamServices.getAllLoaiSanPham().subscribe(

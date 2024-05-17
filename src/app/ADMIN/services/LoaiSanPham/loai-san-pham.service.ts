@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoaiSanPham, ThemLoaiSanPham } from '../models/loai-san-pham.model';
+import { LoaiSanPham, SuaLoaiSanPham, ThemLoaiSanPham } from '../../models/loai-san-pham.model';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,15 @@ export class LoaiSanPhamService {
     return this.http.post<LoaiSanPham>(`${environment.apiBaseUrl}/api/LoaiSanPham`, data);
   }
 
+  suaLoaiSanPham(id:string,data:SuaLoaiSanPham):Observable<LoaiSanPham>{
+    return this.http.put<LoaiSanPham>(`${environment.apiBaseUrl}/api/LoaiSanPham/${id}`,data)
+  }
+
   getAllLoaiSanPham():Observable<LoaiSanPham[]>{
     return this.http.get<LoaiSanPham[]>(`${environment.apiBaseUrl}/api/LoaiSanPham`)
+  }
+
+  getLoaiSanPhamById(id:string):Observable<LoaiSanPham>{
+    return this.http.get<LoaiSanPham>(`${environment.apiBaseUrl}/api/LoaiSanPham/${id}`)
   }
 }
