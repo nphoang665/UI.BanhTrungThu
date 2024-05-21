@@ -1,0 +1,79 @@
+<app-header></app-header>
+
+
+<div class="max-w-screen-xl mx-auto p-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-2">
+        <h2 class="text-xl font-semibold mb-4">Thông tin giao hàng</h2>
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname">
+              Họ và tên
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fullname" type="text" placeholder="Họ và tên">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+              Email
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+              Số điện thoại
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Số điện thoại">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+              Địa chỉ
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" placeholder="Địa chỉ">
+          </div>
+
+          <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+              Tiếp tục đến phương thức thanh toán
+            </button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <h2 class="text-xl font-semibold mb-4">Giỏ hàng</h2>
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div class="mb-4">
+            <div class="flex justify-between items-center">
+              <div>BÁNH MỲ PARKET CÓ NHÂN</div>
+              <div>300,000₫</div>
+            </div>
+            <div class="flex justify-between items-center mt-2">
+              <div>BÁNH SANDWICH SỮA CHUA LAVA</div>
+              <div>8,000₫</div>
+            </div>
+          </div>
+          <div class="mb-4">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="discount-code" type="text" placeholder="Mã giảm giá">
+            <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" type="button">
+              Sử dụng
+            </button>
+          </div>
+          <div class="flex justify-between items-center">
+            <div>Tạm tính</div>
+            <div>308,000₫</div>
+          </div>
+          <div class="flex justify-between items-center mt-2">
+            <div>Phí vận chuyển</div>
+            <div>-</div>
+          </div>
+          <div class="flex justify-between items-center mt-2 font-bold">
+            <div>Tổng cộng</div>
+            <div>308,000₫</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <app-footer></app-footer>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { SanPhamService } from '../../../services/SanPham/san-pham.service';
 import { ToastrService } from 'ngx-toastr';
+import { LoaiSanPhamService } from '../../../services/LoaiSanPham/loai-san-pham.service';
+import { LoaiSanPham } from '../../../models/loai-san-pham.model';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-them-san-pham',
@@ -11,24 +14,34 @@ import { ToastrService } from 'ngx-toastr';
 export class ThemSanPhamComponent implements OnInit{
   selectedFile: any[] = [];
   previewingFileImg: any[] = [];
+  LoaiSanPham:any[]=[]
   themSanPhamForm:FormGroup = new FormGroup({
     maLoai:new FormControl(''),
     tenSanPham: new FormControl(''),
     gia: new FormControl(''),
     moTa: new FormControl(''),
     soLuongTrongKho: new FormControl(''),
-    ngayHetHan: new FormControl(''),
-    ngayNhap: new FormControl(''),
+    ngayThem: new FormControl(new Date()),
     tinhTrang: new FormControl(''),
   })
 
   constructor(
     private sanPhamServices:SanPhamService,
     private toastr: ToastrService,
+    private loaiSanPhamServices:LoaiSanPhamService,
+    private ref: MatDialogRef<ThemSanPhamComponent>,
   ){}
 
   ngOnInit(): void {
     
+    this.loaiSanPhamServices.getAllLoaiSanPham().subscribe((data:LoaiSanPham[])=>{
+      this.LoaiSanPham = data;
+      // console.log(this.LoaiSanPham);
+      
+    })
+  }
+  ClosePopup() {
+    this.ref.close();
   }
 
   themSanPham(){
@@ -45,7 +58,10 @@ export class ThemSanPhamComponent implements OnInit{
         this.toastr.success('Thêm sản phẩm thành công', 'Thông báo', {
           timeOut: 1000,
         });
-      }
+        this.ClosePopup();
+      }, error: (error) => {
+        console.error('Lỗi khi thêm sản phẩm:', error);
+      },
     })
   }
   onFileSelected(event: any) {

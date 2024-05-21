@@ -13,11 +13,12 @@ import { LoaiSanPhamService } from '../../../services/LoaiSanPham/loai-san-pham.
 export class SuaLoaiSanPhamComponent implements OnInit {
   model?:LoaiSanPham;
   inputdata: any;
-  myForm: FormGroup = new FormGroup({
+  myForm : FormGroup = new FormGroup({
     maLoai: new FormControl(''),
     tenLoai: new FormControl(''),
     moTa: new FormControl(''),
   })
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,14 +30,14 @@ export class SuaLoaiSanPhamComponent implements OnInit {
 
   ngOnInit(): void {
     this.inputdata = this.data;
-    this.id = this.data.idDichVu;
+    this.id = this.data.idLoaiSanPham;
     if (this.id) {
       this.loaiSanPhamServices.getLoaiSanPhamById(this.id).subscribe((data: LoaiSanPham) => {
         if (data) {
           this.model = data;
           this.initalizeForm();
         } else {
-          console.error('không tìm thấy dịch vụ', this.id);
+          console.error('không tìm thấy loại sản phẩm', this.id);
         }
       });
     }

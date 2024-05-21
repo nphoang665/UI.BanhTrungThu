@@ -5,9 +5,9 @@ export interface SanPham{
     gia:string,
     moTa:string,
     soLuongTrongKho:string,
-    ngayHetHan:string,
-    ngayNhap:string,
+    ngayThem:string,
     tinhTrang:string, 
+    anhSanPham:any,
 }
 
 export interface ThemSanPham{
@@ -16,9 +16,9 @@ export interface ThemSanPham{
     gia:string,
     moTa:string,
     soLuongTrongKho:string,
-    ngayHetHan:string,
-    ngayNhap:string,
+    ngayThem:string,
     tinhTrang:string, 
+    imgSelected: any,
 }
 
 export interface SuaSanPham{
@@ -27,8 +27,9 @@ export interface SuaSanPham{
     gia:string,
     moTa:string,
     soLuongTrongKho:string,
-    ngayHetHan:string,
-    ngayNhap:string,
+    ngayThem:string,
     tinhTrang:string, 
+    anhSanPhamDb:any,
+    anhSanPhamBrowse:any
 }
 

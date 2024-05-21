@@ -1,21 +1,13 @@
 <form [formGroup]="myForm" (ngSubmit)="suaLoaiSanPham($event)">
-    <h1 mat-dialog-title>Sửa loại sản phẩm - {{model?.maLoai}}</h1>
-    <div mat-dialog-content>
-
-  
-      <mat-form-field>
-        <mat-label>Tên loại sản phẩm</mat-label>
-        <input matInput formControlName="tenLoai" />
-
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Mô tả</mat-label>
-        <input matInput formControlName="moTa" />
-
-      </mat-form-field>
-
-    </div>
+    <h1 mat-dialog-title>Sửa loại sản phẩm - {{model?.maLoai}}</h1> <hr>
+    <div mat-dialog-content class="mb-6">
+      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên loại sản phẩm</label>
+      <input type="text" formControlName="tenLoai"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nhập tên loại sản phẩm..." required />
+  </div>
+  <div mat-dialog-content class="mb-6">
+    <label for="moTa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mô tả</label>
+    <textarea  formControlName="moTa" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nhập mô tả..."></textarea>
+  </div>
     <div mat-dialog-actions align="end">
       <button (click)="ClosePopup()" mat-dialog-close mat-raised-button color="warn">Đóng</button>
       <button mat-raised-button color="primary" [disabled]="myForm.invalid">Lưu</button>

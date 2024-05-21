@@ -1,13 +1,114 @@
-
-<header class="bg-red-500 text-white p-4">
-    <div class="max-w-screen-xl mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Bánh Trung Thu Ngon</h1>
-      <nav>
-        <ul class="flex space-x-4">
-          <li><a routerLink="/home" class="hover:underline">Trang chủ</a></li>
-          <li><a [routerLink]="'/banh-trung-thu'" class="hover:underline">Sản phẩm</a></li>
-          <li><a href="#" class="hover:underline">Liên hệ</a></li>
-        </ul>
-      </nav>
+<!-- src/app/header/header.component.html -->
+<header class="bg-red-700 text-white" style="background-image: url('https://www.banhngoncaocap.com/templates/sj_market/images/styling/red/bn_bg_header.png');">
+  <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+    <div class="flex items-center space-x-4">
+      <img src="https://i.ibb.co/t3SJ1QF/Designer-preview-rev-1.png" alt="Logo" class="h-20">
+      <span class="font-bold text-xl">Bánh Trung Thu Ngon </span>
     </div>
-  </header>
+    <nav class="flex space-x-6">
+      <a routerLink="/home" class="hover:text-yellow-300">Trang Chủ</a>
+      <a routerLink="/banh-trung-thu" class="hover:text-yellow-300">Bánh Trung Thu</a>
+      <a href="#" class="hover:text-yellow-300">Hướng Dẫn Đặt Hàng</a>
+    </nav>
+    <div class="flex space-x-4 items-center">
+      <button class="relative">
+        <svg class="bg-[#fff] w-[40px] h-[40px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+        </svg>
+
+        
+        <span class="absolute -top-2 -right-2 bg-yellow-400 text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+<!-- src/app/header/header.component.html -->
+<header class="bg-[#920E15] text-white">
+  <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+    <div class="flex items-center space-x-4">
+      <div class="dropdown">
+        <button class="dropbtn text-xl p-3">    <i class="fas fa-bars"></i> DANH MỤC SẢN PHẨM</button>
+        <div class="dropdown-content text-[#000]">
+            <a href="#">BÁNH TRUNG THU TRĂNG VÀNG BLACK & GOLD</a> <hr>
+            <a href="#">
+              BÁNH TRUNG THU TRĂNG VÀNG CAO CẤP</a> <hr>
+            <a href="#">
+              BÁNH TRUNG THU OREO</a> <hr>
+        </div>
+      </div>
+      
+      <form class="max-w-lg mx-auto">
+        <div class="flex">
+            <!-- <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label> -->
+            <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-white border   focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">Loại sản phẩm <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+      </svg></button>
+            <div id="dropdown" class="z-10 hidden bg-white  shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                <li>
+                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Loại bánh</button>
+                </li>
+                <li>
+                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bánh chay</button>
+                </li>
+                <li>
+                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bánh dẻo</button>
+                </li>
+                <li>
+                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bánh nướng 0 trứng</button>
+                </li>
+                </ul>
+            </div>
+            <div class="relative w-screen">
+                <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50  border-s-gray-50 border-s-2 border border-gray-300  focus:ring-0 focus:ring-white focus:border-white dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Tìm kiếm bánh trung thu..." required />
+                <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700  border border-blue-700 hover:bg-blue-800 focus:ring-0 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="flex items-center space-x-4 bg-[#E7E531] text-[#B9121B] p-3 text-xl">
+      <svg class="w-6 h-6 text-[#B9121B] dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"/>
+      </svg>
+      <span>HOTLINE: </span>
+      <a href="tel:0123123123" class="hover:underline ">0123 123 123</a>
+    </div>
+  </div>
+</header>
+
+
+<!-- Dropdown menu -->
+<div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-72 dark:bg-gray-700">
+  <ul class="text-xl bg-[#B9121B] p-3" aria-labelledby="dropdownHoverButton">
+    <li>
+      <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+        BÁNH TRUNG THU TRĂNG VÀNG BLACK & GOLD</a>
+    </li>
+    <li>
+      <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+    </li>
+    <li>
+      <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+    </li>
+    <li>
+      <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+    </li>
+  </ul>
+</div>
+
+<!-- <div class="dropdown">
+  <button class="dropbtn"> DANH MỤC SẢN PHẨM</button>
+  <div class="dropdown-content">
+      <a href="#">BÁNH TRUNG THU TRĂNG VÀNG BLACK & GOLD</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+  </div>
+</div> -->

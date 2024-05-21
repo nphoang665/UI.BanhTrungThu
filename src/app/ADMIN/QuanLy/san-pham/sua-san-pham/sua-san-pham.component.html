@@ -1,1 +1,79 @@
-<p>sua-san-pham works!</p>
+<form [formGroup]="suaSanPhamForm">
+    <h1 mat-dialog-title>Sửa sản phẩm - {{model?.maSanPham}}</h1> <hr>
+    <div mat-dialog-content>
+        <div class="grid gap-6 mb-6 md:grid-cols-2">
+
+            <div>
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên sản phẩm</label>
+                <input formControlName="tenSanPham" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nhập tên sản phẩm..." required="">
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Loại sản phẩm</label>
+              <select id="loaiSanPham" formControlName="maLoai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                <option  *ngFor="let item of LoaiSanPham; let i = index" [value]="item.maLoai">
+                  {{ item.tenLoai }}</option>
+              </select>
+            </div>
+            <div>
+              <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giá</label>
+              <input formControlName="gia" type="number"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+          </div>
+          <div>
+            <label for="">Ngay</label>
+            <input type="text" formControlName="ngayThem">
+          </div>
+            <div>
+                <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số lượng trong kho</label>
+                <input formControlName="soLuongTrongKho" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"required="">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mô tả</label>
+              <textarea formControlName="moTa"  rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nhập mô tả..."></textarea>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+              <button mat-raised-button color="primary" (click)="fileInput.click()">
+                Chọn ảnh
+              </button>
+              <input #fileInput type="file" (change)="OnFileSelected($event)" multiple style="display: none;">
+            </div>
+            @if(fileImgPreviewFromDb.length >0){
+
+            <div class="col-auto">
+              <span><b>Ảnh đã lưu</b></span>
+              <div class="row dv_khung_img p-2">
+                @for(item of fileImgPreviewFromDb; track $index){
+                <div class="dv_img_previewing col-auto gx-2">
+                  <img [src]="item"
+                    style="width: 150px; height: 70px; object-fit: cover; border: 1px solid #40679E;" alt="img">
+                  <button (click)="XoaImgPreviewing(item)" class="btn_Delete_Img ps-1 pe-1"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                }
+              </div>
+            </div>
+            }
+
+            @if(fileImgPreviewFromBrowse.length >0){
+            <div class="col-lg-12">
+              <span><b>Ảnh mới chọn</b></span>
+              <div class="row dv_khung_img p-2">
+                @for(item of fileImgPreviewFromBrowse; track $index){
+                <div class="dv_img_previewing col-auto gx-2">
+                  <img [src]="item"
+                    style="width: 150px; height: 70px; object-fit: cover; border: 1px solid #40679E;" alt="img">
+                  <button (click)="XoaImgPreviewing(item)" class="btn_Delete_Img ps-1 pe-1"><i class="fa-solid fa-xmark"></i> </button>
+                </div>
+                }
+              </div>
+            </div>
+            }
+
+          </div>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button  mat-dialog-close mat-raised-button color="warn">Đóng</button>
+      <button mat-raised-button color="primary" (click)="suaSanPham($event)">Lưu</button>
+    </div>
+</form>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { LoaiSanPham } from '../../ADMIN/models/loai-san-pham.model';
+import { SanPhamService } from '../../ADMIN/services/SanPham/san-pham.service';
+import { LoaiSanPhamService } from '../../ADMIN/services/LoaiSanPham/loai-san-pham.service';
 
 @Component({
   selector: 'app-banh-trung-thu',
@@ -6,103 +10,61 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './banh-trung-thu.component.css'
 })
 export class BanhTrungThuComponent implements OnInit {
-  products = [
-    {
-      id:1,
-      name: 'Bánh Trung Thu Truyền Thống',
-      description: 'Bánh trung thu truyền thống với nhân đậu xanh và trứng muối.',
-      price: 120000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },
-    {
-      id:2,
-      name: 'Bánh Trung Thu Hiện Đại',
-      description: 'Bánh trung thu với hương vị hiện đại, thích hợp cho giới trẻ.',
-      price: 150000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },{
-      id:3,
-      name: 'Bánh Trung Thu Truyền Thống',
-      description: 'Bánh trung thu truyền thống với nhân đậu xanh và trứng muối.',
-      price: 120000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },
-    {
-      id:4,
-      name: 'Bánh Trung Thu Hiện Đại',
-      description: 'Bánh trung thu với hương vị hiện đại, thích hợp cho giới trẻ.',
-      price: 150000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },{
-      id:5,
-      name: 'Bánh Trung Thu Truyền Thống',
-      description: 'Bánh trung thu truyền thống với nhân đậu xanh và trứng muối.',
-      price: 120000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },
-    {
-      id:6,
-      name: 'Bánh Trung Thu Hiện Đại',
-      description: 'Bánh trung thu với hương vị hiện đại, thích hợp cho giới trẻ.',
-      price: 150000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },{
-      id:7,
-      name: 'Bánh Trung Thu Truyền Thống',
-      description: 'Bánh trung thu truyền thống với nhân đậu xanh và trứng muối.',
-      price: 120000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },
-    {
-      id:8,
-      name: 'Bánh Trung Thu Hiện Đại',
-      description: 'Bánh trung thu với hương vị hiện đại, thích hợp cho giới trẻ.',
-      price: 150000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },{
-      id:9,
-      name: 'Bánh Trung Thu Truyền Thống',
-      description: 'Bánh trung thu truyền thống với nhân đậu xanh và trứng muối.',
-      price: 120000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },
-    {id:10,
-      name: 'Bánh Trung Thu Hiện Đại',
-      description: 'Bánh trung thu với hương vị hiện đại, thích hợp cho giới trẻ.',
-      price: 150000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },{
-      id:11,
-      name: 'Bánh Trung Thu Truyền Thống',
-      description: 'Bánh trung thu truyền thống với nhân đậu xanh và trứng muối.',
-      price: 120000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },
-    {
-      id:12,
-      name: 'Bánh Trung Thu Hiện Đại',
-      description: 'Bánh trung thu với hương vị hiện đại, thích hợp cho giới trẻ.',
-      price: 150000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },{
-      id:13,
-      name: 'Bánh Trung Thu Truyền Thống',
-      description: 'Bánh trung thu truyền thống với nhân đậu xanh và trứng muối.',
-      price: 120000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },
-    {
-      id:14,
-      name: 'Bánh Trung Thu Hiện Đại',
-      description: 'Bánh trung thu với hương vị hiện đại, thích hợp cho giới trẻ.',
-      price: 150000,
-      image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//resized/%C4%90%E1%BA%ADu%20Xanh%20Kh%C3%B4ng%20Tr%E1%BB%A9ng_250%20x350%20.png'
-    },
-    // Thêm các sản phẩm khác ở đây
-  ];
+  
+  loaiSanPhamsWithCounts: { loaiSanPham: LoaiSanPham, count: number }[] = [];
 
-  constructor() { }
+  constructor(private sanPhamService: SanPhamService,private loaiSanPhamService: LoaiSanPhamService) { }
 
   ngOnInit(): void {
+    this.getLoaiSanPhamWithCounts();
   }
+
+  getLoaiSanPhamWithCounts(): void {
+    this.loaiSanPhamService.getAllLoaiSanPhamWithCounts()
+      .subscribe(
+        data => {
+          this.loaiSanPhamsWithCounts = data;
+          console.log(this.loaiSanPhamsWithCounts); // Kiểm tra xem dữ liệu có được lấy thành công không
+        },
+        error => {
+          console.error('Error fetching loaiSanPhamsWithCounts:', error);
+        }
+      );
+  }
+
+
+
+
+  // products = [
+  //   {
+  //     name: 'Bánh Chay ',
+  //     description: '3 sản phẩm',
+  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-chay.jpg'
+  //   },
+  //   {
+  //     name: 'Bánh Dẻo ',
+  //     description: '14 sản phẩm',
+  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-deo.jpg'
+  //   },
+  //   {
+  //     name: 'Bánh nướng 0 trứng ',
+  //     description: '5 sản phẩm',
+  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-nuong-0trung.jpg'
+  //   },
+  //   {
+  //     name: 'Bánh Nướng 0 Trứng ',
+  //     description: '0 sản phẩm',
+  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-nuong-2trung.jpg'
+  //   },
+  //   {
+  //     name: 'Bánh Nướng 1 Trứng  ',
+  //     description: '12 sản phẩm',
+  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-nuong-4trung.jpg'
+  //   },
+  //   {
+  //     name: 'Bánh Nướng 2 Trứng ',
+  //     description: '11 sản phẩm',
+  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-nuong-4trung.jpg'
+  //   }
+  // ];
 }

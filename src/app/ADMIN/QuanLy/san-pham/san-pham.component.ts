@@ -51,7 +51,7 @@ export class SanPhamComponent implements AfterViewInit, OnInit {
 
   OpenPopup(id: any, title: any): void {
     const _popup = this.dialog.open(ThemSanPhamComponent, {
-      width: '60%',
+      width: '80%',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
       data: {
@@ -66,7 +66,7 @@ export class SanPhamComponent implements AfterViewInit, OnInit {
   }
   OpenPopupSua(id: any, title: any): void {
     const _popup = this.dialog.open(SuaSanPhamComponent, {
-      width: '40%',
+      width: '80%',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
       data: {

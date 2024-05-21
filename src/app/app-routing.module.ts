@@ -6,6 +6,10 @@ import { HomeComponent } from './USER/home/home.component';
 import { SanPhamComponent } from './ADMIN/QuanLy/san-pham/san-pham.component';
 import { BanhTrungThuComponent } from './USER/banh-trung-thu/banh-trung-thu.component';
 import { ChiTietBanhTrungThuComponent } from './USER/chi-tiet-banh-trung-thu/chi-tiet-banh-trung-thu.component';
+import { TongQuanComponent } from './ADMIN/QuanLy/tong-quan/tong-quan.component';
+import { KhachHangComponent } from './ADMIN/QuanLy/khach-hang/khach-hang.component';
+import { SanPhamBanhTrungThuComponent } from './USER/san-pham-banh-trung-thu/san-pham-banh-trung-thu.component';
+import { GioHangComponent } from './USER/gio-hang/gio-hang.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/admin/LoaiSanPham', pathMatch: 'full' },
@@ -15,11 +19,15 @@ const routes: Routes = [
     children: [
         { path: 'LoaiSanPham', component: LoaiSanPhamComponent },
         { path: 'SanPham', component: SanPhamComponent },
+        { path: 'TongQuan', component: TongQuanComponent },
+        { path: 'KhachHang', component: KhachHangComponent },
     ]
 },
   {path:'home',component:HomeComponent},
   {path:'banh-trung-thu',component:BanhTrungThuComponent},
   {path:'chi-tiet-banh-trung-thu/:id',component:ChiTietBanhTrungThuComponent},
+  {path:'san-pham-banh-trung-thu',component:SanPhamBanhTrungThuComponent},
+  {path:'gio-hang',component:GioHangComponent},
 ];
 
 @NgModule({

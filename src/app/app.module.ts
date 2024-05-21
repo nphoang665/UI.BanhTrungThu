@@ -24,6 +24,12 @@ import { HeaderComponent } from './USER/Header/header/header.component';
 import { FooterComponent } from './USER/Header/footer/footer.component';
 import { BanhTrungThuComponent } from './USER/banh-trung-thu/banh-trung-thu.component';
 import { ChiTietBanhTrungThuComponent } from './USER/chi-tiet-banh-trung-thu/chi-tiet-banh-trung-thu.component';
+import { TongQuanComponent } from './ADMIN/QuanLy/tong-quan/tong-quan.component';
+import { KhachHangComponent } from './ADMIN/QuanLy/khach-hang/khach-hang.component';
+import { SanPhamBanhTrungThuComponent } from './USER/san-pham-banh-trung-thu/san-pham-banh-trung-thu.component';
+import { GioHangComponent } from './USER/gio-hang/gio-hang.component';
+import { ThemKhachHangComponent } from './ADMIN/QuanLy/khach-hang/them-khach-hang/them-khach-hang.component';
+import { SuaKhachHangComponent } from './ADMIN/QuanLy/khach-hang/sua-khach-hang/sua-khach-hang.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +48,13 @@ import { ChiTietBanhTrungThuComponent } from './USER/chi-tiet-banh-trung-thu/chi
     HeaderComponent,
     FooterComponent,
     BanhTrungThuComponent,
-    ChiTietBanhTrungThuComponent
+    ChiTietBanhTrungThuComponent,
+    TongQuanComponent,
+    KhachHangComponent,
+    SanPhamBanhTrungThuComponent,
+    GioHangComponent,
+    ThemKhachHangComponent,
+    SuaKhachHangComponent
   ],
   imports: [
     BrowserModule,

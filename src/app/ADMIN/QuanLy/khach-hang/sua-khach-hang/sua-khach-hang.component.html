@@ -1,0 +1,33 @@
+<form [formGroup]="myForm" (ngSubmit)="suaKhachHang($event)" style="z-index: 999;">
+    <h1 mat-dialog-title>Sửa khách hàng - {{model?.maKhachHang}}</h1> <hr>
+    <div class="grid gap-6 md:grid-cols-2 p-6">
+        <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên khách hàng</label>
+            <input type="text" formControlName="tenKhachHang" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+        </div>
+        <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số điện thoại</label>
+            <input type="text" formControlName="soDienThoai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required />
+        </div>
+        <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+            <input type="text" formControlName="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Flowbite" required />
+        </div>  
+        <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa chỉ</label>
+            <input type="text" formControlName="diaChi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
+        </div>
+        <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tình trạng</label>
+            <input type="text" formControlName="tinhTrang" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
+        </div>
+       
+    </div>
+     
+     
+
+    <div mat-dialog-actions align="end">
+      <button (click)="ClosePopup()" mat-dialog-close mat-raised-button color="warn">Đóng</button>
+      <button mat-raised-button color="primary" >Lưu</button>
+    </div>
+  </form>
