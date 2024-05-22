@@ -17,3 +17,9 @@ table {
     justify-content: space-around; 
     /* margin-left: 60%;  */
   }
+  
+  .product-image {
+    width: 100px;
+    height: auto; 
+    max-width: 100%;
+  }

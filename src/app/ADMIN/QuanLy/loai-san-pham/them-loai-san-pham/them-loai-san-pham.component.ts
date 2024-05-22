@@ -10,10 +10,11 @@ import { LoaiSanPhamService } from '../../../services/LoaiSanPham/loai-san-pham.
   styleUrl: './them-loai-san-pham.component.css'
 })
 export class ThemLoaiSanPhamComponent implements OnInit{
-
+  selectedFile: File | null = null;
+  imagePreview: string | null = null;
   myForm: FormGroup = new FormGroup({
     tenLoai: new FormControl(''),
-    moTa: new FormControl(''),
+    anhLoai: new FormControl(''),
   })
 
   constructor(    
@@ -27,13 +28,36 @@ export class ThemLoaiSanPhamComponent implements OnInit{
     this.ref.close();
   }
 
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   ngOnInit(): void {
 
   }
 
   themLoaiSanPham(){
+    if (this.myForm.invalid || !this.selectedFile) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = (reader.result as string).split(',')[1];
+      const request = {
+        tenLoai: this.myForm.get('tenLoai')?.value,
+        anhLoai: `data:${this.selectedFile?.type};base64,${base64String}`
+      };
 
-    this.loaiSanPhamServices.themLoaiSanPham(this.myForm.value).subscribe({
+    this.loaiSanPhamServices.themLoaiSanPham(request).subscribe({
       next:(response)=>{
         console.log(response);
         this.toastr.success('Thêm loại sản phẩm thành công', 'Thông báo', {
@@ -46,5 +70,7 @@ export class ThemLoaiSanPhamComponent implements OnInit{
       },
     })
   }
+  reader.readAsDataURL(this.selectedFile);
 
+}
 }

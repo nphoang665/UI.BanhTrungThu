@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { LoaiSanPham } from '../../ADMIN/models/loai-san-pham.model';
 import { SanPhamService } from '../../ADMIN/services/SanPham/san-pham.service';
 import { LoaiSanPhamService } from '../../ADMIN/services/LoaiSanPham/loai-san-pham.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-banh-trung-thu',
@@ -10,7 +11,7 @@ import { LoaiSanPhamService } from '../../ADMIN/services/LoaiSanPham/loai-san-ph
   styleUrl: './banh-trung-thu.component.css'
 })
 export class BanhTrungThuComponent implements OnInit {
-  
+  apiBaseUrl: string = environment.apiBaseUrl;
   loaiSanPhamsWithCounts: { loaiSanPham: LoaiSanPham, count: number }[] = [];
 
   constructor(private sanPhamService: SanPhamService,private loaiSanPhamService: LoaiSanPhamService) { }

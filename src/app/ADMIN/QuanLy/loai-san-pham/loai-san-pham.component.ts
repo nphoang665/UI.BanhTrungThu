@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ThemLoaiSanPhamComponent } from './them-loai-san-pham/them-loai-san-pham.component';
 import { SuaLoaiSanPhamComponent } from './sua-loai-san-pham/sua-loai-san-pham.component';
 import { LoaiSanPhamService } from '../../services/LoaiSanPham/loai-san-pham.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-loai-san-pham',
@@ -15,8 +16,9 @@ import { LoaiSanPhamService } from '../../services/LoaiSanPham/loai-san-pham.ser
 })
 export class LoaiSanPhamComponent implements AfterViewInit, OnInit  {
 
-  displayedColumns: string[] = ['maLoai', 'tenLoai', 'moTa', 'action'];
+  displayedColumns: string[] = ['maLoai', 'tenLoai', 'anhLoai', 'action'];
   dataSource: MatTableDataSource<LoaiSanPham>;
+  apiBaseUrl: string = environment.apiBaseUrl;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

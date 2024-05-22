@@ -1,15 +1,15 @@
 export interface LoaiSanPham{
     maLoai:string,
     tenLoai:string,
-    moTa:string
+    anhLoai:string
 }
 
 export interface ThemLoaiSanPham{
     tenLoai:string,
-    moTa:string
+    anhLoai:string
 }
 
 export interface SuaLoaiSanPham{
     tenLoai:string,
-    moTa:string
+    anhLoai:string
 }
