@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { LoaiSanPham } from '../../../models/loai-san-pham.model';
 import { ToastrService } from 'ngx-toastr';
@@ -19,7 +19,7 @@ export class SuaLoaiSanPhamComponent implements OnInit {
   apiBaseUrl: string = environment.apiBaseUrl;
   myForm : FormGroup = new FormGroup({
     maLoai: new FormControl(''),
-    tenLoai: new FormControl(''),
+    tenLoai: new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
     anhLoai: new FormControl('')
   })
 
@@ -66,7 +66,7 @@ export class SuaLoaiSanPhamComponent implements OnInit {
     // console.log('Model:', this.model);
    this.myForm = new FormGroup({
     maLoai: new FormControl(this.model?.maLoai),
-    tenLoai: new FormControl(this.model?.tenLoai),
+    tenLoai: new FormControl(this.model?.tenLoai, [Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
     anhLoai: new FormControl(this.model?.anhLoai),
    })
   }

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SanPham, SuaSanPham } from '../../../models/san-pham.model';
 import { ActivatedRoute } from '@angular/router';
 import { SanPhamService } from '../../../services/SanPham/san-pham.service';
@@ -21,11 +21,11 @@ export class SuaSanPhamComponent implements OnInit {
   inputdata: any;
 
   suaSanPhamForm: FormGroup = new FormGroup({
-    maLoai: new FormControl(''),
-    tenSanPham: new FormControl(''),
-    gia: new FormControl(''),
-    moTa: new FormControl(''),
-    soLuongTrongKho: new FormControl(''),
+    maLoai: new FormControl('',[Validators.required]),
+    tenSanPham: new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+    gia: new FormControl('',[Validators.required, Validators.min(0),Validators.max(10000000)]),
+    moTa: new FormControl('',[Validators.required, Validators.minLength(3)]),
+    soLuongTrongKho: new FormControl('',[Validators.required, Validators.min(0),Validators.max(300)]),
     ngayThem: new FormControl(''),
     tinhTrang: new FormControl(''),
   })
@@ -39,7 +39,7 @@ export class SuaSanPhamComponent implements OnInit {
 
 
   ngOnInit(): void {
-console.log(this.model?.ngayThem);
+// console.log(this.model?.ngayThem);
 
     this.loaiSanPhamServices.getAllLoaiSanPham().subscribe((data: LoaiSanPham[]) => {
       this.LoaiSanPham = data;
@@ -65,13 +65,13 @@ console.log(this.model?.ngayThem);
   initalizeForm(): void {
     this.suaSanPhamForm = new FormGroup({
       maSanPham: new FormControl(this.model?.maSanPham),
-      tenSanPham: new FormControl(this.model?.tenSanPham),
-      maLoai: new FormControl(this.model?.maLoai),
-      moTa: new FormControl(this.model?.moTa),
-      gia: new FormControl(this.model?.gia),
+      tenSanPham: new FormControl(this.model?.tenSanPham,[Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+      maLoai: new FormControl(this.model?.maLoai,[Validators.required]),
+      moTa: new FormControl(this.model?.moTa,[Validators.required, Validators.minLength(3)]),
+      gia: new FormControl(this.model?.gia,[Validators.required, Validators.min(0),Validators.max(10000000)]),
       tinhTrang: new FormControl(this.model?.tinhTrang),
       ngayThem: new FormControl(this.model?.ngayThem),
-      soLuongTrongKho: new FormControl(this.model?.soLuongTrongKho),
+      soLuongTrongKho: new FormControl(this.model?.soLuongTrongKho,[Validators.required, Validators.min(0),Validators.max(300)]),
     })
   }
   ClosePopup() {

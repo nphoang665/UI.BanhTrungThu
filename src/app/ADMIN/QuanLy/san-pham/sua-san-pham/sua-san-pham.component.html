@@ -3,33 +3,135 @@
     <div mat-dialog-content>
         <div class="grid gap-6 mb-6 md:grid-cols-2">
 
-            <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên sản phẩm</label>
-                <input formControlName="tenSanPham" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nhập tên sản phẩm..." required="">
-            </div>
-            <div>
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Loại sản phẩm</label>
-              <select id="loaiSanPham" formControlName="maLoai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option  *ngFor="let item of LoaiSanPham; let i = index" [value]="item.maLoai">
-                  {{ item.tenLoai }}</option>
-              </select>
-            </div>
-            <div>
-              <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giá</label>
-              <input formControlName="gia" type="number"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+          <div>
+            <label for="tenSanPham" class="block mb-2 text-sm font-medium"
+            [ngClass]="{
+              'text-green-700 dark:text-green-500': suaSanPhamForm.get('tenSanPham')?.valid,
+              'text-red-700 dark:text-red-500': suaSanPhamForm.get('tenSanPham')?.invalid && (suaSanPhamForm.get('tenSanPham')?.dirty || suaSanPhamForm.get('tenSanPham')?.touched)
+            }">
+            Tên sản phẩm
+          </label>
+
+          <input type="text" id="tenSanPham" formControlName="tenSanPham"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': suaSanPhamForm.get('tenSanPham')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': suaSanPhamForm.get('tenSanPham')?.invalid && (suaSanPhamForm.get('tenSanPham')?.dirty || suaSanPhamForm.get('tenSanPham')?.touched)
+          }"
+          class="text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-green-400 dark:placeholder-green-500 dark:border-green-500"
+          placeholder="Nhập Tên sản phẩm..." required />
+        <div *ngIf="suaSanPhamForm.get('tenSanPham')?.invalid && (suaSanPhamForm.get('tenSanPham')?.dirty || suaSanPhamForm.get('tenSanPham')?.touched)" class="mt-2 text-sm">
+          <p *ngIf="suaSanPhamForm.get('tenSanPham')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+             Tên sản phẩm là bắt buộc.
+          </p>
+          <p *ngIf="suaSanPhamForm.get('tenSanPham')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+             Tên sản phẩm phải có ít nhất 3 ký tự.
+          </p>
+          <p *ngIf="suaSanPhamForm.get('tenSanPham')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+            Tên sản phẩm quá dài.
+         </p>
+        </div>
           </div>
           <div>
-            <label for="">Ngay</label>
-            <input type="text" formControlName="ngayThem">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Loại sản phẩm</label>
+            <select id="loaiSanPham" formControlName="maLoai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+              <option  *ngFor="let item of LoaiSanPham; let i = index" [value]="item.maLoai">
+                {{ item.tenLoai }}</option>
+            </select>
           </div>
-            <div>
-                <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số lượng trong kho</label>
-                <input formControlName="soLuongTrongKho" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"required="">
-            </div>
-            <div class="sm:col-span-2">
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mô tả</label>
-              <textarea formControlName="moTa"  rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nhập mô tả..."></textarea>
-            </div>
+
+          <div>
+            <label for="gia" class="block mb-2 text-sm font-medium"
+            [ngClass]="{
+              'text-green-700 dark:text-green-500': suaSanPhamForm.get('gia')?.valid,
+              'text-red-700 dark:text-red-500': suaSanPhamForm.get('gia')?.invalid && (suaSanPhamForm.get('gia')?.dirty || suaSanPhamForm.get('gia')?.touched)
+            }">
+            Giá
+          </label>
+  
+          <input type="number" id="gia" formControlName="gia"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': suaSanPhamForm.get('gia')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': suaSanPhamForm.get('gia')?.invalid && (suaSanPhamForm.get('gia')?.dirty || suaSanPhamForm.get('gia')?.touched)
+          }"
+          class="text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-green-400 dark:placeholder-green-500 dark:border-green-500"
+          placeholder="Nhập giá sản phẩm..." required />
+        <div *ngIf="suaSanPhamForm.get('gia')?.invalid && (suaSanPhamForm.get('gia')?.dirty || suaSanPhamForm.get('gia')?.touched)" class="mt-2 text-sm">
+          <p *ngIf="suaSanPhamForm.get('gia')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+             Giá sản phẩm là bắt buộc.
+          </p>
+          <p *ngIf="suaSanPhamForm.get('gia')?.errors?.['min']" class="text-red-600 dark:text-red-500">
+            Giá sản phẩm không được nhỏ hơn 1.
+          </p>
+          <p *ngIf="suaSanPhamForm.get('gia')?.errors?.['max']" class="text-red-600 dark:text-red-500">
+            Giá sản phẩm vượt mức cho phép.
+         </p>
+        </div>
+          </div>
+          <div>
+            <label for="soLuongTrongKho" class="block mb-2 text-sm font-medium"
+            [ngClass]="{
+              'text-green-700 dark:text-green-500': suaSanPhamForm.get('soLuongTrongKho')?.valid,
+              'text-red-700 dark:text-red-500': suaSanPhamForm.get('soLuongTrongKho')?.invalid && (suaSanPhamForm.get('soLuongTrongKho')?.dirty || suaSanPhamForm.get('soLuongTrongKho')?.touched)
+            }">
+            Số lượng trong kho
+          </label>
+          <input type="number" id="soLuongTrongKho" formControlName="soLuongTrongKho"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': suaSanPhamForm.get('soLuongTrongKho')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': suaSanPhamForm.get('soLuongTrongKho')?.invalid && (suaSanPhamForm.get('soLuongTrongKho')?.dirty || suaSanPhamForm.get('soLuongTrongKho')?.touched)
+          }"
+          class="text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-green-400 dark:placeholder-green-500 dark:border-green-500"
+          placeholder="Nhập tên sản phẩm..." required />
+        <div *ngIf="suaSanPhamForm.get('soLuongTrongKho')?.invalid && (suaSanPhamForm.get('soLuongTrongKho')?.dirty || suaSanPhamForm.get('soLuongTrongKho')?.touched)" class="mt-2 text-sm">
+          <p *ngIf="suaSanPhamForm.get('soLuongTrongKho')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+             Số lượng trong kho là bắt buộc.
+          </p>
+          <p *ngIf="suaSanPhamForm.get('soLuongTrongKho')?.errors?.['min']" class="text-red-600 dark:text-red-500">
+             Số lượng trong kho không được nhỏ hơn 1.
+          </p>
+          <p *ngIf="suaSanPhamForm.get('soLuongTrongKho')?.errors?.['max']" class="text-red-600 dark:text-red-500">
+            Số lượng trong kho vượt mức cho phép.
+         </p>
+        </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="moTa" class="block mb-2 text-sm font-medium"
+            [ngClass]="{
+              'text-green-700 dark:text-green-500': suaSanPhamForm.get('moTa')?.valid,
+              'text-red-700 dark:text-red-500': suaSanPhamForm.get('moTa')?.invalid && (suaSanPhamForm.get('moTa')?.dirty || suaSanPhamForm.get('moTa')?.touched)
+            }">
+            Mô tả
+          </label>
+          <textarea rows="4"type="text" id="moTa" formControlName="moTa"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': suaSanPhamForm.get('moTa')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': suaSanPhamForm.get('moTa')?.invalid && (suaSanPhamForm.get('moTa')?.dirty || suaSanPhamForm.get('moTa')?.touched)
+          }"
+          class="text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-green-400 dark:placeholder-green-500 dark:border-green-500"
+          placeholder="Nhập Mô tả..." required ></textarea>
+        <div *ngIf="suaSanPhamForm.get('moTa')?.invalid && (suaSanPhamForm.get('moTa')?.dirty || suaSanPhamForm.get('moTa')?.touched)" class="mt-2 text-sm">
+          <p *ngIf="suaSanPhamForm.get('moTa')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+             Mô tả là bắt buộc.
+          </p>
+          <p *ngIf="suaSanPhamForm.get('moTa')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+             Mô tả phải có ít nhất 3 ký tự.
+          </p>
+  
+        </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+            
+           
         </div>
 
         <div class="col-lg-12">
@@ -39,41 +141,30 @@
               </button>
               <input #fileInput type="file" (change)="OnFileSelected($event)" multiple style="display: none;">
             </div>
-            @if(fileImgPreviewFromDb.length >0){
-
-            <div class="col-auto">
+            <div *ngIf="fileImgPreviewFromDb.length > 0" class="col-auto">
               <span><b>Ảnh đã lưu</b></span>
               <div class="row dv_khung_img p-2">
-                @for(item of fileImgPreviewFromDb; track $index){
-                <div class="dv_img_previewing col-auto gx-2">
-                  <img [src]="item"
-                    style="width: 150px; height: 70px; object-fit: cover; border: 1px solid #40679E;" alt="img">
+                <div *ngFor="let item of fileImgPreviewFromDb; let i = index" class="dv_img_previewing col-auto gx-2">
+                  <img [src]="item" style="width: 150px; height: 70px; object-fit: cover; border: 1px solid #40679E;" alt="img">
                   <button (click)="XoaImgPreviewing(item)" class="btn_Delete_Img ps-1 pe-1"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-                }
               </div>
             </div>
-            }
 
-            @if(fileImgPreviewFromBrowse.length >0){
-            <div class="col-lg-12">
+            <div *ngIf="fileImgPreviewFromBrowse.length > 0" class="col-lg-12">
               <span><b>Ảnh mới chọn</b></span>
               <div class="row dv_khung_img p-2">
-                @for(item of fileImgPreviewFromBrowse; track $index){
-                <div class="dv_img_previewing col-auto gx-2">
-                  <img [src]="item"
-                    style="width: 150px; height: 70px; object-fit: cover; border: 1px solid #40679E;" alt="img">
-                  <button (click)="XoaImgPreviewing(item)" class="btn_Delete_Img ps-1 pe-1"><i class="fa-solid fa-xmark"></i> </button>
+                <div *ngFor="let item of fileImgPreviewFromBrowse; let i = index" class="dv_img_previewing col-auto gx-2">
+                  <img [src]="item" style="width: 150px; height: 70px; object-fit: cover; border: 1px solid #40679E;" alt="img">
+                  <button (click)="XoaImgPreviewing(item)" class="btn_Delete_Img ps-1 pe-1"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-                }
               </div>
             </div>
-            }
 
           </div>
     </div>
     <div mat-dialog-actions align="end">
       <button  mat-dialog-close mat-raised-button color="warn">Đóng</button>
-      <button mat-raised-button color="primary" (click)="suaSanPham($event)">Lưu</button>
+      <button mat-raised-button color="primary" (click)="suaSanPham($event)" [disabled]="suaSanPhamForm.invalid">Lưu</button>
     </div>
 </form>

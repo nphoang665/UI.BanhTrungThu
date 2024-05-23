@@ -1,4 +1,4 @@
-<form [formGroup]="myForm" >
+<!-- <form [formGroup]="myForm" >
     <h1 mat-dialog-title>Sửa loại sản phẩm - {{model?.maLoai}}</h1> <hr>
     <div mat-dialog-content class="mb-6">
       <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên loại sản phẩm</label>
@@ -12,12 +12,61 @@
     <input #fileInput type="file" (change)="onFileSelected($event)" style="display: none;">
   </div>
   <div *ngIf="imagePreview" class="form-group">
-    <!-- <label>Xem trước ảnh:</label> -->
     <img mat-dialog-content [src]="imagePreview" alt="Image Preview" style="max-width: 200px; max-height: 200px; margin-top: 10px;">
   </div>
     <div mat-dialog-actions align="end">
       <button (click)="ClosePopup()" mat-dialog-close mat-raised-button color="warn">Đóng</button>
       <button mat-raised-button color="primary" (click)="suaLoaiSanPham($event)"  [disabled]="myForm.invalid">Lưu</button>
-      <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Hủy</button> -->
+    </div>
+  </form> -->
+
+  <form [formGroup]="myForm" style="z-index: 999;">
+    <h1 mat-dialog-title>Sửa loại sản phẩm - {{ model?.maLoai }}</h1>
+    <hr>
+  
+    <div mat-dialog-content class="mb-6">
+      <label for="tenLoai" class="block mb-2 text-sm font-medium"
+        [ngClass]="{
+          'text-green-700 dark:text-green-500': myForm.get('tenLoai')?.valid,
+          'text-red-700 dark:text-red-500': myForm.get('tenLoai')?.invalid && (myForm.get('tenLoai')?.dirty || myForm.get('tenLoai')?.touched)
+        }">
+        Tên loại sản phẩm
+      </label>
+      <input type="text" id="tenLoai" formControlName="tenLoai"
+        [ngClass]="{
+          'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': myForm.get('tenLoai')?.valid,
+          'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': myForm.get('tenLoai')?.invalid && (myForm.get('tenLoai')?.dirty || myForm.get('tenLoai')?.touched)
+        }"
+        class="text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-green-400 dark:placeholder-green-500 dark:border-green-500"
+        placeholder="Nhập tên loại sản phẩm..." required />
+      <div *ngIf="myForm.get('tenLoai')?.invalid && (myForm.get('tenLoai')?.dirty || myForm.get('tenLoai')?.touched)" class="mt-2 text-sm">
+        <p *ngIf="myForm.get('tenLoai')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+           Tên loại sản phẩm là bắt buộc.
+        </p>
+        <p *ngIf="myForm.get('tenLoai')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+           Tên loại sản phẩm phải có ít nhất 3 ký tự.
+        </p>
+        <p *ngIf="myForm.get('tenLoai')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+          Tên loại sản phẩm quá dài.
+       </p>
+      </div>
+    </div>
+  
+    <div mat-dialog-content class="form-group">
+      <label for="fileInput" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ảnh loại sản phẩm</label>
+      <button mat-raised-button color="primary" (click)="fileInput.click()">
+        Chọn ảnh
+      </button>
+      <input #fileInput type="file" (change)="onFileSelected($event)" style="display: none;">
+    </div>
+  
+    <div *ngIf="imagePreview" class="form-group">
+      <img mat-dialog-content [src]="imagePreview" alt="Image Preview" style="max-width: 200px; max-height: 200px; margin-top: 10px;">
+    </div>
+  
+    <div mat-dialog-actions align="end">
+      <button (click)="ClosePopup()" mat-dialog-close mat-raised-button color="warn">Đóng</button>
+      <button mat-raised-button color="primary" (click)="suaLoaiSanPham($event)" [disabled]="myForm.invalid">Lưu</button>
     </div>
   </form>
+  

@@ -26,8 +26,9 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'banh-trung-thu',component:BanhTrungThuComponent},
   {path:'chi-tiet-banh-trung-thu/:id',component:ChiTietBanhTrungThuComponent},
-  {path:'san-pham-banh-trung-thu',component:SanPhamBanhTrungThuComponent},
+  // {path:'san-pham-banh-trung-thu',component:SanPhamBanhTrungThuComponent},
   {path:'gio-hang',component:GioHangComponent},
+  { path: 'san-pham/:idLoaiSanPham', component: SanPhamBanhTrungThuComponent },
 ];
 
 @NgModule({

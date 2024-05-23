@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { LoaiSanPhamService } from '../../../services/LoaiSanPham/loai-san-pham.service';
@@ -13,7 +13,7 @@ export class ThemLoaiSanPhamComponent implements OnInit{
   selectedFile: File | null = null;
   imagePreview: string | null = null;
   myForm: FormGroup = new FormGroup({
-    tenLoai: new FormControl(''),
+    tenLoai: new FormControl('',[Validators.required, Validators.minLength(3),Validators.maxLength(70)]),
     anhLoai: new FormControl(''),
   })
 
@@ -21,9 +21,8 @@ export class ThemLoaiSanPhamComponent implements OnInit{
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ref: MatDialogRef<ThemLoaiSanPhamComponent>,
     private loaiSanPhamServices: LoaiSanPhamService,
-    private toastr: ToastrService,){
-    
-  }
+    private toastr: ToastrService,
+  ){}
   ClosePopup() {
     this.ref.close();
   }

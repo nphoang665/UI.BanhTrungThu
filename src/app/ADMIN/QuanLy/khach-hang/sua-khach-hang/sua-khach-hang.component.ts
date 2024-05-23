@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { KhachHang } from '../../../models/khach-hang.model';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { KhachHangService } from '../../../services/KhachHang/khach-hang.service';
 import { ToastrService } from 'ngx-toastr';
@@ -15,10 +15,10 @@ export class SuaKhachHangComponent implements OnInit{
   inputdata:any;
   myForm:FormGroup = new FormGroup({
     maKhachHang:new FormControl(''),
-    tenKhachHang:new FormControl(''),
-    soDienThoai:new FormControl(''),
-    email:new FormControl(''),
-    diaChi:new FormControl(''),
+    tenKhachHang:new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
+    soDienThoai:new FormControl('',[Validators.required, Validators.minLength(7), Validators.maxLength(11)]),
+    email:new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
+    diaChi:new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(255)]),
     tinhTrang:new FormControl(''),
   })
   constructor(
@@ -47,10 +47,10 @@ export class SuaKhachHangComponent implements OnInit{
     console.log('Model:', this.model);
    this.myForm = new FormGroup({
     maKhachHang: new FormControl(this.model?.maKhachHang),
-    tenKhachHang: new FormControl(this.model?.tenKhachHang),
-    soDienThoai: new FormControl(this.model?.soDienThoai),
-    email: new FormControl(this.model?.email),
-    diaChi: new FormControl(this.model?.diaChi),
+    tenKhachHang: new FormControl(this.model?.tenKhachHang,[Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
+    soDienThoai: new FormControl(this.model?.soDienThoai,[Validators.required, Validators.minLength(7), Validators.maxLength(11)]),
+    email: new FormControl(this.model?.email,[Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
+    diaChi: new FormControl(this.model?.diaChi,[Validators.required, Validators.minLength(3), Validators.maxLength(255)]),
     tinhTrang: new FormControl(this.model?.tinhTrang),
    })
   }

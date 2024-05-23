@@ -2,30 +2,145 @@
     <h1 mat-dialog-title>Thêm mới sản phẩm</h1> <hr>
     <div mat-dialog-content>
       <div class="grid gap-6 mb-6 md:grid-cols-2">
-
-          <div>
-              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên sản phẩm</label>
-              <input formControlName="tenSanPham" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nhập tên sản phẩm..." required="">
-          </div>
-          <div>
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Loại sản phẩm</label>
-            <select id="loaiSanPham" formControlName="maLoai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-              <option  *ngFor="let item of LoaiSanPham; let i = index" [value]="item.maLoai">
-                {{ item.tenLoai }}</option>
-            </select>
-          </div>
-          <div>
-            <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giá</label>
-            <input formControlName="gia" type="number"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+        <div>
+           <label for="tenSanPham" class="block mb-2 text-sm font-medium"
+        [ngClass]="{
+          'text-green-700 dark:text-green-500': themSanPhamForm.get('tenSanPham')?.valid,
+          'text-red-700 dark:text-red-500': themSanPhamForm.get('tenSanPham')?.invalid && (themSanPhamForm.get('tenSanPham')?.dirty || themSanPhamForm.get('tenSanPham')?.touched)
+        }">
+        Tên sản phẩm
+      </label>
+      <input type="text" id="tenSanPham" formControlName="tenSanPham"
+        [ngClass]="{
+          'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': themSanPhamForm.get('tenSanPham')?.valid,
+          'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': themSanPhamForm.get('tenSanPham')?.invalid && (themSanPhamForm.get('tenSanPham')?.dirty || themSanPhamForm.get('tenSanPham')?.touched)
+        }"
+        class="text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-green-400 dark:placeholder-green-500 dark:border-green-500"
+        placeholder="Nhập tên sản phẩm..." required />
+      <div *ngIf="themSanPhamForm.get('tenSanPham')?.invalid && (themSanPhamForm.get('tenSanPham')?.dirty || themSanPhamForm.get('tenSanPham')?.touched)" class="mt-2 text-sm">
+        <p *ngIf="themSanPhamForm.get('tenSanPham')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+           Tên sản phẩm là bắt buộc.
+        </p>
+        <p *ngIf="themSanPhamForm.get('tenSanPham')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+           Tên sản phẩm phải có ít nhất 3 ký tự.
+        </p>
+        <p *ngIf="themSanPhamForm.get('tenSanPham')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+          Tên sản phẩm quá dài.
+       </p>
+      </div>
         </div>
-          <div>
-              <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số lượng trong kho</label>
-              <input formControlName="soLuongTrongKho" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"required="">
-          </div>
-          <div class="sm:col-span-2">
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Loại sản phẩm</label>
+          <select id="loaiSanPham" formControlName="maLoai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            <option  *ngFor="let item of LoaiSanPham; let i = index" [value]="item.maLoai">
+              {{ item.tenLoai }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="gia" class="block mb-2 text-sm font-medium"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': themSanPhamForm.get('gia')?.valid,
+            'text-red-700 dark:text-red-500': themSanPhamForm.get('gia')?.invalid && (themSanPhamForm.get('gia')?.dirty || themSanPhamForm.get('gia')?.touched)
+          }">
+          Giá
+        </label>
+
+        <input type="number" id="gia" formControlName="gia"
+        [ngClass]="{
+          'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': themSanPhamForm.get('gia')?.valid,
+          'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': themSanPhamForm.get('gia')?.invalid && (themSanPhamForm.get('gia')?.dirty || themSanPhamForm.get('gia')?.touched)
+        }"
+        class="text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-green-400 dark:placeholder-green-500 dark:border-green-500"
+        placeholder="Nhập giá sản phẩm..." required />
+      <div *ngIf="themSanPhamForm.get('gia')?.invalid && (themSanPhamForm.get('gia')?.dirty || themSanPhamForm.get('gia')?.touched)" class="mt-2 text-sm">
+        <p *ngIf="themSanPhamForm.get('gia')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+           Giá sản phẩm là bắt buộc.
+        </p>
+        <p *ngIf="themSanPhamForm.get('gia')?.errors?.['min']" class="text-red-600 dark:text-red-500">
+          Giá sản phẩm không được nhỏ hơn 1.
+        </p>
+        <p *ngIf="themSanPhamForm.get('gia')?.errors?.['max']" class="text-red-600 dark:text-red-500">
+          Giá sản phẩm vượt mức cho phép.
+       </p>
+      </div>
+        </div>
+      
+        <div>
+          <label for="soLuongTrongKho" class="block mb-2 text-sm font-medium"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': themSanPhamForm.get('soLuongTrongKho')?.valid,
+            'text-red-700 dark:text-red-500': themSanPhamForm.get('soLuongTrongKho')?.invalid && (themSanPhamForm.get('soLuongTrongKho')?.dirty || themSanPhamForm.get('soLuongTrongKho')?.touched)
+          }">
+          Số lượng trong kho
+        </label>
+        <input type="number" id="soLuongTrongKho" formControlName="soLuongTrongKho"
+        [ngClass]="{
+          'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': themSanPhamForm.get('soLuongTrongKho')?.valid,
+          'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': themSanPhamForm.get('soLuongTrongKho')?.invalid && (themSanPhamForm.get('soLuongTrongKho')?.dirty || themSanPhamForm.get('soLuongTrongKho')?.touched)
+        }"
+        class="text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-green-400 dark:placeholder-green-500 dark:border-green-500"
+        placeholder="Nhập tên sản phẩm..." required />
+      <div *ngIf="themSanPhamForm.get('soLuongTrongKho')?.invalid && (themSanPhamForm.get('soLuongTrongKho')?.dirty || themSanPhamForm.get('soLuongTrongKho')?.touched)" class="mt-2 text-sm">
+        <p *ngIf="themSanPhamForm.get('soLuongTrongKho')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+           Số lượng trong kho là bắt buộc.
+        </p>
+        <p *ngIf="themSanPhamForm.get('soLuongTrongKho')?.errors?.['min']" class="text-red-600 dark:text-red-500">
+           Số lượng trong kho không được nhỏ hơn 1.
+        </p>
+        <p *ngIf="themSanPhamForm.get('soLuongTrongKho')?.errors?.['max']" class="text-red-600 dark:text-red-500">
+          Số lượng trong kho vượt mức cho phép.
+       </p>
+      </div>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="moTa" class="block mb-2 text-sm font-medium"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': themSanPhamForm.get('moTa')?.valid,
+            'text-red-700 dark:text-red-500': themSanPhamForm.get('moTa')?.invalid && (themSanPhamForm.get('moTa')?.dirty || themSanPhamForm.get('moTa')?.touched)
+          }">
+          Mô tả
+        </label>
+        <textarea rows="4"type="text" id="moTa" formControlName="moTa"
+        [ngClass]="{
+          'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': themSanPhamForm.get('moTa')?.valid,
+          'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': themSanPhamForm.get('moTa')?.invalid && (themSanPhamForm.get('moTa')?.dirty || themSanPhamForm.get('moTa')?.touched)
+        }"
+        class="text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-green-400 dark:placeholder-green-500 dark:border-green-500"
+        placeholder="Nhập Mô tả..." required ></textarea>
+      <div *ngIf="themSanPhamForm.get('moTa')?.invalid && (themSanPhamForm.get('moTa')?.dirty || themSanPhamForm.get('moTa')?.touched)" class="mt-2 text-sm">
+        <p *ngIf="themSanPhamForm.get('moTa')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+           Mô tả là bắt buộc.
+        </p>
+        <p *ngIf="themSanPhamForm.get('moTa')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+           Mô tả phải có ít nhất 3 ký tự.
+        </p>
+
+      </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+
+         
+
+          <!-- <div class="sm:col-span-2">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mô tả</label>
             <textarea formControlName="moTa"  rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nhập mô tả..."></textarea>
-          </div>
+          </div> -->
       </div>
 
         <div class="col-lg-12">
@@ -62,6 +177,6 @@
       </div>
       <div mat-dialog-actions align="end">
         <button  mat-dialog-close mat-raised-button color="warn">Đóng</button>
-        <button mat-raised-button color="primary" (click)="themSanPham()">Lưu</button>
+        <button mat-raised-button color="primary" (click)="themSanPham()"  [disabled]="themSanPhamForm.invalid">Lưu</button>
       </div>
 </form>

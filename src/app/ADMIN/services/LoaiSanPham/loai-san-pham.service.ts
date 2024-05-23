@@ -21,6 +21,10 @@ export class LoaiSanPhamService {
     return this.http.put<LoaiSanPham>(`${environment.apiBaseUrl}/api/LoaiSanPham/${id}`,data)
   }
 
+  xoaLoaiSanPham(id:string):Observable<LoaiSanPham>{
+    return this.http.delete<LoaiSanPham>(`${environment.apiBaseUrl}/api/LoaiSanPham/${id}`)
+  }
+
   getAllLoaiSanPham():Observable<LoaiSanPham[]>{
     return this.http.get<LoaiSanPham[]>(`${environment.apiBaseUrl}/api/LoaiSanPham`)
   }

@@ -8,6 +8,7 @@ import { ThemLoaiSanPhamComponent } from './them-loai-san-pham/them-loai-san-pha
 import { SuaLoaiSanPhamComponent } from './sua-loai-san-pham/sua-loai-san-pham.component';
 import { LoaiSanPhamService } from '../../services/LoaiSanPham/loai-san-pham.service';
 import { environment } from '../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-loai-san-pham',
@@ -23,7 +24,7 @@ export class LoaiSanPhamComponent implements AfterViewInit, OnInit  {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private loaiSanPhamServices: LoaiSanPhamService,
+  constructor(private loaiSanPhamServices: LoaiSanPhamService, private toastr: ToastrService,
     private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<LoaiSanPham>([]);
   }
@@ -82,6 +83,15 @@ export class LoaiSanPhamComponent implements AfterViewInit, OnInit  {
     this.OpenPopupSua(id, 'Sửa loại sản phẩm');
     console.log(id);
     
+  }
+
+  xoaLoaiSanPham(id:string){
+    this.loaiSanPhamServices.xoaLoaiSanPham(id).subscribe((data: any) => {
+      this.toastr.success('Xóa loại sản phẩm thành công', 'Thông báo', {
+        timeOut: 1000,
+      });
+      this.getLoaiSanPhamData();
+    });
   }
 
 

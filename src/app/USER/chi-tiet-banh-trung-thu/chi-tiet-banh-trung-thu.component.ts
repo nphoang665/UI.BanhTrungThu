@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
+import { SanPham } from '../../ADMIN/models/san-pham.model';
+import { SanPhamService } from '../../ADMIN/services/SanPham/san-pham.service';
+import { LoaiSanPham } from '../../ADMIN/models/loai-san-pham.model';
+import { LoaiSanPhamService } from '../../ADMIN/services/LoaiSanPham/loai-san-pham.service';
 
 @Component({
   selector: 'app-chi-tiet-banh-trung-thu',
@@ -7,34 +12,39 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './chi-tiet-banh-trung-thu.component.css'
 })
 export class ChiTietBanhTrungThuComponent implements OnInit {
-  product: any | undefined;;
+  sanPham: SanPham | null = null;
+  loaiSanPham: LoaiSanPham | null = null;
+  apiBaseUrl: string = environment.apiBaseUrl;
 
-  products = [
-    {
-      id: 1,
-      name: 'Bánh Trung Thu Truyền Thống',
-      description: 'Bánh trung thu truyền thống với nhân đậu xanh và trứng muối.',
-      price: 120000,
-      image: 'assets/images/mooncake1.jpg',
-      details: 'Chi tiết về Bánh Trung Thu Truyền Thống...'
-    },
-    {
-      id: 2,
-      name: 'Bánh Trung Thu Hiện Đại',
-      description: 'Bánh trung thu với hương vị hiện đại, thích hợp cho giới trẻ.',
-      price: 150000,
-      image: 'assets/images/mooncake2.jpg',
-      details: 'Chi tiết về Bánh Trung Thu Hiện Đại...'
-    },
-    // Thêm các sản phẩm khác ở đây
-  ];
-
-  constructor(private route: ActivatedRoute) { }
-
+  constructor(
+    private route: ActivatedRoute,
+    private sanPhamService: SanPhamService,
+    private loaiSanPhamService: LoaiSanPhamService
+  ) {}
+  
   ngOnInit(): void {
-    const productId = Number(this.route.snapshot.paramMap.get('id'));
-    if (!isNaN(productId)) {
-      this.product = this.products.find(p => p.id === productId);
-    }
+    
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.loadSanPham(id);   
+      }
+    });
+  }
+  
+  loadSanPham(id: string): void {
+    this.sanPhamService.getSanPhamById(id).subscribe((data: SanPham) => {
+      this.sanPham = data;
+    }, error => {
+      console.error('Error loading SanPham:', error);
+    });
+  }
+
+  loadLoaiSanPham(maLoai: string): void {
+    this.loaiSanPhamService.getLoaiSanPhamById(maLoai).subscribe((data: LoaiSanPham) => {
+      this.loaiSanPham = data;
+    }, error => {
+      console.error('Error loading LoaiSanPham:', error);
+    });
   }
 }

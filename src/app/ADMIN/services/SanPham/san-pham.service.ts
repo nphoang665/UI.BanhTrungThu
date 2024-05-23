@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { SanPham, SuaSanPham, ThemSanPham } from '../../models/san-pham.model';
 import { Observable, map } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { AnhSanPham } from '../../models/anh-san-pham.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,19 @@ export class SanPhamService {
     return this.http.put<SanPham>(`${environment.apiBaseUrl}/api/SanPham/${id}`,data)
   }
 
+  xoaSanPham(id:string):Observable<SanPham>{
+    return this.http.delete<SanPham>(`${environment.apiBaseUrl}/api/SanPham/${id}`)
+  }
+
   getAllSanPham():Observable<SanPham[]>{
     return this.http.get<SanPham[]>(`${environment.apiBaseUrl}/api/SanPham`)
   }
 
   getSanPhamById(id:string):Observable<SanPham>{
     return this.http.get<SanPham>(`${environment.apiBaseUrl}/api/SanPham/${id}`)
+  }
+  getAnhSanPham(maSanPham: string): Observable<AnhSanPham[]> {
+    return this.http.get<AnhSanPham[]>(`${environment.apiBaseUrl}/api/AnhSanPham/${maSanPham}`);
   }
 
   getSanPhamByLoai(maLoai: string): Observable<SanPham[]> {

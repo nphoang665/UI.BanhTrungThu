@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { KhachHangService } from '../../../services/KhachHang/khach-hang.service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,10 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 export class ThemKhachHangComponent implements OnInit{
 
   myForm:FormGroup = new FormGroup({
-    tenKhachHang:new FormControl(''),
-    soDienThoai:new FormControl(''),
-    email:new FormControl(''),
-    diaChi:new FormControl(''),
+    tenKhachHang:new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
+    soDienThoai:new FormControl('',[Validators.required, Validators.minLength(7), Validators.maxLength(11)]),
+    email:new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
+    diaChi:new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(255)]),
     tinhTrang:new FormControl(''),
   })
   constructor(    

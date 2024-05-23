@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SanPhamService } from '../../../services/SanPham/san-pham.service';
 import { ToastrService } from 'ngx-toastr';
 import { LoaiSanPhamService } from '../../../services/LoaiSanPham/loai-san-pham.service';
@@ -16,11 +16,11 @@ export class ThemSanPhamComponent implements OnInit{
   previewingFileImg: any[] = [];
   LoaiSanPham:any[]=[]
   themSanPhamForm:FormGroup = new FormGroup({
-    maLoai:new FormControl(''),
-    tenSanPham: new FormControl(''),
-    gia: new FormControl(''),
-    moTa: new FormControl(''),
-    soLuongTrongKho: new FormControl(''),
+    maLoai:new FormControl('',[Validators.required]),
+    tenSanPham: new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
+    gia: new FormControl('',[Validators.required, Validators.min(0),Validators.max(10000000)]),
+    moTa: new FormControl('',[Validators.required, Validators.minLength(3)]),
+    soLuongTrongKho: new FormControl('',[Validators.required, Validators.min(0),Validators.max(300)]),
     ngayThem: new FormControl(new Date()),
     tinhTrang: new FormControl(''),
   })
