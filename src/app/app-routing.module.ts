@@ -10,6 +10,7 @@ import { TongQuanComponent } from './ADMIN/QuanLy/tong-quan/tong-quan.component'
 import { KhachHangComponent } from './ADMIN/QuanLy/khach-hang/khach-hang.component';
 import { SanPhamBanhTrungThuComponent } from './USER/san-pham-banh-trung-thu/san-pham-banh-trung-thu.component';
 import { GioHangComponent } from './USER/gio-hang/gio-hang.component';
+import { ThanhToanComponent } from './USER/ThanhToan/thanh-toan/thanh-toan.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path:'chi-tiet-banh-trung-thu/:id',component:ChiTietBanhTrungThuComponent},
   // {path:'san-pham-banh-trung-thu',component:SanPhamBanhTrungThuComponent},
   {path:'gio-hang',component:GioHangComponent},
+  {path:'thanh-toan',component:ThanhToanComponent},
   { path: 'san-pham/:idLoaiSanPham', component: SanPhamBanhTrungThuComponent },
 ];
 

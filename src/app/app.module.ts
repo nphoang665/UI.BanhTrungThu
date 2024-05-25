@@ -30,6 +30,7 @@ import { SanPhamBanhTrungThuComponent } from './USER/san-pham-banh-trung-thu/san
 import { GioHangComponent } from './USER/gio-hang/gio-hang.component';
 import { ThemKhachHangComponent } from './ADMIN/QuanLy/khach-hang/them-khach-hang/them-khach-hang.component';
 import { SuaKhachHangComponent } from './ADMIN/QuanLy/khach-hang/sua-khach-hang/sua-khach-hang.component';
+import { ThanhToanComponent } from './USER/ThanhToan/thanh-toan/thanh-toan.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { SuaKhachHangComponent } from './ADMIN/QuanLy/khach-hang/sua-khach-hang/
     SanPhamBanhTrungThuComponent,
     GioHangComponent,
     ThemKhachHangComponent,
-    SuaKhachHangComponent
+    SuaKhachHangComponent,
+    ThanhToanComponent
   ],
   imports: [
     BrowserModule,

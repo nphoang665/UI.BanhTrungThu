@@ -16,7 +16,10 @@ export class GioHangComponent implements OnInit {
   constructor(private gioHangService: GioHangService) { }
 
   ngOnInit(): void {
+    
     this.cartItems = this.gioHangService.getCartItems();
+    console.log(this.cartItems);
+    
   }
 
   updateQuantity(sanPham: SanPham | undefined, event: Event): void {
