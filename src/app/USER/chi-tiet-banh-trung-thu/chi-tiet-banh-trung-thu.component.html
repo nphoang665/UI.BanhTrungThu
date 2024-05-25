@@ -1,44 +1,5 @@
 <app-header></app-header>
 <!-- <div style="background-image: url('https://www.banhngoncaocap.com/templates/sj_market/images/styling/red/bn_bg_partern_01.png');">
-  <div class="max-w-screen-xl mx-auto p-6">
-    <div class="flex flex-col md:flex-row  overflow-hidden">
-      <div class="md:w-1/3 bg-white border flex items-center justify-center p-6">
-        <img src="https://www.banhngoncaocap.com/images/stories/virtuemart/product//20180810183334_Main-product-detail.png" alt="Bánh Trung Thu" class="w-full">
-      </div>
-      <div class="md:w-2/3 p-6">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">BÁNH CHAY ĐẬU XANH HẠNH NHÂN</h2>
-        <span>Giá bán lẻ:  <p class="text-red-600 font-bold text-2xl mb-4">75,000₫</p></span>
-        <div class="mb-6">
-          <label for="quantity" class="block text-gray-700 font-medium mb-2">Số lượng</label>
-          <input type="number" id="quantity" name="quantity" min="1" value="1" class="w-20 border rounded px-3 py-2 text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400">
-        </div>
-        <div class="flex space-x-4 mb-6">
-          <button class="bg-[#B9121B] text-white px-6 py-3 rounded-lg shadow ">Thêm vào giỏ hàng</button>
-          <button class="bg-[#E7E531] text-[#B9121B] px-6 py-3 rounded-lg shadow  focus:outline-none ">HOTLINE: 0123 123 123</button>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">Phương thức thanh toán</h3>
-          <p class="text-gray-700">Thanh toán khi nhận hàng</p>
-        </div>
-      </div>
-    </div>
-  
-    <div class="mt-8 p-6 bg-gray-50 rounded-lg shadow-md">
-      <h3 class="text-xl font-semibold text-gray-800 mb-4">Thông Tin Sản Phẩm</h3>
-      <ul class="list-disc list-inside text-gray-700">
-        <li>Bánh Trung Thu Kinh Đô - Bánh Chay / Bánh Xanh - Bánh Xanh Đậu xanh hạnh nhân</li>
-        <li>Thương hiệu: bánh trung thu Kinh Đô</li>
-        <li>Loại bánh: Bánh chay</li>
-        <li>Hình thức: 01 bánh, hộp kiếng chống ẩm</li>
-        <li>Khối lượng: 150 gram</li>
-        <li>Thành phần: nhân Đậu xanh hạnh nhân</li>
-      </ul>
-      <p class="text-gray-700 mt-4">Bánh Trung thu Kinh Đô không thể thiếu trong mâm cỗ Tết Trung thu, hơn nữa đây là món quà đặc trưng và ý nghĩa nhất không thể thay thế được...</p>
-    </div>
-  </div>
-</div> -->
-
-<div style="background-image: url('https://www.banhngoncaocap.com/templates/sj_market/images/styling/red/bn_bg_partern_01.png');">
   <div class="max-w-screen-xl mx-auto p-6" *ngIf="sanPham">
     <div class="flex flex-col md:flex-row overflow-hidden">
       <div class="md:w-1/3 bg-white border flex items-center justify-center p-6">
@@ -71,7 +32,41 @@
       <p class="text-gray-700 mt-4">{{ sanPham.moTa }}</p>
     </div>
   </div>
+</div> -->
+
+<div style="background-image: url('https://www.banhngoncaocap.com/templates/sj_market/images/styling/red/bn_bg_partern_01.png');">
+  <div class="max-w-screen-xl mx-auto p-6" *ngIf="sanPham">
+    <div class="flex flex-col md:flex-row overflow-hidden">
+      <div class="md:w-1/3 bg-white border flex items-center justify-center p-6">
+        <img [src]="sanPham.anhSanPham && sanPham.anhSanPham.length > 0 ? apiBaseUrl + '/images/' + sanPham.anhSanPham[0].tenAnh : 'https://www.banhngoncaocap.com/images/stories/virtuemart/product//20180810183334_Main-product-detail.png'" alt="{{ sanPham.tenSanPham }}" class="w-full">
+      </div>
+      <div class="md:w-2/3 p-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ sanPham.tenSanPham }}</h2>
+        <span>Giá bán lẻ: <p class="text-red-600 font-bold text-2xl mb-4">{{ sanPham.gia | currency:'VND':'symbol' }}</p></span>
+        <div class="mb-6">
+          <label for="quantity" class="block text-gray-700 font-medium mb-2">Số lượng - ({{sanPham.soLuongTrongKho}})</label>
+          <input type="number" id="quantity" name="quantity" min="1" [(ngModel)]="quantity" class="w-20 border rounded px-3 py-2 text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400">
+        </div>
+        <div class="flex space-x-4 mb-6">
+          <button (click)="addToCart()" class="bg-[#B9121B] text-white px-6 py-3 rounded-lg shadow">Thêm vào giỏ hàng</button>
+          <button class="bg-[#E7E531] text-[#B9121B] px-6 py-3 rounded-lg shadow focus:outline-none">HOTLINE: 0123 123 123</button>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Phương thức thanh toán</h3>
+          <p class="text-gray-700">Thanh toán khi nhận hàng</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="mt-8 p-6 bg-gray-50 rounded-lg shadow-md">
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">Thông Tin Sản Phẩm</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li>Loại bánh: {{ sanPham.maLoai }}</li>
+        <li>Khối lượng: 150 gram</li>
+      </ul>
+      <p class="text-gray-700 mt-4">{{ sanPham.moTa }}</p>
+    </div>
+  </div>
 </div>
 
-  
   <app-footer></app-footer>

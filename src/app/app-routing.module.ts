@@ -12,7 +12,7 @@ import { SanPhamBanhTrungThuComponent } from './USER/san-pham-banh-trung-thu/san
 import { GioHangComponent } from './USER/gio-hang/gio-hang.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/admin/LoaiSanPham', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { 
     path: 'admin',
     component: AdminComponent,

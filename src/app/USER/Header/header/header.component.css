@@ -43,3 +43,12 @@
 .dropdown-content {
     width: 100%;
 }
+
+.active {
+  
+    color: #F3B233; /* Màu chữ khi mục được chọn */
+  }
+  
+  .active .text-gray-500 {
+    color: #F3B233; /* Màu của biểu tượng khi mục được chọn */
+  }

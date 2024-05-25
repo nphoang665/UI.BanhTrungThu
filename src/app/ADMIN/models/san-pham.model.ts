@@ -2,7 +2,7 @@ export interface SanPham{
     maSanPham:string,
     maLoai:string,
     tenSanPham:string,
-    gia:string,
+    gia:number,
     moTa:string,
     soLuongTrongKho:string,
     ngayThem:string,
@@ -13,7 +13,7 @@ export interface SanPham{
 export interface ThemSanPham{
     maLoai:string,
     tenSanPham:string,
-    gia:string,
+    gia:number,
     moTa:string,
     soLuongTrongKho:string,
     ngayThem:string,
@@ -24,7 +24,7 @@ export interface ThemSanPham{
 export interface SuaSanPham{
     maLoai:string,
     tenSanPham:string,
-    gia:string,
+    gia:number,
     moTa:string,
     soLuongTrongKho:string,
     ngayThem:string,

@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 
-<div class="max-w-screen-xl mx-auto p-4">
+<!-- <div class="max-w-screen-xl mx-auto p-4">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="md:col-span-2">
         <h2 class="text-xl font-semibold mb-4">Thông tin giao hàng</h2>
@@ -43,11 +43,11 @@
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
             <div class="flex justify-between items-center">
-              <div>BÁNH MỲ PARKET CÓ NHÂN</div>
+              <div>Jambon Lạp Xưởng</div>
               <div>300,000₫</div>
             </div>
             <div class="flex justify-between items-center mt-2">
-              <div>BÁNH SANDWICH SỮA CHUA LAVA</div>
+              <div>Bánh Chay Đậu Xanh Hạnh Nhân</div>
               <div>8,000₫</div>
             </div>
           </div>
@@ -72,8 +72,75 @@
         </div>
       </div>
     </div>
+  </div> -->
+  
+  <div class="max-w-screen-xl mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Giỏ hàng</h1>
+    <table class="min-w-full bg-white border">
+      <thead>
+        <tr>
+          <th class="px-6 py-3 border-b">Sản phẩm</th>
+          <th class="px-6 py-3 border-b">Giá</th>
+          <th class="px-6 py-3 border-b">Số lượng</th>
+          <th class="px-6 py-3 border-b">Thành tiền</th>
+          <th class="px-6 py-3 border-b">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems">
+          <td class="border p-4">{{ item.sanPham?.tenSanPham }}</td>
+          <td class="border p-4">{{ item.sanPham?.gia | currency:'VND':'symbol' }}</td>
+          <td class="border p-4">
+            <input type="number" [value]="item.quantity" (change)="updateQuantity(item.sanPham, $event)" class="w-20 border rounded px-3 py-2 text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400">
+          </td>
+          <td class="border p-4">{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</td>
+          <td class="border p-4">
+            <button (click)="removeFromCart(item.sanPham)" class="bg-red-500 text-white px-4 py-2 rounded">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="mt-4">
+      <p class="text-lg font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
+    </div>
   </div>
   
+
+  <!-- <div class="container mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Giỏ hàng</h1>
+    <table class="min-w-full bg-white border">
+      <thead>
+        <tr>
+          <th class="px-6 py-3 border-b">Sản phẩm</th>
+          <th class="px-6 py-3 border-b">Giá</th>
+          <th class="px-6 py-3 border-b">Số lượng</th>
+          <th class="px-6 py-3 border-b">Thành tiền</th>
+          <th class="px-6 py-3 border-b">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems">
+          <td class="border p-4">{{ item.sanPham?.tenSanPham }}</td>
+          <td class="border p-4">{{ item.sanPham?.gia | currency:'VND':'symbol' }}</td>
+          <td class="border p-4">
+            <input type="number" [value]="item.quantity" (change)="updateQuantity(item.sanPham, $event)" class="w-20 border rounded px-3 py-2 text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400">
+          </td>
+          <td class="border p-4">{{ item.sanPham?.gia ?? 0 * item.quantity | currency:'VND':'symbol' }}</td>
+          <td class="border p-4">
+            <button (click)="removeFromCart(item.sanPham)" class="bg-red-500 text-white px-4 py-2 rounded">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="mt-4">
+      <p class="text-lg font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
+    </div>
+  </div> -->
+  
+  
+  
+
+
 
 
   <app-footer></app-footer>

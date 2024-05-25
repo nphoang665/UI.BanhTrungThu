@@ -86,6 +86,15 @@ export class SanPhamComponent implements AfterViewInit, OnInit {
   suaSanPham(id:any): void {
     this.OpenPopupSua(id, 'Sửa sản phẩm');
   }
+  
+  xoaSanPham(id:string){
+    this.sanPhamServices.xoaSanPham(id).subscribe((data:any)=>{
+      this.toastr.success('Xóa sản phẩm thành công', 'Thông báo', {
+        timeOut: 1000,
+      });
+      this.getSanPhamData();
+    });
+  }
 
   getSanPhamData(){
     this.sanPhamServices.getAllSanPham().subscribe(

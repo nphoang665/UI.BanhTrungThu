@@ -5,6 +5,8 @@ import { SanPham } from '../../ADMIN/models/san-pham.model';
 import { SanPhamService } from '../../ADMIN/services/SanPham/san-pham.service';
 import { LoaiSanPham } from '../../ADMIN/models/loai-san-pham.model';
 import { LoaiSanPhamService } from '../../ADMIN/services/LoaiSanPham/loai-san-pham.service';
+import { GioHangService } from '../../ADMIN/services/GioHang/gio-hang.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-chi-tiet-banh-trung-thu',
@@ -15,11 +17,14 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
   sanPham: SanPham | null = null;
   loaiSanPham: LoaiSanPham | null = null;
   apiBaseUrl: string = environment.apiBaseUrl;
+  quantity: number = 1;
 
   constructor(
     private route: ActivatedRoute,
     private sanPhamService: SanPhamService,
-    private loaiSanPhamService: LoaiSanPhamService
+    private loaiSanPhamService: LoaiSanPhamService,
+    private gioHangService:GioHangService,
+    private toastr: ToastrService,
   ) {}
   
   ngOnInit(): void {
@@ -46,5 +51,13 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
     }, error => {
       console.error('Error loading LoaiSanPham:', error);
     });
+  }
+  addToCart(): void {
+    if (this.sanPham) {
+      this.gioHangService.addToCart(this.sanPham, this.quantity);
+      this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {
+        timeOut: 1000,
+      });
+    }
   }
 }
