@@ -9,23 +9,56 @@
       <a routerLink="/home" [routerLinkActive]="['active']" class="hover:text-yellow-300">Trang Chủ</a>
       <a routerLink="/banh-trung-thu" [routerLinkActive]="['active']" class="hover:text-yellow-300">Bánh Trung Thu</a>
       <a href="#" class="hover:text-yellow-300">Hướng Dẫn Đặt Hàng</a>
+      
     </nav>
-    <div class="flex space-x-4 items-center">
-      <button class="relative" (click)="xemCart()">
-        <svg class="bg-[#fff] w-[40px] h-[40px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
-        </svg>
-
+    <ng-container *ngIf="user === undefined; else showLogout">
+      <div class="flex space-x-4 items-center">
+        <button class="relative" (click)="xemCart()">
+          <svg class="bg-[#fff] w-[40px] h-[40px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+          </svg>
+          <span class="absolute -top-2 -right-2 bg-yellow-400 text-xs rounded-full h-5 w-5 flex items-center justify-center">{{SoLuongSpTrongDonHang()}}</span>
+        </button>
+        <a routerLink="/login" class="hover:text-yellow-300">Đăng nhập</a>
+        <a routerLink="/register" class="hover:text-yellow-300">Đăng ký</a>
+      </div>
+      </ng-container>
         
-        <span class="absolute -top-2 -right-2 bg-yellow-400 text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
-      </button>
-    </div>
+      <ng-template #showLogout>
+        <div class="flex space-x-4 items-center">
+          <button class="relative" (click)="xemCart()">
+            <svg class="bg-[#fff] w-[40px] h-[40px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+            </svg>
+            <span class="absolute -top-2 -right-2 bg-yellow-400 text-xs rounded-full h-5 w-5 flex items-center justify-center">{{SoLuongSpTrongDonHang()}}</span>
+          </button>
+          <button mat-button  [matMenuTriggerFor]="menu"  class="text-white">Xin chào!
+            {{user?.email}}</button>
+            <mat-menu #menu="matMenu" style="z-index: 10000;">
+              <ng-container *ngIf="user !== undefined && user?.roles?.includes('Admin')">
+                  <button mat-menu-item routerLink="/quanLyDatTour"><mat-icon
+                          svgIcon="icon_Manager"></mat-icon> Trang quản lý</button>
+              </ng-container>
+
+              <button mat-menu-item data-bs-toggle="modal" data-bs-target="#myModal"><mat-icon
+                      svgIcon="icon_User"></mat-icon> Thông tin cá
+                  nhân</button>
+              <button mat-menu-item routerLink="/lichsudattour"><mat-icon
+                      svgIcon="icon_History"></mat-icon> Lịch sử đặt hàng</button>
+              <button mat-menu-item (click)="onLogout()"> <mat-icon svgIcon="icon_Logout"></mat-icon>
+                  Đăng xuất</button>
+          </mat-menu>
+        </div>
+      
+      </ng-template>
+     
+   
   </div>
 </header>
 
 
 <!-- src/app/header/header.component.html -->
-<header class="bg-[#920E15] text-white">
+<!-- <header class="bg-[#920E15] text-white">
   <div class="max-w-screen-xl mx-auto flex justify-between items-center">
     <div class="flex items-center space-x-4">
       <div class="dropdown">
@@ -41,7 +74,6 @@
       
       <form class="max-w-lg mx-auto">
         <div class="flex">
-            <!-- <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label> -->
             <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-white border   focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">Loại sản phẩm <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
       </svg></button>
@@ -82,7 +114,7 @@
       <a href="tel:0123123123" class="hover:underline ">0123 123 123</a>
     </div>
   </div>
-</header>
+</header> -->
 
 
 <!-- Dropdown menu -->

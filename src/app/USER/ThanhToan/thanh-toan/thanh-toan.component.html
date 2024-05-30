@@ -30,35 +30,53 @@
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" placeholder="Địa chỉ">
           </div>
 
-          <div class="flex items-center justify-between">
+          <!-- <div class="flex items-center justify-between">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
               Tiếp tục đến phương thức thanh toán
             </button>
-          </div>
+          </div> -->
+
+          <div class="flex justify-normal ">
+            <div class="mt-4 py-1">
+                 <p class="text-lg font-semibold">Phương thức thanh toán: </p>
+               </div>
+               <button  class="mt-4"mat-raised-button >
+                 <p class="text-lg font-semibold">Thanh toán khi nhận hàng</p>
+               </button>
+               <button  class="mt-4" mat-raised-button >
+                <p class="text-lg font-semibold">Thanh toán qua ngân hàng</p>
+              </button>
+               </div>
         </form>
       </div>
       <div>
         <h2 class="text-xl font-semibold mb-4">Giỏ hàng</h2>
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
+          <div class="mb-4" *ngFor="let item of cartItems">
             <div class="flex justify-between items-center">
-              <div>Jambon Lạp Xưởng</div>
-              <div>300,000₫</div>
+              <div class="flex items-center gap-4 relative">
+                <img class="w-20 h-20 border" [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}">
+                <div class="badge">{{ item.quantity }}</div>
+                <div class="font-medium dark:text-white">
+                  <div>{{ item.sanPham?.tenSanPham }}</div>
+                </div>
+              </div>
+              <!-- <div>{{ item.sanPham?.gia | currency:'VND':'symbol' }}</div> -->
+              <div>{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</div>
             </div>
-            <div class="flex justify-between items-center mt-2">
-              <div>Bánh Chay Đậu Xanh Hạnh Nhân</div>
-              <div>8,000₫</div>
-            </div>
+            <!-- <div class="flex justify-between items-center mt-2">
+              <div>{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</div>
+            </div> -->
           </div>
-          <div class="mb-4">
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="discount-code" type="text" placeholder="Mã giảm giá">
+          <div class="mb-4 flex justify-between">
+            <input class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="discount-code" type="text" placeholder="Mã giảm giá">
             <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" type="button">
               Sử dụng
             </button>
           </div>
           <div class="flex justify-between items-center">
             <div>Tạm tính</div>
-            <div>308,000₫</div>
+            <div>{{ getTotal() | currency:'VND':'symbol' }}</div>
           </div>
           <div class="flex justify-between items-center mt-2">
             <div>Phí vận chuyển</div>
@@ -66,12 +84,24 @@
           </div>
           <div class="flex justify-between items-center mt-2 font-bold">
             <div>Tổng cộng</div>
-            <div>308,000₫</div>
+            <div>{{ getTotal() | currency:'VND':'symbol' }}</div>
           </div>
         </div>
+      
+        <div class="flex justify-between">
+          <div class="mt-4">
+            <p class="text-lg font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
+          </div>
+          <button routerLink="/thanh-toan" class="mt-4" mat-dialog-close mat-raised-button color="warn">
+            <p class="text-lg font-semibold">Đặt hàng</p>
+          </button>
+        </div>
       </div>
-    </div>
+      
+
+
   </div>
+</div>
 
 
   <app-footer></app-footer>

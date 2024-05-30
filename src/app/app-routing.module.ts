@@ -11,6 +11,9 @@ import { KhachHangComponent } from './ADMIN/QuanLy/khach-hang/khach-hang.compone
 import { SanPhamBanhTrungThuComponent } from './USER/san-pham-banh-trung-thu/san-pham-banh-trung-thu.component';
 import { GioHangComponent } from './USER/gio-hang/gio-hang.component';
 import { ThanhToanComponent } from './USER/ThanhToan/thanh-toan/thanh-toan.component';
+import { XemNhanhSanPhamComponent } from './USER/xem-nhanh-san-pham/xem-nhanh-san-pham.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { RegisterComponent } from './Auth/register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -31,6 +34,9 @@ const routes: Routes = [
   {path:'gio-hang',component:GioHangComponent},
   {path:'thanh-toan',component:ThanhToanComponent},
   { path: 'san-pham/:idLoaiSanPham', component: SanPhamBanhTrungThuComponent },
+  { path: 'a', component: XemNhanhSanPhamComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({

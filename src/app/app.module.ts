@@ -8,7 +8,7 @@ import { AdminComponent } from './ADMIN/admin/admin.component';
 import { MainNavbarComponent } from './ADMIN/Main/main-navbar/main-navbar.component';
 import { MainSidebarComponent } from './ADMIN/Main/main-sidebar/main-sidebar.component';
 import { LoaiSanPhamComponent } from './ADMIN/QuanLy/loai-san-pham/loai-san-pham.component';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './USER/home/home.component';
@@ -31,6 +31,11 @@ import { GioHangComponent } from './USER/gio-hang/gio-hang.component';
 import { ThemKhachHangComponent } from './ADMIN/QuanLy/khach-hang/them-khach-hang/them-khach-hang.component';
 import { SuaKhachHangComponent } from './ADMIN/QuanLy/khach-hang/sua-khach-hang/sua-khach-hang.component';
 import { ThanhToanComponent } from './USER/ThanhToan/thanh-toan/thanh-toan.component';
+import { XemNhanhSanPhamComponent } from './USER/xem-nhanh-san-pham/xem-nhanh-san-pham.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { RegisterComponent } from './Auth/register/register.component';
+import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { AuthInterceptor } from './Auth/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,7 +61,10 @@ import { ThanhToanComponent } from './USER/ThanhToan/thanh-toan/thanh-toan.compo
     GioHangComponent,
     ThemKhachHangComponent,
     SuaKhachHangComponent,
-    ThanhToanComponent
+    ThanhToanComponent,
+    XemNhanhSanPhamComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -67,11 +75,37 @@ import { ThanhToanComponent } from './USER/ThanhToan/thanh-toan/thanh-toan.compo
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    GoogleSigninButtonModule,
     ToastrModule.forRoot(),
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     provideClientHydration(),
     provideAnimationsAsync(),
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '101863175272-n460ifjdvtb6gevl0sa64md26bt0r22v.apps.googleusercontent.com', {
+              oneTapEnabled: false,
+              prompt: 'consent'
+            }
+            )
+          },
+          // {
+          //   id: FacebookLoginProvider.PROVIDER_ID,
+          //   provider: new FacebookLoginProvider('clientId')
+          // }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

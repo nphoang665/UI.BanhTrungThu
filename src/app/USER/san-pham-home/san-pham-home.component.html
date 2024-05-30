@@ -31,7 +31,7 @@
             <div class="p-4">
               <a href="#" class="text-xl mb-2 text-[#C0281B] hover:text-[#F3B233]">{{ sanPham.tenSanPham }}</a>
               <p class="text-[#C0281B] text-2xl font-bold dark:text-white mb-4">{{ sanPham.gia | currency:'VND':'symbol-narrow' }}</p>
-              <a href="#" class="py-1 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:border-[#8B0000] hover:bg-[#8B0000] hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Xem nhanh</a>
+              <a (click)="xemNhanhSP(sanPham.maSanPham)" class="py-1 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:border-[#8B0000] hover:bg-[#8B0000] hover:text-white focus:z-10 focus:ring-4  focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 hover:cursor-pointer">Xem nhanh</a>
               <a [routerLink]="['/chi-tiet-banh-trung-thu', sanPham.maSanPham]" class="text-white bg-[#B3111A] hover:bg-[#F3B233] border border-[#B3111A] hover:border-[#F3B233] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-5 py-1 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Chi tiết</a>
             </div>
         </div>

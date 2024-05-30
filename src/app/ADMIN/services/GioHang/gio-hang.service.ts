@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SanPham } from '../../models/san-pham.model';
+import { KhachHang } from '../../models/khach-hang.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,28 @@ export class GioHangService {
   getCartItems(): { sanPham: SanPham, quantity: number }[] {
     return this.cartItems;
   }
+  DemSoLuong():number{
+    var gioHangs = localStorage.getItem(this.storageKey);
+    if(gioHangs){
+      var gioHangParsed = JSON.parse(gioHangs);
+    }
+    
+
+    var soLuongSp = gioHangParsed.length;
+    // console.log(soLuongSp);
+    
+    return soLuongSp;
+  }
 
   addToCart(sanPham: SanPham, quantity: number = 1): void {
+    const userLogin = localStorage.getItem('NguoiDung');
+    if(userLogin==undefined){
+      alert("dang nhap")
+      return ;
+    }
+    const user=JSON.parse(userLogin);
+    console.log(user.maKhachHang);
+    
     const existingItem = this.cartItems.find(item => item.sanPham.maSanPham === sanPham.maSanPham);
     if (existingItem) {
       existingItem.quantity += quantity;

@@ -18,7 +18,7 @@ export class GioHangComponent implements OnInit {
   ngOnInit(): void {
     
     this.cartItems = this.gioHangService.getCartItems();
-    console.log(this.cartItems);
+    // console.log(this.cartItems);
     
   }
 

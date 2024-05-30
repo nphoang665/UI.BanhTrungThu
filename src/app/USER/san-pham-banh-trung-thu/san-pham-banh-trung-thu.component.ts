@@ -26,7 +26,7 @@ export class SanPhamBanhTrungThuComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    console.log(this.loaiSanPham?.tenLoai);
+    // console.log(this.loaiSanPham?.tenLoai);
     
     this.route.paramMap.subscribe(params => {
       this.loaiSanPhamId = params.get('idLoaiSanPham');

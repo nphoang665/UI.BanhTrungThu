@@ -1,0 +1,235 @@
+
+
+<!-- <div class="container-fluid">
+    <div class="container">
+      <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="row w-100 ">
+  
+  
+  
+          <div
+            class="patterm_Login bg-white col-lg-5 col-md-8 mx-auto pt-lg-5 pt-md-3 pt-sm-2 pt-0  pb-4 pb-md-3 pb-sm-2">
+            <div class="_title_Login text-center pt-4">
+              Đăng ký
+            </div>
+            <div class="_descriptionTitle mt-1 text-center">
+              <span>Đăng ký tài khoản của bạn</span>
+            </div>
+  
+            <div class="ps-lg-5 ps-md-4 ps-sm-2 ps-1 pe-lg-5 pe-md-4 pe-sm-2 pe-1">
+              <form [formGroup]="register" (submit)="onFormSubmit()">
+                <div class="_frm_ipt_login pt-4 ">
+                  <mat-form-field class="example-full-width w-100">
+                    <mat-label>Email</mat-label>
+                    <mat-icon matPrefix svgIcon="user-login" aria-hidden="false"
+                      aria-label="Example thumbs up SVG icon"></mat-icon>
+                    <input matInput formControlName="email" placeholder="Email" >
+                    
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width w-100">
+                    <mat-label>Họ và tên</mat-label>
+                    <mat-icon matPrefix svgIcon="user-login" aria-hidden="false"
+                      aria-label="Example thumbs up SVG icon"></mat-icon>
+                    <input matInput formControlName="userName" placeholder="Họ và tên" >
+                    
+                  </mat-form-field>
+  
+  
+                  <mat-form-field class="example-full-width d-block w-100">
+                    <mat-label>Mật khẩu</mat-label>
+                    <mat-icon matPrefix svgIcon="password-login" aria-hidden="false"
+                      aria-label="Example thumbs up SVG icon"></mat-icon>
+                    <input matInput placeholder="Mật khẩu" formControlName="password" >
+  
+                    <mat-icon matSuffix svgIcon="eye-login" aria-hidden="false"
+                      aria-label="Example thumbs up SVG icon"></mat-icon>
+                  </mat-form-field>
+  
+                  <mat-form-field class="example-full-width d-block w-100">
+                    <mat-label>Nhập lại mật khẩu</mat-label>
+                    <mat-icon matPrefix svgIcon="password-login" aria-hidden="false"
+                      aria-label="Example thumbs up SVG icon"></mat-icon>
+                    <input matInput placeholder="Nhập lại mật khẩu" formControlName="confirmPassword"
+                      >
+                   
+                    <mat-icon matSuffix svgIcon="eye-login" aria-hidden="false"
+                      aria-label="Example thumbs up SVG icon"></mat-icon>
+                  </mat-form-field>
+                </div>
+  
+                <div class="_dv_btn_login  mt-2">
+                  <button class="btn_login w-100" type="submit" >
+                    Đăng ký
+                  </button>
+                </div>
+              </form>
+  
+              <div class="_dv_quenmk mt-2 text-center">
+                <span class="">
+                  Bạn đã có tài khoản ? <i routerLink="/login"><u style="cursor: pointer;">Trở về đăng nhập</u></i> !!!
+                </span>
+              </div>
+  
+  
+  
+  
+  
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div> -->
+
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Đăng ký</h2>
+    <div class="flex justify-around mb-4">
+      <asl-google-signin-button type='standard' size='large'
+      ></asl-google-signin-button>
+      <!-- <button class="w-100 btn_log_fb d-flex align-items-center justify-content-center"
+                                  (click)="onFacebookLogin()">
+                                  <div>
+                                      <mat-icon class="p-0 m-0 small-icon me-1" svgIcon="facebook-login">
+                                      </mat-icon>
+                                  </div>
+                                  <div class="text-nowrap">
+                                      <span>Đăng nhập với Facebook</span>
+                                  </div>
+                              </button> -->
+    </div>
+    <div class="flex items-center my-4">
+      <div class="flex-grow border-t border-gray-300"></div>
+      <span class="mx-2 text-gray-500">or</span>
+      <div class="flex-grow border-t border-gray-300"></div>
+    </div>
+    <form [formGroup]="register" (ngSubmit)="onFormSubmit()">
+      <div class="mb-4">
+        <label for="email" class="block mb-2 text-sm font-medium"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': register.get('email')?.valid,
+            'text-red-700 dark:text-red-500': register.get('email')?.invalid && (register.get('email')?.dirty || register.get('email')?.touched)
+          }">
+          Email
+        </label>
+        <input formControlName="email" id="email" type="email" class="mt-1 px-3 py-2 bg-white border shadow-sm rounded-md w-full"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': register.get('email')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': register.get('email')?.invalid && (register.get('email')?.dirty || register.get('email')?.touched)
+          }"
+          placeholder="Nhập email của bạn..." />
+        <div *ngIf="register.get('email')?.invalid && (register.get('email')?.dirty || register.get('email')?.touched)" class="mt-2 text-sm">
+          <p *ngIf="register.get('email')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+            Email là bắt buộc.
+          </p>
+          <!-- <p *ngIf="register.get('email')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+            Email phải có ít nhất 4 ký tự.
+          </p> -->
+          <p *ngIf="register.get('email')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+            Email không được vượt quá 200 ký tự.
+          </p>
+          <p *ngIf="register.get('email')?.errors?.['pattern']" class="text-red-600 dark:text-red-500">
+            Email không hợp lệ.
+          </p>
+        </div>
+      </div>
+    
+      <div class="mb-4">
+        <label for="userName" class="block mb-2 text-sm font-medium"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': register.get('userName')?.valid,
+            'text-red-700 dark:text-red-500': register.get('userName')?.invalid && (register.get('userName')?.dirty || register.get('userName')?.touched)
+          }">
+          Họ và tên
+        </label>
+        <input formControlName="userName" id="userName" type="text" class="mt-1 px-3 py-2 bg-white border shadow-sm rounded-md w-full"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': register.get('userName')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': register.get('userName')?.invalid && (register.get('userName')?.dirty || register.get('userName')?.touched)
+          }"
+          placeholder="Nhập họ và tên của bạn..." />
+        <div *ngIf="register.get('userName')?.invalid && (register.get('userName')?.dirty || register.get('userName')?.touched)" class="mt-2 text-sm">
+          <p *ngIf="register.get('userName')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+            Họ và tên là bắt buộc.
+          </p>
+          <p *ngIf="register.get('userName')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+            Họ và tên phải có ít nhất 4 ký tự.
+          </p>
+          <p *ngIf="register.get('userName')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+            Họ và tên không được vượt quá 50 ký tự.
+          </p>
+        </div>
+      </div>
+    
+      <div class="mb-4">
+        <label for="password" class="block mb-2 text-sm font-medium"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': register.get('password')?.valid,
+            'text-red-700 dark:text-red-500': register.get('password')?.invalid && (register.get('password')?.dirty || register.get('password')?.touched)
+          }">
+          Mật khẩu
+        </label>
+        <input formControlName="password" id="password" type="password" class="mt-1 px-3 py-2 bg-white border shadow-sm rounded-md w-full"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': register.get('password')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': register.get('password')?.invalid && (register.get('password')?.dirty || register.get('password')?.touched)
+          }"
+          placeholder="Nhập mật khẩu của bạn..." />
+        <div *ngIf="register.get('password')?.invalid && (register.get('password')?.dirty || register.get('password')?.touched)" class="mt-2 text-sm">
+          <p *ngIf="register.get('password')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+            Mật khẩu là bắt buộc.
+          </p>
+          <p *ngIf="register.get('password')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+            Mật khẩu phải có ít nhất 6 ký tự.
+          </p>
+          <p *ngIf="register.get('password')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+            Mật khẩu không được vượt quá 100 ký tự.
+          </p>
+        </div>
+      </div>
+    
+      <div class="mb-4">
+        <label for="confirmPassword" class="block mb-2 text-sm font-medium"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': register.get('confirmPassword')?.valid,
+            'text-red-700 dark:text-red-500': register.get('confirmPassword')?.invalid && (register.get('confirmPassword')?.dirty || register.get('confirmPassword')?.touched)
+          }">
+          Nhập lại mật khẩu
+        </label>
+        <input formControlName="confirmPassword" id="confirmPassword" type="password" class="mt-1 px-3 py-2 bg-white border shadow-sm rounded-md w-full"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': register.get('confirmPassword')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': register.get('confirmPassword')?.invalid && (register.get('confirmPassword')?.dirty || register.get('confirmPassword')?.touched)
+          }"
+          placeholder="Nhập lại mật khẩu của bạn..." />
+        <div *ngIf="register.get('confirmPassword')?.invalid && (register.get('confirmPassword')?.dirty || register.get('confirmPassword')?.touched)" class="mt-2 text-sm">
+          <p *ngIf="register.get('confirmPassword')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+            Nhập lại mật khẩu là bắt buộc.
+          </p>
+          <p *ngIf="register.get('confirmPassword')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+            Nhập lại mật khẩu phải có ít nhất 6 ký tự.
+          </p>
+          <p *ngIf="register.get('confirmPassword')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+            Nhập lại mật khẩu không được vượt quá 100 ký tự.
+          </p>
+          <p *ngIf="register.get('confirmPassword')?.errors?.['passwordMismatch']" class="text-red-600 dark:text-red-500">
+            Mật khẩu không khớp.
+          </p>
+        </div>
+      </div>
+    
+      <div class="mt-6">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" type="submit">
+          Đăng ký
+        </button>
+      </div>
+      
+      <div class="mt-4 text-center">
+        <span class="text-gray-700">Bạn đã có tài khoản? <a routerLink="/login" class="text-blue-500 hover:text-blue-700">Đăng nhập</a></span>
+      </div>
+    </form>
+    
+  </div>
+</div>

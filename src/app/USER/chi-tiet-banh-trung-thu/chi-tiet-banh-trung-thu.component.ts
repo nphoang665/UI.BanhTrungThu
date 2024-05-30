@@ -53,6 +53,8 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
     });
   }
   addToCart(): void {
+    console.log(this.sanPham);
+    
     if (this.sanPham) {
       this.gioHangService.addToCart(this.sanPham, this.quantity);
       this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {
