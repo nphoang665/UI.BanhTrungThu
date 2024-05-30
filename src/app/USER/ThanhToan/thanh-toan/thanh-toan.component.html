@@ -1,107 +1,94 @@
 <app-header></app-header>
 
 <div class="max-w-screen-xl mx-auto p-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="md:col-span-2">
-        <h2 class="text-xl font-semibold mb-4">Thông tin giao hàng</h2>
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname">
-              Họ và tên
-            </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fullname" type="text" placeholder="Họ và tên">
-          </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-              Email
-            </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
-          </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
-              Số điện thoại
-            </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Số điện thoại">
-          </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
-              Địa chỉ
-            </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" placeholder="Địa chỉ">
-          </div>
-
-          <!-- <div class="flex items-center justify-between">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-              Tiếp tục đến phương thức thanh toán
-            </button>
-          </div> -->
-
-          <div class="flex justify-normal ">
-            <div class="mt-4 py-1">
-                 <p class="text-lg font-semibold">Phương thức thanh toán: </p>
-               </div>
-               <button  class="mt-4"mat-raised-button >
-                 <p class="text-lg font-semibold">Thanh toán khi nhận hàng</p>
-               </button>
-               <button  class="mt-4" mat-raised-button >
-                <p class="text-lg font-semibold">Thanh toán qua ngân hàng</p>
-              </button>
-               </div>
-        </form>
-      </div>
-      <div>
-        <h2 class="text-xl font-semibold mb-4">Giỏ hàng</h2>
-        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4" *ngFor="let item of cartItems">
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-4 relative">
-                <img class="w-20 h-20 border" [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}">
-                <div class="badge">{{ item.quantity }}</div>
-                <div class="font-medium dark:text-white">
-                  <div>{{ item.sanPham?.tenSanPham }}</div>
-                </div>
-              </div>
-              <!-- <div>{{ item.sanPham?.gia | currency:'VND':'symbol' }}</div> -->
-              <div>{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</div>
-            </div>
-            <!-- <div class="flex justify-between items-center mt-2">
-              <div>{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</div>
-            </div> -->
-          </div>
-          <div class="mb-4 flex justify-between">
-            <input class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="discount-code" type="text" placeholder="Mã giảm giá">
-            <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" type="button">
-              Sử dụng
-            </button>
-          </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="md:col-span-2">
+      <h2 class="text-xl font-semibold mb-4">Thông tin giao hàng</h2>
+      <form [formGroup]="myForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname">
+            Họ và tên
+          </label>
+          <input formControlName="tenKhachHang" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fullname" type="text" placeholder="Họ và tên">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+            Email
+          </label>
+          <input formControlName="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+            Số điện thoại
+          </label>
+          <input formControlName="soDienThoai" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Số điện thoại">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+            Địa chỉ
+          </label>
+          <input formControlName="diaChi" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" placeholder="Địa chỉ">
+        </div>
+        <div class="mb-4 flex items-center">
+          <label class="block text-gray-700 text-sm font-bold mb-2 mr-4" for="paymentMethod">
+            Phương thức thanh toán:
+          </label>
+          <select formControlName="thongTinThanhToan" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <option value="COD">Thanh toán khi nhận hàng</option>
+            <option value="Bank">Thanh toán qua ngân hàng</option>
+          </select>
+        </div>
+        <!-- <div class="flex items-center justify-between">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            Đặt hàng
+          </button>
+        </div> -->
+      </form>
+    </div>
+    <div>
+      <h2 class="text-xl font-semibold mb-4">Giỏ hàng</h2>
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4" *ngFor="let item of cartItems">
           <div class="flex justify-between items-center">
-            <div>Tạm tính</div>
-            <div>{{ getTotal() | currency:'VND':'symbol' }}</div>
-          </div>
-          <div class="flex justify-between items-center mt-2">
-            <div>Phí vận chuyển</div>
-            <div>-</div>
-          </div>
-          <div class="flex justify-between items-center mt-2 font-bold">
-            <div>Tổng cộng</div>
-            <div>{{ getTotal() | currency:'VND':'symbol' }}</div>
+            <div class="flex items-center gap-4 relative">
+              <img class="w-20 h-20 border" [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}">
+              <div class="badge">{{ item.quantity }}</div>
+              <div class="font-medium dark:text-white">
+                <div>{{ item.sanPham?.tenSanPham }}</div>
+              </div>
+            </div>
+            <div>{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</div>
           </div>
         </div>
-      
-        <div class="flex justify-between">
-          <div class="mt-4">
-            <p class="text-lg font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
-          </div>
-          <button routerLink="/thanh-toan" class="mt-4" mat-dialog-close mat-raised-button color="warn">
-            <p class="text-lg font-semibold">Đặt hàng</p>
+        <div class="mb-4 flex justify-between">
+          <input class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="discount-code" type="text" placeholder="Mã giảm giá">
+          <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" type="button">
+            Sử dụng
           </button>
         </div>
+        <div class="flex justify-between items-center">
+          <div>Tạm tính</div>
+          <div>{{ getTotal() | currency:'VND':'symbol' }}</div>
+        </div>
+        <div class="flex justify-between items-center mt-2">
+          <div>Phí vận chuyển</div>
+          <div>-</div>
+        </div>
+        <div class="flex justify-between items-center mt-2 font-bold">
+          <div>Tổng cộng</div>
+          <div>{{ getTotal() | currency:'VND':'symbol' }}</div>
+        </div>
       </div>
-      
-
-
+      <div class="flex justify-between">
+        <div class="mt-4">
+          <p class="text-lg font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
+        </div>
+        <button (click)="thanhToan()" class="mt-4 bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          <p class="text-lg font-semibold">Đặt hàng</p>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
-
-  <app-footer></app-footer>
+<app-footer></app-footer>

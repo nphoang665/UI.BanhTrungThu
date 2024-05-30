@@ -7,48 +7,56 @@ import { KhachHang } from '../../models/khach-hang.model';
 })
 export class GioHangService {
   private storageKey = 'gioHang';
+
   constructor() {
     this.loadCartFromStorage();
   }
 
-  private cartItems: { sanPham: SanPham, quantity: number }[] = [];
+  private cartItems: { sanPham: SanPham, quantity: number, maKhachHang: string }[] = [];
 
-  getCartItems(): { sanPham: SanPham, quantity: number }[] {
+  getCartItems(): { sanPham: SanPham, quantity: number, maKhachHang: string }[] {
     return this.cartItems;
   }
-  DemSoLuong():number{
-    var gioHangs = localStorage.getItem(this.storageKey);
-    if(gioHangs){
-      var gioHangParsed = JSON.parse(gioHangs);
-    }
-    
 
-    var soLuongSp = gioHangParsed.length;
-    // console.log(soLuongSp);
-    
-    return soLuongSp;
+  DemSoLuong(): number {
+    const gioHangs = localStorage.getItem(this.storageKey);
+    if (gioHangs) {
+      const gioHangParsed = JSON.parse(gioHangs);
+      return gioHangParsed.length;
+    }
+    return 0;
   }
 
   addToCart(sanPham: SanPham, quantity: number = 1): void {
     const userLogin = localStorage.getItem('NguoiDung');
-    if(userLogin==undefined){
-      alert("dang nhap")
-      return ;
+    if (userLogin === null) {
+      alert("Dang nhap");
+      return;
     }
-    const user=JSON.parse(userLogin);
-    console.log(user.maKhachHang);
-    
-    const existingItem = this.cartItems.find(item => item.sanPham.maSanPham === sanPham.maSanPham);
+
+    const user = JSON.parse(userLogin);
+    const maKhachHang = user.maKhachHang;
+
+    const existingItem = this.cartItems.find(item => item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang);
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      this.cartItems.push({ sanPham, quantity });
+      this.cartItems.push({ sanPham, quantity, maKhachHang });
     }
     this.saveCartToStorage();
   }
 
   updateCartItem(sanPham: SanPham, quantity: number): void {
-    const item = this.cartItems.find(item => item.sanPham.maSanPham === sanPham.maSanPham);
+    const userLogin = localStorage.getItem('NguoiDung');
+    if (userLogin === null) {
+      alert("Dang nhap");
+      return;
+    }
+
+    const user = JSON.parse(userLogin);
+    const maKhachHang = user.maKhachHang;
+
+    const item = this.cartItems.find(item => item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang);
     if (item) {
       item.quantity = quantity;
       this.saveCartToStorage();
@@ -56,12 +64,30 @@ export class GioHangService {
   }
 
   removeFromCart(sanPham: SanPham): void {
-    this.cartItems = this.cartItems.filter(item => item.sanPham.maSanPham !== sanPham.maSanPham);
+    const userLogin = localStorage.getItem('NguoiDung');
+    if (userLogin === null) {
+      alert("Dang nhap");
+      return;
+    }
+
+    const user = JSON.parse(userLogin);
+    const maKhachHang = user.maKhachHang;
+
+    this.cartItems = this.cartItems.filter(item => !(item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang));
     this.saveCartToStorage();
   }
 
   clearCart(): void {
-    this.cartItems = [];
+    const userLogin = localStorage.getItem('NguoiDung');
+    if (userLogin === null) {
+      alert("Dang nhap");
+      return;
+    }
+
+    const user = JSON.parse(userLogin);
+    const maKhachHang = user.maKhachHang;
+
+    this.cartItems = this.cartItems.filter(item => item.maKhachHang !== maKhachHang);
     this.saveCartToStorage();
   }
 
