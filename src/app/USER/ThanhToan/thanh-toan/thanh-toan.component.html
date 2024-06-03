@@ -49,10 +49,21 @@
       <h2 class="text-xl font-semibold mb-4">Giỏ hàng</h2>
       <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div class="mb-4" *ngFor="let item of cartItems">
-          <div class="flex justify-between items-center">
+          <div class="flex justify-between items-center border">
             <div class="flex items-center gap-4 relative">
-              <img class="w-20 h-20 border" [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}">
-              <div class="badge">{{ item.quantity }}</div>
+              
+<div class="relative inline-flex items-center text-sm font-medium text-center text-white">
+  <div class="w-20 h-20 border">
+    <img class="w-full" [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}">
+
+  </div>
+    <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{{ item.quantity }}</div>
+  </div>
+  
+
+
+              
+              
               <div class="font-medium dark:text-white">
                 <div>{{ item.sanPham?.tenSanPham }}</div>
               </div>

@@ -36,6 +36,7 @@ import { LoginComponent } from './Auth/login/login.component';
 import { RegisterComponent } from './Auth/register/register.component';
 import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { AuthInterceptor } from './Auth/interceptors/auth.interceptor';
+import { QuenMatKhauComponent } from './Auth/QuenMatKhau/quen-mat-khau/quen-mat-khau.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { AuthInterceptor } from './Auth/interceptors/auth.interceptor';
     ThanhToanComponent,
     XemNhanhSanPhamComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    QuenMatKhauComponent
   ],
   imports: [
     BrowserModule,

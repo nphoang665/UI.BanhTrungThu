@@ -56,6 +56,9 @@ export class GioHangService {
     const user = JSON.parse(userLogin);
     const maKhachHang = user.maKhachHang;
 
+    this.cartItems = this.cartItems.filter(item => !(item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang));
+    this.saveCartToStorage();
+    
     const item = this.cartItems.find(item => item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang);
     if (item) {
       item.quantity = quantity;
@@ -101,6 +104,10 @@ export class GioHangService {
       this.cartItems = JSON.parse(storedCart);
     }
   }
+  checkProductAvailability(): boolean {
+    return this.cartItems.every(item => item.quantity <= item.sanPham.soLuongTrongKho);
+  }
+  
   // private cartItems: { sanPham: SanPham, quantity: number }[] = [];
 
   // addToCart(sanPham: SanPham, quantity: number): void {

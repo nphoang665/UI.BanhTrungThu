@@ -9,6 +9,7 @@ import { LoginResponse } from '../models/login-response.model';
 import { LoginRequest } from '../models/login-request.model';
 import { GoogleLoginDto } from '../models/login-google.model';
 import { isPlatformBrowser } from '@angular/common';
+import { MaXacNhan } from '../../ADMIN/models/ma-xac-nhan.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class AuthService {
     private cookieService: CookieService,
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
+  }
+
+  quenMatKhau(email: string): Observable<MaXacNhan> {
+    return this.http.post<MaXacNhan>(`${environment.apiBaseUrl}/api/Auth/quen-mat-khau/${email}`, {});
   }
 
   createAcount(data: Register): Observable<Register> {
@@ -114,5 +119,15 @@ export class AuthService {
       this.$user.next(undefined);
     }
   }
+
+  LayLaiMatKhau(data: RequestData): Observable<any> {
+    return this.http.post<RequestData>(`${environment.apiBaseUrl}/api/Auth/QuenMatKhau`, data);
+  }
   
+}
+
+export interface RequestData {
+  optionOtp: string,
+  email: string;
+  matKhauMoi: string,
 }

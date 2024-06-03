@@ -7,6 +7,7 @@ import { DonHangService } from '../../../ADMIN/services/DonHang/don-hang.service
 import { ThemDonHang } from '../../../ADMIN/models/don-hang.model';
 import { ThemChiTietDonhang } from '../../../ADMIN/models/chi-tiet-don-hang.model';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-thanh-toan',
@@ -18,7 +19,7 @@ export class ThanhToanComponent implements OnInit {
   cartItems: { sanPham: SanPham, quantity: number, maKhachHang: string }[] = [];
   apiBaseUrl: string = environment.apiBaseUrl;
 
-  constructor(private gioHangService: GioHangService, private donHangService: DonHangService,private toastr: ToastrService) {
+  constructor(private gioHangService: GioHangService, private donHangService: DonHangService,private toastr: ToastrService,private route:Router) {
     this.myForm = new FormGroup({
       tenKhachHang: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -79,13 +80,14 @@ export class ThanhToanComponent implements OnInit {
             timeOut: 1000,
           });
           this.gioHangService.clearCart();
+          this.route.navigateByUrl('/home');
         },
         error: (error) => {
           console.error('Lỗi khi đặt hàng:', error);
         }
       });
     } else {
-      this.toastr.success('Vui lòng điền đầy đủ thông tin giao hàng', 'Thông báo', {
+      this.toastr.error('Vui lòng điền đầy đủ thông tin giao hàng', 'Thông báo', {
         timeOut: 1000,
       });
     }
