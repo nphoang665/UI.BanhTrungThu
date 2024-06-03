@@ -10,16 +10,13 @@ import { GioHangService } from '../../ADMIN/services/GioHang/gio-hang.service';
 })
 export class GioHangComponent implements OnInit {
 
-  cartItems: { sanPham: SanPham, quantity: number }[] = [];
+  cartItems: { sanPham: SanPham, quantity: number, maKhachHang: string }[] = [];
   apiBaseUrl: string = environment.apiBaseUrl;
 
   constructor(private gioHangService: GioHangService) { }
 
   ngOnInit(): void {
-    
     this.cartItems = this.gioHangService.getCartItems();
-    // console.log(this.cartItems);
-    
   }
 
   updateQuantity(sanPham: SanPham | undefined, event: Event): void {
@@ -29,9 +26,13 @@ export class GioHangComponent implements OnInit {
       if (qty <= 0) {
         this.removeFromCart(sanPham);
       } else {
-        this.gioHangService.updateCartItem(sanPham, qty);
+        if (this.gioHangService.checkProductAvailability(sanPham, qty)) {
+          this.gioHangService.updateCartItem(sanPham, qty);
+          this.cartItems = this.gioHangService.getCartItems(); // Cập nhật lại cartItems
+        } else {
+          alert('Số lượng sản phẩm vượt quá số lượng trong kho');
+        }
       }
-      this.cartItems = this.gioHangService.getCartItems(); // Cập nhật lại cartItems
     }
   }
 
@@ -45,39 +46,4 @@ export class GioHangComponent implements OnInit {
   getTotal(): number {
     return this.cartItems.reduce((total, item) => total + ((item.sanPham?.gia ?? 0) * item.quantity), 0);
   }
-
-
-
-
-  // cartItems: { sanPham: SanPham, quantity: number }[] = [];
-  // apiBaseUrl: string = environment.apiBaseUrl;
-
-  // constructor(private gioHangService: GioHangService) { }
-
-  // ngOnInit(): void {
-  //   this.cartItems = this.gioHangService.getCartItems();
-  // }
-
-  // updateQuantity(sanPham: SanPham | undefined, event: Event): void {
-  //   if (sanPham) {
-  //     const inputElement = event.target as HTMLInputElement;
-  //     const qty = parseInt(inputElement.value, 10);
-  //     if (qty <= 0) {
-  //       this.removeFromCart(sanPham);
-  //     } else {
-  //       this.gioHangService.updateCartItem(sanPham, qty);
-  //     }
-  //   }
-  // }
-
-  // removeFromCart(sanPham: SanPham | undefined): void {
-  //   if (sanPham) {
-  //     this.gioHangService.removeFromCart(sanPham);
-  //     this.cartItems = this.gioHangService.getCartItems();
-  //   }
-  // }
-
-  // getTotal(): number {
-  //   return this.cartItems.reduce((total, item) => total + (item.sanPham?.gia ?? 0) * item.quantity, 0);
-  // }
 }

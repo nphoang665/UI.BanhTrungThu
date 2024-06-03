@@ -23,12 +23,11 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
     private route: ActivatedRoute,
     private sanPhamService: SanPhamService,
     private loaiSanPhamService: LoaiSanPhamService,
-    private gioHangService:GioHangService,
+    private gioHangService: GioHangService,
     private toastr: ToastrService,
   ) {}
-  
+
   ngOnInit(): void {
-    
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
@@ -36,10 +35,13 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
       }
     });
   }
-  
+
   loadSanPham(id: string): void {
     this.sanPhamService.getSanPhamById(id).subscribe((data: SanPham) => {
       this.sanPham = data;
+      if (data.maLoai) {
+        this.loadLoaiSanPham(data.maLoai);
+      }
     }, error => {
       console.error('Error loading SanPham:', error);
     });
@@ -52,14 +54,19 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
       console.error('Error loading LoaiSanPham:', error);
     });
   }
+
   addToCart(): void {
-    console.log(this.sanPham);
-    
     if (this.sanPham) {
-      this.gioHangService.addToCart(this.sanPham, this.quantity);
-      this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {
-        timeOut: 1000,
-      });
+      const success = this.gioHangService.addToCart(this.sanPham, this.quantity);
+      if (success) {
+        this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {
+          timeOut: 1000,
+        });
+      } else {
+        this.toastr.error('Số lượng sản phẩm vượt quá số lượng trong kho', 'Lỗi', {
+          timeOut: 1000,
+        });
+      }
     }
   }
 }

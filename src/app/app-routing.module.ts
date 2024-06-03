@@ -15,6 +15,7 @@ import { XemNhanhSanPhamComponent } from './USER/xem-nhanh-san-pham/xem-nhanh-sa
 import { LoginComponent } from './Auth/login/login.component';
 import { RegisterComponent } from './Auth/register/register.component';
 import { QuenMatKhauComponent } from './Auth/QuenMatKhau/quen-mat-khau/quen-mat-khau.component';
+import { PaymentResultComponent } from './USER/ThanhToan/payment-result/payment-result.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgotpassword', component: QuenMatKhauComponent },
+  { path: 'payment-result', component: PaymentResultComponent },
 ];
 
 @NgModule({

@@ -19,7 +19,7 @@ export class ThanhToanComponent implements OnInit {
   cartItems: { sanPham: SanPham, quantity: number, maKhachHang: string }[] = [];
   apiBaseUrl: string = environment.apiBaseUrl;
 
-  constructor(private gioHangService: GioHangService, private donHangService: DonHangService,private toastr: ToastrService,private route:Router) {
+  constructor(private gioHangService: GioHangService, private donHangService: DonHangService,private toastr: ToastrService,private router:Router) {
     this.myForm = new FormGroup({
       tenKhachHang: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -76,20 +76,32 @@ export class ThanhToanComponent implements OnInit {
             });
           });
 
-          this.toastr.success('Đặt hàng thành công', 'Thông báo', {
-            timeOut: 1000,
-          });
-          this.gioHangService.clearCart();
-          this.route.navigateByUrl('/home');
+          if (this.myForm.value.thongTinThanhToan === 'Bank') {
+            this.donHangService.getVnPayPaymentUrl(maDonHang, orderData.tongTien).subscribe({
+              next: (data) => {
+                window.location.href = data.paymentUrl;
+              },
+              error: (error) => {
+                console.error('Lỗi khi lấy URL thanh toán VNPay:', error);
+                this.toastr.error('Lỗi khi lấy URL thanh toán VNPay', 'Thông báo', { timeOut: 1000 });
+              }
+            });
+          } else {
+            // Hiển thị thông báo thành công
+            this.toastr.success('Đặt hàng thành công', 'Thông báo', { timeOut: 1000 });
+            // Xóa giỏ hàng
+            this.gioHangService.clearCart();
+            // Chuyển hướng người dùng về trang home
+            this.router.navigateByUrl('/home');
+          }
         },
         error: (error) => {
           console.error('Lỗi khi đặt hàng:', error);
         }
       });
     } else {
-      this.toastr.error('Vui lòng điền đầy đủ thông tin giao hàng', 'Thông báo', {
-        timeOut: 1000,
-      });
+      // Hiển thị thông báo lỗi nếu form không hợp lệ
+      this.toastr.error('Vui lòng điền đầy đủ thông tin giao hàng', 'Thông báo', { timeOut: 1000 });
     }
   }
 }

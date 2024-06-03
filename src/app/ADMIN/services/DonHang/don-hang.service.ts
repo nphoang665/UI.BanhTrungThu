@@ -30,4 +30,8 @@ export class DonHangService {
   themChiTietDonHang(data: ThemChiTietDonhang): Observable<ChiTietDonhang> {
     return this.http.post<ChiTietDonhang>(`${environment.apiBaseUrl}/api/ChiTietDonHang`, data);
   }
+  getVnPayPaymentUrl(orderId: string, amount: string): Observable<{ paymentUrl: string }> {
+    return this.http.get<{ paymentUrl: string }>(`${environment.apiBaseUrl}/api/DonHang/vnpay-payment-url?orderId=${orderId}&amount=${amount}`);
+  }
+  
 }
