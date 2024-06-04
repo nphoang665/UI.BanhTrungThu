@@ -71,12 +71,12 @@
             <div>{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</div>
           </div>
         </div>
-        <div class="mb-4 flex justify-between">
+        <!-- <div class="mb-4 flex justify-between">
           <input class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="discount-code" type="text" placeholder="Mã giảm giá">
           <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" type="button">
             Sử dụng
           </button>
-        </div>
+        </div> -->
         <div class="flex justify-between items-center">
           <div>Tạm tính</div>
           <div>{{ getTotal() | currency:'VND':'symbol' }}</div>

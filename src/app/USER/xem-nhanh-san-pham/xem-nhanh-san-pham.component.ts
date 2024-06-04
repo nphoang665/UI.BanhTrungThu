@@ -36,6 +36,7 @@ export class XemNhanhSanPhamComponent {
 
   loadProductDetails(idSanPham: string) {
     this.sanPhamService.getSanPhamById(idSanPham).subscribe((product: SanPham) => {
+      this.sanPham = product;
       this.selectedImage = this.apiBaseUrl + '/images/' + product.anhSanPham[0].tenAnh; // Assuming the first image is the main image
       this.images = product.anhSanPham.map((anh: AnhSanPham) => this.apiBaseUrl + '/images/' + anh.tenAnh);
       this.productTitle = product.tenSanPham;
@@ -47,17 +48,31 @@ export class XemNhanhSanPhamComponent {
     this.selectedImage = image;
   }
 
-  addToCart() {
+  // addToCart() {
+  //   if (this.sanPham) {
+  //     this.gioHangService.addToCart(this.sanPham, this.quantity);
+  //     this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {
+  //       timeOut: 1000,
+  //     });
+  //   } else {
+  //     console.error('SanPham is null');
+  //     this.toastr.error('Sản phẩm không thể được thêm vào giỏ hàng', 'Lỗi', {
+  //       timeOut: 1000,
+  //     });
+  //   }
+  // }
+  addToCart(): void {
     if (this.sanPham) {
-      this.gioHangService.addToCart(this.sanPham, this.quantity);
-      this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {
-        timeOut: 1000,
-      });
-    } else {
-      console.error('SanPham is null');
-      this.toastr.error('Sản phẩm không thể được thêm vào giỏ hàng', 'Lỗi',{
-        timeOut: 1000,
-      });
+      const success = this.gioHangService.addToCart(this.sanPham, this.quantity);
+      if (success) {
+        this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {
+          timeOut: 1000,
+        });
+      } else {
+        this.toastr.error('Số lượng sản phẩm vượt quá số lượng trong kho', 'Lỗi', {
+          timeOut: 1000,
+        });
+      }
     }
   }
 }

@@ -16,6 +16,8 @@ import { LoginComponent } from './Auth/login/login.component';
 import { RegisterComponent } from './Auth/register/register.component';
 import { QuenMatKhauComponent } from './Auth/QuenMatKhau/quen-mat-khau/quen-mat-khau.component';
 import { PaymentResultComponent } from './USER/ThanhToan/payment-result/payment-result.component';
+import { ThongTinCaNhanComponent } from './USER/thong-tin-ca-nhan/thong-tin-ca-nhan.component';
+import { LichSuDatHangComponent } from './USER/lich-su-dat-hang/lich-su-dat-hang.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -41,6 +43,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgotpassword', component: QuenMatKhauComponent },
   { path: 'payment-result', component: PaymentResultComponent },
+  { path: 'thong-tin', component: ThongTinCaNhanComponent },
+  { path: 'lich-su', component: LichSuDatHangComponent },
 ];
 
 @NgModule({

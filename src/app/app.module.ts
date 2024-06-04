@@ -38,6 +38,8 @@ import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig 
 import { AuthInterceptor } from './Auth/interceptors/auth.interceptor';
 import { QuenMatKhauComponent } from './Auth/QuenMatKhau/quen-mat-khau/quen-mat-khau.component';
 import { PaymentResultComponent } from './USER/ThanhToan/payment-result/payment-result.component';
+import { ThongTinCaNhanComponent } from './USER/thong-tin-ca-nhan/thong-tin-ca-nhan.component';
+import { LichSuDatHangComponent } from './USER/lich-su-dat-hang/lich-su-dat-hang.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { PaymentResultComponent } from './USER/ThanhToan/payment-result/payment-
     LoginComponent,
     RegisterComponent,
     QuenMatKhauComponent,
-    PaymentResultComponent
+    PaymentResultComponent,
+    ThongTinCaNhanComponent,
+    LichSuDatHangComponent
   ],
   imports: [
     BrowserModule,
