@@ -31,6 +31,17 @@ export class ThanhToanComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartItems = this.gioHangService.getCartItems();
+
+    const userLogin = localStorage.getItem('NguoiDung');
+    if (userLogin) {
+    const user = JSON.parse(userLogin);
+    this.myForm.patchValue({
+      tenKhachHang: user.tenKhachHang,
+      email: user.email,
+      soDienThoai: user.soDienThoai,
+      diaChi: user.diaChi
+    });
+  }
   }
 
   getTotal(): number {
@@ -88,7 +99,11 @@ export class ThanhToanComponent implements OnInit {
             });
           } else {
             // Hiển thị thông báo thành công
-            this.toastr.success('Đặt hàng thành công', 'Thông báo', { timeOut: 1000 });
+            this.donHangService.guiEmailThanhToan(maDonHang).subscribe((response)=>{
+              this.toastr.success('Đặt hàng thành công', 'Thông báo', { timeOut: 1000 });
+              this.toastr.success('Vui lòng kiểm tra email để xem chi tiết', 'Thông báo', { timeOut: 2000 });             
+            });
+            
             // Xóa giỏ hàng
             this.gioHangService.clearCart();
             // Chuyển hướng người dùng về trang home

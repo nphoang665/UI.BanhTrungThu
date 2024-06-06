@@ -17,9 +17,27 @@ export class GioHangService {
   getCartItems(): { sanPham: SanPham, quantity: number, maKhachHang: string }[] {
     return this.cartItems;
   }
+  private kiemTraDangNhap(): any {
+    const userLogin = localStorage.getItem('NguoiDung');
+    if (userLogin === null) {
+      alert("Đăng nhập");
+      return null;
+    }
+    return JSON.parse(userLogin);
+  }
+
 
   DemSoLuong(): number {
-    const gioHangs = localStorage.getItem(this.storageKey);
+    const userLogin = localStorage.getItem('NguoiDung');
+    if (userLogin === null) {
+      alert("Dang nhap");
+      return 0;
+    }
+
+    const user = JSON.parse(userLogin);
+    const maKhachHang = user.maKhachHang;
+
+    const gioHangs = localStorage.getItem(`${this.storageKey}_${maKhachHang}`);
     if (gioHangs) {
       const gioHangParsed = JSON.parse(gioHangs);
       return gioHangParsed.length;
@@ -88,6 +106,7 @@ export class GioHangService {
     this.cartItems = this.cartItems.filter(item => !(item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang));
     this.saveCartToStorage(maKhachHang);
   }
+
 
   clearCart(): void {
     const userLogin = localStorage.getItem('NguoiDung');

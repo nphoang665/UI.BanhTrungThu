@@ -28,8 +28,10 @@ export class SanPhamHomeComponent implements OnInit {
     this.sanPhamBanhTrungThu$ = this.sanPhamServices.getAllSanPham();
     this.sanPhamMoi$ = this.sanPhamServices.getSanPhamMoi(); 
     // console.log(this.sanPhamMoi$);
-    
+    this.sanPhamNoiBat$ = this.sanPhamServices.getSanPhamNoiBat();
     // this.sanPhamNoiBat$ = this.sanPhamServices.getSanPhamNoiBat(); 
+    // console.log(this.sanPhamNoiBat$);
+    
   }
 
   OpenPopup(id: any, title: any): void {

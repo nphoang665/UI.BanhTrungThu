@@ -32,18 +32,25 @@
             </svg>
             <span class="absolute -top-2 -right-2 bg-yellow-400 text-xs rounded-full h-5 w-5 flex items-center justify-center">{{SoLuongSpTrongDonHang()}}</span>
           </button>
-          <button mat-button  [matMenuTriggerFor]="menu"  class="text-white">Xin chào!
-            {{user?.email}}</button>
+          
+          <button mat-button  [matMenuTriggerFor]="menu"  class="text-white">
+            <div class="flex items-center gap-4">
+              <img class="w-10 h-10 rounded-full" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="">
+              <div class="font-medium dark:text-white">
+                  <div>{{user?.email}}</div>
+                  <!-- <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div> -->
+              </div>
+          </div></button>
             <mat-menu #menu="matMenu" style="z-index: 10000;">
               <ng-container *ngIf="user !== undefined && user?.roles?.includes('Admin')">
                   <button mat-menu-item routerLink="/quanLyDatTour"><mat-icon
                           svgIcon="icon_Manager"></mat-icon> Trang quản lý</button>
               </ng-container>
 
-              <button mat-menu-item data-bs-toggle="modal" data-bs-target="#myModal"><mat-icon
+              <button routerLink="/thong-tin" mat-menu-item data-bs-toggle="modal" data-bs-target="#myModal"><mat-icon
                       svgIcon="icon_User"></mat-icon> Thông tin cá
                   nhân</button>
-              <button mat-menu-item routerLink="/lichsudattour"><mat-icon
+              <button mat-menu-item routerLink="/lich-su"><mat-icon
                       svgIcon="icon_History"></mat-icon> Lịch sử đặt hàng</button>
               <button mat-menu-item (click)="onLogout()"> <mat-icon svgIcon="icon_Logout"></mat-icon>
                   Đăng xuất</button>

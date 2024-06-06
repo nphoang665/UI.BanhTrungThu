@@ -1,160 +1,38 @@
-
-
-
-<!-- <div class="max-w-screen-xl mx-auto p-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="md:col-span-2">
-        <h2 class="text-xl font-semibold mb-4">Thông tin giao hàng</h2>
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname">
-              Họ và tên
-            </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fullname" type="text" placeholder="Họ và tên">
+<div class="container mx-auto py-4 px-6">
+  <h1 class="text-3xl font-bold mb-6 text-center">Giỏ hàng</h1>
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Sản phẩm</th>
+        <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Giá</th>
+        <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Số lượng</th>
+        <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Thành tiền</th>
+        <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cartItems" class="border-b hover:bg-gray-50">
+        <td class="px-6 py-4 flex items-center gap-4">
+          <img class="w-20 h-20 object-cover" [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}">
+          <div class="font-medium text-gray-700">
+            <div>{{ item.sanPham?.tenSanPham }}</div>
           </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-              Email
-            </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
-          </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
-              Số điện thoại
-            </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Số điện thoại">
-          </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
-              Địa chỉ
-            </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" placeholder="Địa chỉ">
-          </div>
-
-          <div class="flex items-center justify-between">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-              Tiếp tục đến phương thức thanh toán
-            </button>
-          </div>
-        </form>
-      </div>
-      <div>
-        <h2 class="text-xl font-semibold mb-4">Giỏ hàng</h2>
-        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <div class="flex justify-between items-center">
-              <div>Jambon Lạp Xưởng</div>
-              <div>300,000₫</div>
-            </div>
-            <div class="flex justify-between items-center mt-2">
-              <div>Bánh Chay Đậu Xanh Hạnh Nhân</div>
-              <div>8,000₫</div>
-            </div>
-          </div>
-          <div class="mb-4">
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="discount-code" type="text" placeholder="Mã giảm giá">
-            <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" type="button">
-              Sử dụng
-            </button>
-          </div>
-          <div class="flex justify-between items-center">
-            <div>Tạm tính</div>
-            <div>308,000₫</div>
-          </div>
-          <div class="flex justify-between items-center mt-2">
-            <div>Phí vận chuyển</div>
-            <div>-</div>
-          </div>
-          <div class="flex justify-between items-center mt-2 font-bold">
-            <div>Tổng cộng</div>
-            <div>308,000₫</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  
-  <div class=" mx-auto py-2">
-    <h1 class="text-2xl font-bold mb-4">Giỏ hàng</h1>
-    <table class="min-w-full bg-white border">
-      <thead>
-        <tr>
-          <th class="px-6 py-3 border-b">Sản phẩm</th>
-          <th class="px-6 py-3 border-b">Giá</th>
-          <th class="px-6 py-3 border-b">Số lượng</th>
-          <th class="px-6 py-3 border-b">Thành tiền</th>
-          <th class="px-6 py-3 border-b">Thao tác</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of cartItems">
-          <td>
-            <div class="flex items-center gap-4">
-            <img class="w-20 h-20 rounded-full" [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}">
-            <div class="font-medium dark:text-white">
-                <div>{{ item.sanPham?.tenSanPham }}</div>
-            </div>
-            </div>
-          </td>
-          <!-- <td class="border p-4"><img [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}" class="w-20 h-20"> {{ item.sanPham?.tenSanPham }}</td> -->
-          <td></td>
-          <td class="border p-4">{{ item.sanPham?.gia | currency:'VND':'symbol' }}</td>
-          <td class="border p-4">
-            <input type="number" [value]="item.quantity" (change)="updateQuantity(item.sanPham, $event)" class="w-20 border rounded px-3 py-2 text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400">
-          </td>
-          <td class="border p-4">{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</td>
-          <td class="border p-4">
-            <button (click)="removeFromCart(item.sanPham)" class="bg-red-500 text-white px-4 py-2 rounded">Xóa</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="flex justify-between ">
- <div class="mt-4">
-      <p class="text-lg font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
-    </div>
-    <button routerLink="/thanh-toan" class="mt-4" mat-dialog-close mat-raised-button color="primary">
-      <p class="text-lg font-semibold">Thanh toán</p>
+        </td>
+        <td class="px-6 py-4 text-gray-700">{{ item.sanPham?.gia | currency:'VND':'symbol' }}</td>
+        <td class="px-6 py-4">
+          <input type="number" [value]="item.quantity" (change)="updateQuantity(item.sanPham, $event)" class="w-20 border rounded px-3 py-2 text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400">
+        </td>
+        <td class="px-6 py-4 text-gray-700">{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</td>
+        <td class="px-6 py-4">
+          <button (click)="removeFromCart(item.sanPham)" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Xóa</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="flex justify-between items-center mt-6">
+    <p class="text-xl font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
+    <button mat-dialog-close routerLink="/thanh-toan" class="bg-blue-500 text-white px-6 py-3 rounded font-semibold hover:bg-blue-600">
+      Thanh toán
     </button>
-    </div>
-   
   </div>
-  
-
-  <!-- <div class="container mx-auto">
-    <h1 class="text-2xl font-bold mb-4">Giỏ hàng</h1>
-    <table class="min-w-full bg-white border">
-      <thead>
-        <tr>
-          <th class="px-6 py-3 border-b">Sản phẩm</th>
-          <th class="px-6 py-3 border-b">Giá</th>
-          <th class="px-6 py-3 border-b">Số lượng</th>
-          <th class="px-6 py-3 border-b">Thành tiền</th>
-          <th class="px-6 py-3 border-b">Thao tác</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of cartItems">
-          <td class="border p-4">{{ item.sanPham?.tenSanPham }}</td>
-          <td class="border p-4">{{ item.sanPham?.gia | currency:'VND':'symbol' }}</td>
-          <td class="border p-4">
-            <input type="number" [value]="item.quantity" (change)="updateQuantity(item.sanPham, $event)" class="w-20 border rounded px-3 py-2 text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400">
-          </td>
-          <td class="border p-4">{{ item.sanPham?.gia ?? 0 * item.quantity | currency:'VND':'symbol' }}</td>
-          <td class="border p-4">
-            <button (click)="removeFromCart(item.sanPham)" class="bg-red-500 text-white px-4 py-2 rounded">Xóa</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="mt-4">
-      <p class="text-lg font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
-    </div>
-  </div> -->
-  
-  
-  
-
-
-
-
+</div>

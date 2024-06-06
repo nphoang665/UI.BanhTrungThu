@@ -54,4 +54,8 @@ export class SanPhamService {
       })
     );
   }
+
+  getSanPhamNoiBat(): Observable<SanPham[]> {
+    return this.http.get<SanPham[]>(`${environment.apiBaseUrl}/api/SanPham/noibat`);
+  }
 }
