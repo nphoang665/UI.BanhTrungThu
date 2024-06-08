@@ -20,35 +20,42 @@ export class GioHangService {
   private kiemTraDangNhap(): any {
     const userLogin = localStorage.getItem('NguoiDung');
     if (userLogin === null) {
-      alert("Đăng nhập");
+      // alert("Đăng nhập");
       return null;
     }
     return JSON.parse(userLogin);
   }
-
-
   DemSoLuong(): number {
-    const userLogin = localStorage.getItem('NguoiDung');
-    if (userLogin === null) {
-      alert("Dang nhap");
-      return 0;
-    }
+    const user = this.kiemTraDangNhap();
+    if (!user) return 0;
 
-    const user = JSON.parse(userLogin);
-    const maKhachHang = user.maKhachHang;
-
-    const gioHangs = localStorage.getItem(`${this.storageKey}_${maKhachHang}`);
-    if (gioHangs) {
-      const gioHangParsed = JSON.parse(gioHangs);
-      return gioHangParsed.length;
-    }
-    return 0;
+    const gioHangs = localStorage.getItem(`${this.storageKey}_${user.maKhachHang}`);
+    return gioHangs ? JSON.parse(gioHangs).length : 0;
   }
+
+
+  // DemSoLuong(): number {
+  //   const userLogin = localStorage.getItem('NguoiDung');
+  //   if (userLogin === null) {
+  //     // alert("Dang nhap");
+  //     return 0;
+  //   }
+
+  //   const user = JSON.parse(userLogin);
+  //   const maKhachHang = user.maKhachHang;
+
+  //   const gioHangs = localStorage.getItem(`${this.storageKey}_${maKhachHang}`);
+  //   if (gioHangs) {
+  //     const gioHangParsed = JSON.parse(gioHangs);
+  //     return gioHangParsed.length;
+  //   }
+  //   return 0;
+  // }
 
   addToCart(sanPham: SanPham, quantity: number = 1): boolean {
     const userLogin = localStorage.getItem('NguoiDung');
     if (userLogin === null) {
-      alert("Dang nhap");
+      // alert("Dang nhap");
       return false;
     }
 
@@ -72,31 +79,53 @@ export class GioHangService {
     return true;
   }
 
+  // updateCartItem(sanPham: SanPham, quantity: number): void {
+  //   const userLogin = localStorage.getItem('NguoiDung');
+  //   if (userLogin === null) {
+  //     // alert("Dang nhap");
+  //     return;
+  //   }
+
+  //   const user = JSON.parse(userLogin);
+  //   const maKhachHang = user.maKhachHang;
+
+  //   this.cartItems = this.cartItems.filter(item => !(item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang));
+    
+  //   const item = this.cartItems.find(item => item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang);
+  //   if (item) {
+  //     item.quantity = quantity;
+  //   } else {
+  //     this.cartItems.push({ sanPham, quantity, maKhachHang });
+  //   }
+  //   this.saveCartToStorage(maKhachHang);
+  // }
+
   updateCartItem(sanPham: SanPham, quantity: number): void {
     const userLogin = localStorage.getItem('NguoiDung');
     if (userLogin === null) {
-      alert("Dang nhap");
+      // alert("Dang nhap");
       return;
     }
-
+  
     const user = JSON.parse(userLogin);
     const maKhachHang = user.maKhachHang;
-
-    this.cartItems = this.cartItems.filter(item => !(item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang));
-    
-    const item = this.cartItems.find(item => item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang);
-    if (item) {
-      item.quantity = quantity;
+  
+    // Find the item in the cart and update its quantity
+    const itemIndex = this.cartItems.findIndex(item => item.sanPham.maSanPham === sanPham.maSanPham && item.maKhachHang === maKhachHang);
+    if (itemIndex !== -1) {
+      this.cartItems[itemIndex].quantity = quantity;
     } else {
       this.cartItems.push({ sanPham, quantity, maKhachHang });
     }
+  
     this.saveCartToStorage(maKhachHang);
   }
+  
 
   removeFromCart(sanPham: SanPham): void {
     const userLogin = localStorage.getItem('NguoiDung');
     if (userLogin === null) {
-      alert("Dang nhap");
+      // alert("Dang nhap");
       return;
     }
 
@@ -111,7 +140,7 @@ export class GioHangService {
   clearCart(): void {
     const userLogin = localStorage.getItem('NguoiDung');
     if (userLogin === null) {
-      alert("Dang nhap");
+      // alert("Dang nhap");
       return;
     }
 

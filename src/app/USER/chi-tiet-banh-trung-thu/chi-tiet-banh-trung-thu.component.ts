@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { SanPham } from '../../ADMIN/models/san-pham.model';
 import { SanPhamService } from '../../ADMIN/services/SanPham/san-pham.service';
@@ -25,6 +25,7 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
     private loaiSanPhamService: LoaiSanPhamService,
     private gioHangService: GioHangService,
     private toastr: ToastrService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +57,21 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
   }
 
   addToCart(): void {
+    const userLogin = localStorage.getItem('NguoiDung');
+    if (userLogin === null) {
+       this.router.navigateByUrl('/login')
+       this.toastr.error('Bạn chưa đăng nhập!', 'Lỗi', {
+        timeOut: 1000,
+      });
+      return;
+    }
+
+    if (this.quantity < 1) {
+      this.toastr.error('Số lượng sản phẩm phải lớn hơn 0', 'Lỗi', {
+        timeOut: 1000,
+      });
+      return;
+    }
     if (this.sanPham) {
       const success = this.gioHangService.addToCart(this.sanPham, this.quantity);
       if (success) {

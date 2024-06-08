@@ -43,8 +43,8 @@
           </div></button>
             <mat-menu #menu="matMenu" style="z-index: 10000;">
               <ng-container *ngIf="user !== undefined && user?.roles?.includes('Admin')">
-                  <button mat-menu-item routerLink="/quanLyDatTour"><mat-icon
-                          svgIcon="icon_Manager"></mat-icon> Trang quản lý</button>
+                  <button mat-menu-item > <a href="/admin/TongQuan"><mat-icon
+                          svgIcon="icon_Manager"></mat-icon> Trang quản lý</a></button>
               </ng-container>
 
               <button routerLink="/thong-tin" mat-menu-item data-bs-toggle="modal" data-bs-target="#myModal"><mat-icon

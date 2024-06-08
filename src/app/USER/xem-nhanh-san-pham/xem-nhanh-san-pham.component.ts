@@ -7,6 +7,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SanPhamService } from '../../ADMIN/services/SanPham/san-pham.service';
 import { GioHangService } from '../../ADMIN/services/GioHang/gio-hang.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-xem-nhanh-san-pham',
@@ -26,8 +27,8 @@ export class XemNhanhSanPhamComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sanPhamService: SanPhamService,
     private gioHangService: GioHangService,
-    private toastr: ToastrService
-
+    private toastr: ToastrService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -48,20 +49,22 @@ export class XemNhanhSanPhamComponent {
     this.selectedImage = image;
   }
 
-  // addToCart() {
-  //   if (this.sanPham) {
-  //     this.gioHangService.addToCart(this.sanPham, this.quantity);
-  //     this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {
-  //       timeOut: 1000,
-  //     });
-  //   } else {
-  //     console.error('SanPham is null');
-  //     this.toastr.error('Sản phẩm không thể được thêm vào giỏ hàng', 'Lỗi', {
-  //       timeOut: 1000,
-  //     });
-  //   }
-  // }
   addToCart(): void {
+    const userLogin = localStorage.getItem('NguoiDung');
+    if (userLogin === null) {
+       this.router.navigateByUrl('/login')
+       this.toastr.error('Bạn chưa đăng nhập!', 'Lỗi', {
+        timeOut: 1000,
+      });
+      return;
+    }
+
+    if (this.quantity < 1) {
+      this.toastr.error('Số lượng sản phẩm phải lớn hơn 0', 'Lỗi', {
+        timeOut: 1000,
+      });
+      return;
+    }
     if (this.sanPham) {
       const success = this.gioHangService.addToCart(this.sanPham, this.quantity);
       if (success) {

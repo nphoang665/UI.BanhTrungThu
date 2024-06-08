@@ -41,42 +41,6 @@ export const adminGuard: CanActivateFn = (route, state) => {
   }
 };
 
-export const employeeGuard: CanActivateFn = (route, state) => {
-  const cookieService = inject(CookieService);
-  const authService = inject(AuthService);
-  const router = inject(Router);
-  const user = authService.getUser();
-
-  if (!user) {
-    authService.logout();
-    return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
-  }
-
-  let token = cookieService.get('Authorization');
-
-  if (token && user) {
-    token = token.replace('Bearer ', '');
-    const decodedToken: any = jwtDecode(token);
-
-    const expirationDate = decodedToken.exp * 1000;
-    const currentTime = new Date().getTime();
-
-    if (expirationDate < currentTime) {
-      authService.logout();
-      return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } })
-    } else {
-      if (user.roles.some(role => role === 'Nhân viên')) {
-        return true;
-      } else {
-        alert('Bạn chưa được cấp quyền truy cập');
-        return router.createUrlTree(['/404']);
-      }
-    }
-  } else {
-    authService.logout();
-    return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } })
-  }
-};
 export const customerGuard: CanActivateFn = async (route, state) => {
   const cookieService = inject(CookieService);
   const authService = inject(AuthService);
@@ -217,7 +181,7 @@ export const adminOrEmployeeGuard: CanActivateFn = (route, state) => {
       return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } })
     } else {
 
-      if (user.roles.some(role => role === 'Admin' || role === 'Nhân viên')) {
+      if (user.roles.some(role => role === 'Admin')) {
         // Allow Admin or Nhân viên to access
         return true;
       } else {

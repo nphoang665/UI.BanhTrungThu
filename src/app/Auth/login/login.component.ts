@@ -174,7 +174,7 @@ export class LoginComponent implements OnInit{
         if (response.roles.includes('Khách hàng')) {
           this.router.navigateByUrl('/home');
         } else if (response.roles.includes('Admin')) {
-          this.router.navigateByUrl('/admin/trangchu');
+          this.router.navigateByUrl('/admin/TongQuan');
         }
 
         this.toastr.success('Đăng nhập thành công', 'Thông báo', {

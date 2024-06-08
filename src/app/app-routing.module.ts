@@ -18,12 +18,14 @@ import { QuenMatKhauComponent } from './Auth/QuenMatKhau/quen-mat-khau/quen-mat-
 import { PaymentResultComponent } from './USER/ThanhToan/payment-result/payment-result.component';
 import { ThongTinCaNhanComponent } from './USER/thong-tin-ca-nhan/thong-tin-ca-nhan.component';
 import { LichSuDatHangComponent } from './USER/lich-su-dat-hang/lich-su-dat-hang.component';
+import { XemHoaDonComponent } from './USER/xem-hoa-don/xem-hoa-don.component';
+import { adminGuard, guestOrCustomerGuard } from './Auth/Guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { 
     path: 'admin',
-    component: AdminComponent,
+    component: AdminComponent, canActivate: [adminGuard],
     children: [
         { path: 'LoaiSanPham', component: LoaiSanPhamComponent },
         { path: 'SanPham', component: SanPhamComponent },
@@ -45,6 +47,7 @@ const routes: Routes = [
   { path: 'payment-result', component: PaymentResultComponent },
   { path: 'thong-tin', component: ThongTinCaNhanComponent },
   { path: 'lich-su', component: LichSuDatHangComponent },
+  { path: 'xem-hoa-don', component: XemHoaDonComponent },
 ];
 
 @NgModule({

@@ -40,6 +40,7 @@ import { QuenMatKhauComponent } from './Auth/QuenMatKhau/quen-mat-khau/quen-mat-
 import { PaymentResultComponent } from './USER/ThanhToan/payment-result/payment-result.component';
 import { ThongTinCaNhanComponent } from './USER/thong-tin-ca-nhan/thong-tin-ca-nhan.component';
 import { LichSuDatHangComponent } from './USER/lich-su-dat-hang/lich-su-dat-hang.component';
+import { XemHoaDonComponent } from './USER/xem-hoa-don/xem-hoa-don.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { LichSuDatHangComponent } from './USER/lich-su-dat-hang/lich-su-dat-hang
     QuenMatKhauComponent,
     PaymentResultComponent,
     ThongTinCaNhanComponent,
-    LichSuDatHangComponent
+    LichSuDatHangComponent,
+    XemHoaDonComponent
   ],
   imports: [
     BrowserModule,

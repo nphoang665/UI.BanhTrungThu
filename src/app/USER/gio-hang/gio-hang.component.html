@@ -10,8 +10,8 @@
         <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Thao tác</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let item of cartItems" class="border-b hover:bg-gray-50">
+    <tbody >
+      <tr *ngFor="let item of cartItems" class="border-b hover:bg-gray-50" style="overflow: scroll; width: 10px;">
         <td class="px-6 py-4 flex items-center gap-4">
           <img class="w-20 h-20 object-cover" [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}">
           <div class="font-medium text-gray-700">
@@ -31,7 +31,10 @@
   </table>
   <div class="flex justify-between items-center mt-6">
     <p class="text-xl font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
-    <button mat-dialog-close routerLink="/thanh-toan" class="bg-blue-500 text-white px-6 py-3 rounded font-semibold hover:bg-blue-600">
+    <!-- <button mat-dialog-close routerLink="/thanh-toan" class="bg-blue-500 text-white px-6 py-3 rounded font-semibold hover:bg-blue-600">
+      Thanh toán
+    </button> -->
+    <button *ngIf="cartItems.length > 0" mat-dialog-close routerLink="/thanh-toan" class="bg-blue-500 text-white px-6 py-3 rounded font-semibold hover:bg-blue-600">
       Thanh toán
     </button>
   </div>
