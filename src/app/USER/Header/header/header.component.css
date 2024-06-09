@@ -30,7 +30,6 @@
     background-color: #B9121B;
 }
 
-/* Style for the button */
 .dropbtn {
     background-color: #B9121B;
     color: white;
@@ -46,9 +45,9 @@
 
 .active {
   
-    color: #F3B233; /* Màu chữ khi mục được chọn */
+    color: #F3B233; 
   }
   
   .active .text-gray-500 {
-    color: #F3B233; /* Màu của biểu tượng khi mục được chọn */
+    color: #F3B233;
   }

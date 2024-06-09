@@ -32,40 +32,4 @@ export class BanhTrungThuComponent implements OnInit {
         }
       );
   }
-
-
-
-
-  // products = [
-  //   {
-  //     name: 'Bánh Chay ',
-  //     description: '3 sản phẩm',
-  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-chay.jpg'
-  //   },
-  //   {
-  //     name: 'Bánh Dẻo ',
-  //     description: '14 sản phẩm',
-  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-deo.jpg'
-  //   },
-  //   {
-  //     name: 'Bánh nướng 0 trứng ',
-  //     description: '5 sản phẩm',
-  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-nuong-0trung.jpg'
-  //   },
-  //   {
-  //     name: 'Bánh Nướng 0 Trứng ',
-  //     description: '0 sản phẩm',
-  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-nuong-2trung.jpg'
-  //   },
-  //   {
-  //     name: 'Bánh Nướng 1 Trứng  ',
-  //     description: '12 sản phẩm',
-  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-nuong-4trung.jpg'
-  //   },
-  //   {
-  //     name: 'Bánh Nướng 2 Trứng ',
-  //     description: '11 sản phẩm',
-  //     image: 'https://www.banhngoncaocap.com/images/stories/virtuemart/category//cate-banh-nuong-4trung.jpg'
-  //   }
-  // ];
 }

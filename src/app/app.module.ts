@@ -42,6 +42,8 @@ import { ThongTinCaNhanComponent } from './USER/thong-tin-ca-nhan/thong-tin-ca-n
 import { LichSuDatHangComponent } from './USER/lich-su-dat-hang/lich-su-dat-hang.component';
 import { HoaDonComponent } from './ADMIN/QuanLy/hoa-don/hoa-don.component';
 import { XemHoaDonComponent } from './ADMIN/QuanLy/hoa-don/xem-hoa-don/xem-hoa-don.component';
+import { TiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/tiep-nhan-don-hang.component';
+import { SuaTiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/sua-tiep-nhan-don-hang/sua-tiep-nhan-don-hang.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { XemHoaDonComponent } from './ADMIN/QuanLy/hoa-don/xem-hoa-don/xem-hoa-d
     ThongTinCaNhanComponent,
     LichSuDatHangComponent,
     XemHoaDonComponent,
-    HoaDonComponent
+    HoaDonComponent,
+    TiepNhanDonHangComponent,
+    SuaTiepNhanDonHangComponent
   ],
   imports: [
     BrowserModule,

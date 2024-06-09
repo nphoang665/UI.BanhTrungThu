@@ -21,6 +21,7 @@ import { LichSuDatHangComponent } from './USER/lich-su-dat-hang/lich-su-dat-hang
 import { XemHoaDonComponent } from './USER/xem-hoa-don/xem-hoa-don.component';
 import { adminGuard, guestOrCustomerGuard } from './Auth/Guard/auth.guard';
 import { HoaDonComponent } from './ADMIN/QuanLy/hoa-don/hoa-don.component';
+import { TiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/tiep-nhan-don-hang.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const routes: Routes = [
         { path: 'TongQuan', component: TongQuanComponent },
         { path: 'KhachHang', component: KhachHangComponent },
         { path: 'hoa-don', component: HoaDonComponent },
+        { path: 'tiep-nhan-don-hang', component: TiepNhanDonHangComponent },
     ]
 },
   {path:'home',component:HomeComponent},

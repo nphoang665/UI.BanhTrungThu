@@ -1,10 +1,11 @@
-<!-- src/app/header/header.component.html -->
 <header class="bg-red-700 text-white" style="background-image: url('https://www.banhngoncaocap.com/templates/sj_market/images/styling/red/bn_bg_header.png');">
   <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+    <a href="/home">
     <div class="flex items-center space-x-4">
-      <img src="https://i.ibb.co/t3SJ1QF/Designer-preview-rev-1.png" alt="Logo" class="h-20">
+        <img src="https://i.ibb.co/t3SJ1QF/Designer-preview-rev-1.png" alt="Logo" class="h-20">
       <span class="font-bold text-xl">Bánh Trung Thu Ngon </span>
     </div>
+  </a>
     <nav class="flex space-x-6">
       <a routerLink="/home" [routerLinkActive]="['active']" class="hover:text-yellow-300">Trang Chủ</a>
       <a routerLink="/banh-trung-thu" [routerLinkActive]="['active']" class="hover:text-yellow-300">Bánh Trung Thu</a>
@@ -38,7 +39,6 @@
               <img class="w-10 h-10 rounded-full" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="">
               <div class="font-medium dark:text-white">
                   <div>{{user?.email}}</div>
-                  <!-- <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div> -->
               </div>
           </div></button>
             <mat-menu #menu="matMenu" style="z-index: 10000;">
@@ -63,43 +63,25 @@
   </div>
 </header>
 
-
-<!-- src/app/header/header.component.html -->
-<!-- <header class="bg-[#920E15] text-white">
+<header class="bg-[#920E15] text-white">
   <div class="max-w-screen-xl mx-auto flex justify-between items-center">
     <div class="flex items-center space-x-4">
-      <div class="dropdown">
-        <button class="dropbtn text-xl p-3">    <i class="fas fa-bars"></i> DANH MỤC SẢN PHẨM</button>
+     <div class="dropdown">
+        <button class="dropbtn text-xl p-3">
+          <i class="fas fa-bars"></i> DANH MỤC SẢN PHẨM
+        </button>
         <div class="dropdown-content text-[#000]">
-            <a href="#">BÁNH TRUNG THU TRĂNG VÀNG BLACK & GOLD</a> <hr>
-            <a href="#">
-              BÁNH TRUNG THU TRĂNG VÀNG CAO CẤP</a> <hr>
-            <a href="#">
-              BÁNH TRUNG THU OREO</a> <hr>
+          <ng-container *ngFor="let item of loaiSanPhamsWithCounts; let last = last">
+            <a [routerLink]="['/san-pham', item.loaiSanPham.maLoai]">
+              {{ item.loaiSanPham.tenLoai.toUpperCase() }}
+            </a>
+            <hr *ngIf="!last" />
+          </ng-container>
         </div>
       </div>
       
       <form class="max-w-lg mx-auto">
-        <div class="flex">
-            <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-white border   focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">Loại sản phẩm <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-      </svg></button>
-            <div id="dropdown" class="z-10 hidden bg-white  shadow w-44 dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-                <li>
-                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Loại bánh</button>
-                </li>
-                <li>
-                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bánh chay</button>
-                </li>
-                <li>
-                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bánh dẻo</button>
-                </li>
-                <li>
-                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bánh nướng 0 trứng</button>
-                </li>
-                </ul>
-            </div>
+        <div class="flex">      
             <div class="relative w-screen">
                 <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50  border-s-gray-50 border-s-2 border border-gray-300  focus:ring-0 focus:ring-white focus:border-white dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Tìm kiếm bánh trung thu..." required />
                 <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700  border border-blue-700 hover:bg-blue-800 focus:ring-0 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -121,7 +103,7 @@
       <a href="tel:0123123123" class="hover:underline ">0123 123 123</a>
     </div>
   </div>
-</header> -->
+</header>
 
 
 <!-- Dropdown menu -->
@@ -142,12 +124,3 @@
     </li>
   </ul>
 </div>
-
-<!-- <div class="dropdown">
-  <button class="dropbtn"> DANH MỤC SẢN PHẨM</button>
-  <div class="dropdown-content">
-      <a href="#">BÁNH TRUNG THU TRĂNG VÀNG BLACK & GOLD</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-  </div>
-</div> -->
