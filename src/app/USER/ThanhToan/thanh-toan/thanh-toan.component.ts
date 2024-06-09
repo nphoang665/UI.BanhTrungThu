@@ -72,8 +72,8 @@ export class ThanhToanComponent implements OnInit {
           const chiTietDonHang: ThemChiTietDonhang[] = this.cartItems.map(item => ({
             maDonHang,
             maSanPham: item.sanPham.maSanPham,
-            soLuong: item.quantity.toString(),
-            gia: item.sanPham.gia.toString()
+            soLuong: item.quantity,
+            gia: item.sanPham.gia
           }));
 
           chiTietDonHang.forEach(chiTiet => {

@@ -6,6 +6,9 @@ import { SanPhamService } from '../../ADMIN/services/SanPham/san-pham.service';
 import { environment } from '../../../environments/environment';
 import { AnhSanPham } from '../../ADMIN/models/anh-san-pham.model';
 import { LoaiSanPham } from '../../ADMIN/models/loai-san-pham.model';
+import { XemNhanhSanPhamComponent } from '../xem-nhanh-san-pham/xem-nhanh-san-pham.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-san-pham-banh-trung-thu',
@@ -13,6 +16,7 @@ import { LoaiSanPham } from '../../ADMIN/models/loai-san-pham.model';
   styleUrl: './san-pham-banh-trung-thu.component.css'
 })
 export class SanPhamBanhTrungThuComponent implements OnInit{
+  sanPhamBanhTrungThu$?:Observable<SanPham[]>
   sanPhams: SanPham[] = [];
   anhSanPham: AnhSanPham[] = [];
   loaiSanPham: LoaiSanPham | null = null;
@@ -22,7 +26,8 @@ export class SanPhamBanhTrungThuComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private loaiSanPhamService: LoaiSanPhamService,
-    private sanPhamService:SanPhamService
+    private sanPhamService:SanPhamService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -59,5 +64,26 @@ export class SanPhamBanhTrungThuComponent implements OnInit{
         sanPham.anhSanPham = this.anhSanPham;
       });
     }
+  }
+
+  OpenPopup(id: any, title: any): void {
+    const _popup = this.dialog.open(XemNhanhSanPhamComponent, {
+      width: '80%',
+      enterAnimationDuration: '250ms',
+      exitAnimationDuration: '250ms',
+      data: {
+        title: title,
+        idSanPham: id 
+      },
+    });
+    _popup.afterClosed().subscribe((item) => {
+      // console.log(item);
+      this.sanPhamBanhTrungThu$ = this.sanPhamService.getAllSanPham();
+    });
+  }
+  xemNhanhSP(id:string):void{
+    this.OpenPopup(id, 'Xem nhanh sản phẩm');
+    // console.log('kaskdaksd:'+id);
+    
   }
 }
