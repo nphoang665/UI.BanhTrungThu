@@ -44,6 +44,7 @@ import { HoaDonComponent } from './ADMIN/QuanLy/hoa-don/hoa-don.component';
 import { XemHoaDonComponent } from './ADMIN/QuanLy/hoa-don/xem-hoa-don/xem-hoa-don.component';
 import { TiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/tiep-nhan-don-hang.component';
 import { SuaTiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/sua-tiep-nhan-don-hang/sua-tiep-nhan-don-hang.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { SuaTiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/s
     ReactiveFormsModule,
     GoogleSigninButtonModule,
     ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

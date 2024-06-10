@@ -22,6 +22,8 @@ export class SanPhamBanhTrungThuComponent implements OnInit{
   loaiSanPham: LoaiSanPham | null = null;
   loaiSanPhamId: string | null = null;
   apiBaseUrl: string = environment.apiBaseUrl;
+  page: number = 1;
+  selectedSortOption: string = '';
   
   constructor(
     private route: ActivatedRoute,
@@ -31,8 +33,6 @@ export class SanPhamBanhTrungThuComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.loaiSanPham?.tenLoai);
-    
     this.route.paramMap.subscribe(params => {
       this.loaiSanPhamId = params.get('idLoaiSanPham');
       if (this.loaiSanPhamId) {
@@ -50,17 +50,14 @@ export class SanPhamBanhTrungThuComponent implements OnInit{
   loadSanPhams(idLoaiSanPham: string): void {
     this.sanPhamService.getSanPhamByLoai(idLoaiSanPham).subscribe((data: SanPham[]) => {
       this.sanPhams = data;
-      // Gọi hàm để lấy ảnh sản phẩm khi load xong danh sách sản phẩm
       this.getAnhSanPham();
     });
   }
 
   getAnhSanPham(): void {
-    // Duyệt qua danh sách sản phẩm để lấy ảnh cho mỗi sản phẩm
     for (const sanPham of this.sanPhams) {
       this.sanPhamService.getAnhSanPham(sanPham.maSanPham).subscribe((data: AnhSanPham[]) => {
         this.anhSanPham = data;
-        // Gán URL ảnh vào thuộc tính ảnh của từng sản phẩm
         sanPham.anhSanPham = this.anhSanPham;
       });
     }
@@ -77,13 +74,29 @@ export class SanPhamBanhTrungThuComponent implements OnInit{
       },
     });
     _popup.afterClosed().subscribe((item) => {
-      // console.log(item);
       this.sanPhamBanhTrungThu$ = this.sanPhamService.getAllSanPham();
     });
   }
   xemNhanhSP(id:string):void{
     this.OpenPopup(id, 'Xem nhanh sản phẩm');
-    // console.log('kaskdaksd:'+id);
-    
+  }
+
+  sortProducts(): void {
+    switch (this.selectedSortOption) {
+      case 'product-asc':
+        this.sanPhams.sort((a, b) => a.gia - b.gia);
+        break;
+      case 'product-desc':
+        this.sanPhams.sort((a, b) => b.gia - a.gia);
+        break;
+      // Add any additional sorting logic if needed
+      default:
+        // Default sorting logic if necessary
+        break;
+    }
+  }
+  onSortChange(event: any): void {
+    this.selectedSortOption = event.target.value;
+    this.sortProducts();
   }
 }

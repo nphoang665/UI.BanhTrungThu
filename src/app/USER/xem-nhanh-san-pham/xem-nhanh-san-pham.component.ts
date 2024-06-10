@@ -3,7 +3,7 @@ import { SanPham } from '../../ADMIN/models/san-pham.model';
 import { AnhSanPham } from '../../ADMIN/models/anh-san-pham.model';
 import { LoaiSanPham } from '../../ADMIN/models/loai-san-pham.model';
 import { environment } from '../../../environments/environment';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SanPhamService } from '../../ADMIN/services/SanPham/san-pham.service';
 import { GioHangService } from '../../ADMIN/services/GioHang/gio-hang.service';
 import { ToastrService } from 'ngx-toastr';
@@ -28,7 +28,8 @@ export class XemNhanhSanPhamComponent {
     private sanPhamService: SanPhamService,
     private gioHangService: GioHangService,
     private toastr: ToastrService,
-    private router:Router
+    private router:Router,
+    private ref: MatDialogRef<XemNhanhSanPhamComponent>,
   ) {}
 
   ngOnInit(): void {
@@ -48,11 +49,15 @@ export class XemNhanhSanPhamComponent {
   selectImage(image: string) {
     this.selectedImage = image;
   }
+  ClosePopup() {
+    this.ref.close();
+  }
 
   addToCart(): void {
     const userLogin = localStorage.getItem('NguoiDung');
     if (userLogin === null) {
-       this.router.navigateByUrl('/login')
+       this.router.navigateByUrl('/login');
+       this.ClosePopup();
        this.toastr.error('Bạn chưa đăng nhập!', 'Lỗi', {
         timeOut: 1000,
       });

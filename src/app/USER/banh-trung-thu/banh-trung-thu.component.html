@@ -3,7 +3,7 @@
 <div style="background-image: url('https://www.banhngoncaocap.com/templates/sj_market/images/styling/red/bn_bg_partern_01.png');">
   <div class="max-w-screen-xl mx-auto px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div *ngFor="let item of loaiSanPhamsWithCounts" class="border rounded-lg overflow-hidden shadow-lg">
+      <div *ngFor="let item of loaiSanPhamsWithCounts " class="border rounded-lg overflow-hidden shadow-lg">
         <a [routerLink]="['/san-pham', item.loaiSanPham.maLoai]">
           <img [src]="apiBaseUrl + '/images/' + item.loaiSanPham.anhLoai" alt="{{ item.loaiSanPham.tenLoai }}" class="w-full h-48 object-cover">
           <div class="p-4">

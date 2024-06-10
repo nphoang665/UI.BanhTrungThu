@@ -27,11 +27,7 @@ export class SanPhamHomeComponent implements OnInit {
   ngOnInit(): void {
     this.sanPhamBanhTrungThu$ = this.sanPhamServices.getAllSanPham();
     this.sanPhamMoi$ = this.sanPhamServices.getSanPhamMoi(); 
-    // console.log(this.sanPhamMoi$);
-    this.sanPhamNoiBat$ = this.sanPhamServices.getSanPhamNoiBat();
-    // this.sanPhamNoiBat$ = this.sanPhamServices.getSanPhamNoiBat(); 
-    // console.log(this.sanPhamNoiBat$);
-    
+    this.sanPhamNoiBat$ = this.sanPhamServices.getSanPhamNoiBat(); 
   }
 
   OpenPopup(id: any, title: any): void {
@@ -45,14 +41,11 @@ export class SanPhamHomeComponent implements OnInit {
       },
     });
     _popup.afterClosed().subscribe((item) => {
-      // console.log(item);
       this.sanPhamBanhTrungThu$ = this.sanPhamServices.getAllSanPham();
     });
   }
   xemNhanhSP(id:string):void{
     this.OpenPopup(id, 'Xem nhanh sản phẩm');
-    // console.log('kaskdaksd:'+id);
-    
   }
 
 }
