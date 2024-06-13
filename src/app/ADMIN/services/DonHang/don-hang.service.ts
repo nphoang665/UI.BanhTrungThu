@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DonHang, SuaDonHang, ThemDonHang } from '../../models/don-hang.model';
 import { environment } from '../../../../environments/environment';
 import { ChiTietDonhang, ThemChiTietDonhang } from '../../models/chi-tiet-don-hang.model';
+import { DoanhThuTheoThang } from '../../models/DoanhThuThang.models';
 
 @Injectable({
   providedIn: 'root'
@@ -41,4 +42,7 @@ export class DonHangService {
     return this.http.get<any>(`${environment.apiBaseUrl}/api/DonHang/lich-su-mua-hang/${maKhachHang}`);
   }
   
+  getDoanhThuTheoThang():Observable<DoanhThuTheoThang[]>{
+    return this.http.get<DoanhThuTheoThang[]>(`${environment.apiBaseUrl}/api/TongQuan/DoanhThuTheoThang`);
+  }
 }
