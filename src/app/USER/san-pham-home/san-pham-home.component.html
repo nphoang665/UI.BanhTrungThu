@@ -27,7 +27,7 @@
       <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <ng-container *ngIf="sanPhamMoi$ | async as sanPhamMoiList">
             <div *ngFor="let sanPham of sanPhamMoiList | slice:0:8" class="bg-white rounded-lg shadow-lg p-4 relative">
-              <div class="absolute top-2 right-2 bg-[#ED1C24] text-white text-xl font-bold px-2 py-1 rounded">Mới!</div>
+              <div class="absolute top-2 right-2 bg-[yellow] text-white text-xl font-bold px-2 py-1 rounded">Mới!</div>
           <div class="absolute top-2 right-2 bg-gray-500 text-white text-xl font-bold px-2 py-1 rounded" *ngIf="sanPham.soLuongTrongKho === 0">Hết hàng</div>
             <img [src]="apiBaseUrl + '/images/' + sanPham.anhSanPham[0].tenAnh" alt="{{ sanPham.tenSanPham }}" class="w-50 h-50">
             <div class="p-4">

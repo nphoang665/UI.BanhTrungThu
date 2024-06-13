@@ -18,6 +18,7 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
   loaiSanPham: LoaiSanPham | null = null;
   apiBaseUrl: string = environment.apiBaseUrl;
   quantity: number = 1;
+  HetHangSP: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +41,7 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
   loadSanPham(id: string): void {
     this.sanPhamService.getSanPhamById(id).subscribe((data: SanPham) => {
       this.sanPham = data;
+      this.HetHangSP = data.soLuongTrongKho === 0;
       if (data.maLoai) {
         this.loadLoaiSanPham(data.maLoai);
       }
@@ -73,6 +75,12 @@ export class ChiTietBanhTrungThuComponent implements OnInit {
       return;
     }
     if (this.sanPham) {
+      if (this.HetHangSP) { 
+        this.toastr.error('Sản phẩm hiện đang hết hàng', 'Lỗi', {
+          timeOut: 1000,
+        });
+        return;
+      }
       const success = this.gioHangService.addToCart(this.sanPham, this.quantity);
       if (success) {
         this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {

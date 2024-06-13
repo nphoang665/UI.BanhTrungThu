@@ -11,17 +11,17 @@
         </div>
       </div>
       <div class="w-2/3 pl-4">
-        <h1 class="text-2xl font-bold">{{ productTitle }}</h1>
-        <div class="mt-2 text-xl text-red-600">{{ productPrice | currency:'VND':'symbol-narrow' }}</div>
+        <h1 class="text-2xl font-bold">{{ tenSanPham }}</h1>
+        <div class="mt-2 text-xl text-red-600">{{ giaSanPham | currency:'VND':'symbol-narrow' }}</div>
         <div class="mt-4 flex items-center">
           <label class="mr-2">Số lượng:({{sanPham?.soLuongTrongKho}})</label>
-          <input type="number" [(ngModel)]="quantity" min="1" class="w-16 text-center border border-gray-400 rounded">
+          <input type="number" [(ngModel)]="soLuong" min="1" class="w-16 text-center border border-gray-400 rounded">
         </div>
         <div class="mt-4 flex space-x-4">
           <button (click)="addToCart()" class="px-4 py-2 bg-red-600 text-white rounded">
             <i class="fa-solid fa-cart-plus"></i> Thêm giỏ hàng
           </button>
-          <button class="px-4 py-2 bg-yellow-400 text-black rounded">HOTLINE: 0985 023 991</button>
+          <button class="px-4 py-2 bg-yellow-400 text-black rounded">HOTLINE: 0123 123 123</button>
         </div>
         <div class="mt-4 flex items-center">
           <span class="text-green-600">Thanh toán khi nhận hàng</span>

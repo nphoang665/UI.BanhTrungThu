@@ -32,6 +32,7 @@ export class LichSuDatHangComponent implements OnInit{
       this.donHangService.getLichSuMuaHang(maKhachHang).subscribe(
         data => {
           this.hangDaMua = data;
+          this.hangDaMua.sort((a, b) => new Date(b.thoiGianDatHang).getTime() - new Date(a.thoiGianDatHang).getTime());
           console.log('Lịch sử mua hàng:', this.hangDaMua); // Đảm bảo dữ liệu được nhận
         },
         error => {

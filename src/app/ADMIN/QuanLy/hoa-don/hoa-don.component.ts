@@ -49,7 +49,7 @@ export class HoaDonComponent implements AfterViewInit, OnInit{
       this.donHangService.getAllDonHang().subscribe(
         (data: DonHang[]) => {
           // this.dataSource.data = data.filter(donHang => donHang.tinhTrang === 'Đã thanh toán');
-          this.dataSource.data = data.filter(donHang => donHang.tinhTrang === 'Đã thanh toán');;
+          this.dataSource.data = data.filter(donHang => donHang.tinhTrang === 'Đã thanh toán' || donHang.tinhTrang === 'Đã hoàn thành');;
         },
         (error) => {
           console.error('Error fetching don hang data: ', error);

@@ -23,3 +23,7 @@ table {
     height: auto; 
     max-width: 100%;
   }
+  button[disabled] {
+    background-color: #c2bfbf !important; /* Màu xám */
+    color: white !important;
+  }

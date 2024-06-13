@@ -22,3 +22,13 @@ export interface SuaKhachHang{
     diaChi:string,
     tinhTrang:string,
 }
+
+export interface SuaKhachHangDto{
+    maKhachHang:string,
+    tenKhachHang:string,
+    soDienThoai:string,
+    email:string,
+    diaChi:string,
+    tinhTrang:string,
+    ngayDangKy:Date
+}

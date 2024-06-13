@@ -17,11 +17,12 @@ import { Router } from '@angular/router';
 export class XemNhanhSanPhamComponent {
   selectedImage!: string;
   images!: string[];
-  productTitle!: string;
-  productPrice!: number;
-  quantity: number = 1;
+  tenSanPham!: string;
+  giaSanPham!: number;
+  soLuong: number = 1;
   apiBaseUrl: string = environment.apiBaseUrl;
   sanPham: SanPham | null = null;
+  HetHangSP: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -33,16 +34,17 @@ export class XemNhanhSanPhamComponent {
   ) {}
 
   ngOnInit(): void {
-    this.loadProductDetails(this.data.idSanPham);
+    this.loadSanPham(this.data.idSanPham);
   }
 
-  loadProductDetails(idSanPham: string) {
-    this.sanPhamService.getSanPhamById(idSanPham).subscribe((product: SanPham) => {
-      this.sanPham = product;
-      this.selectedImage = this.apiBaseUrl + '/images/' + product.anhSanPham[0].tenAnh; // Assuming the first image is the main image
-      this.images = product.anhSanPham.map((anh: AnhSanPham) => this.apiBaseUrl + '/images/' + anh.tenAnh);
-      this.productTitle = product.tenSanPham;
-      this.productPrice = product.gia;
+  loadSanPham(idSanPham: string) {
+    this.sanPhamService.getSanPhamById(idSanPham).subscribe((sanPham: SanPham) => {
+      this.HetHangSP = sanPham.soLuongTrongKho === 0;
+      this.sanPham = sanPham;
+      this.selectedImage = this.apiBaseUrl + '/images/' + sanPham.anhSanPham[0].tenAnh; // Assuming the first image is the main image
+      this.images = sanPham.anhSanPham.map((anh: AnhSanPham) => this.apiBaseUrl + '/images/' + anh.tenAnh);
+      this.tenSanPham = sanPham.tenSanPham;
+      this.giaSanPham = sanPham.gia;
     });
   }
 
@@ -64,14 +66,20 @@ export class XemNhanhSanPhamComponent {
       return;
     }
 
-    if (this.quantity < 1) {
+    if (this.soLuong < 1) {
       this.toastr.error('Số lượng sản phẩm phải lớn hơn 0', 'Lỗi', {
         timeOut: 1000,
       });
       return;
     }
     if (this.sanPham) {
-      const success = this.gioHangService.addToCart(this.sanPham, this.quantity);
+      const success = this.gioHangService.addToCart(this.sanPham, this.soLuong);
+      if (this.HetHangSP) { 
+        this.toastr.error('Sản phẩm hiện đang hết hàng', 'Lỗi', {
+          timeOut: 1000,
+        });
+        return;
+      }
       if (success) {
         this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {
           timeOut: 1000,
