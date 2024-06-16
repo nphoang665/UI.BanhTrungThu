@@ -2,6 +2,26 @@
 <div class="max-w-screen-xl mx-auto bg-white rounded-xl shadow-md overflow-hidden mt-8 mb-8">
   <div class="p-8">
     <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Lịch Sử Mua Hàng</div>
+    
+
+    <div class="inline-flex rounded-md shadow-sm">
+      <a  aria-current="page" class="px-4 py-2 text-sm font-medium text-blue-700 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+        Tất cả
+      </a>
+      <a  class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+        Đang xử lý
+      </a>
+      <a  class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+        Đang giao hàng
+      </a>
+      <a  class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+        Đã hoàn thành
+      </a>
+      <a  class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+        Đã hủy đơn hàng
+      </a>
+    </div>
+
     <table class="min-w-full divide-y divide-gray-200 mt-4">
       <thead class="bg-gray-50">
         <tr>
@@ -14,7 +34,7 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr *ngFor="let sp of hangDaMua">
+        <tr *ngFor="let sp of hangDaMua | paginate: { itemsPerPage: 6, currentPage: page }">
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ sp.thoiGianDatHang | date :'dd/MM/yyyy'}}</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
             <ul>
@@ -27,7 +47,7 @@
             </ul>
           </td>
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ sp.tongTien | currency:'VND':'symbol' }}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ sp.tinhTrang }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm " [ngClass]="getStatusClass(sp.tinhTrang)">{{ sp.tinhTrang }}</td>
           <!-- <button mat-icon-button >
             <mat-icon svgIcon="icon_eye"></mat-icon>
         </button>
@@ -37,6 +57,7 @@
         </tr>
       </tbody>
     </table>
+    <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
   </div>
 </div>
 <app-footer></app-footer>

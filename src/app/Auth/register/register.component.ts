@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -40,34 +40,30 @@ const google_login = `
 })
 export class RegisterComponent {
   register: FormGroup = new FormGroup({
-    email: new FormControl('',{
-      validators:[
+    email: new FormControl('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(200),
+        Validators.pattern(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
+      ]
+    }),
+    userName: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
-      Validators.maxLength(200), 
-      Validators.pattern(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/),
-      
-    ],
-  }),
-    userName: new FormControl('',[
-      Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(50),
-      
+      Validators.maxLength(50)
     ]),
-    password: new FormControl('',[
+    password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
-      Validators.maxLength(100),
-     
-
+      Validators.maxLength(100)
     ]),
-    confirmPassword: new FormControl('',[
+    confirmPassword: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
-      Validators.maxLength(100),
+      Validators.maxLength(100)
     ])
-  })
+  }, { validators: passwordMatchValidator });
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -108,3 +104,12 @@ export class RegisterComponent {
 
   }
 }
+export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const password = control.get('password');
+  const confirmPassword = control.get('confirmPassword');
+
+  if (password && confirmPassword && password.value !== confirmPassword.value) {
+    return { passwordMismatch: true };
+  }
+  return null;
+};

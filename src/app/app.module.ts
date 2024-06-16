@@ -46,6 +46,8 @@ import { TiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/tiep
 import { SuaTiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/sua-tiep-nhan-don-hang/sua-tiep-nhan-don-hang.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { DemoComponent } from './USER/demo/demo.component';
+import { DanhGiaSanPhamComponent } from './USER/danh-gia-san-pham/danh-gia-san-pham.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
     XemHoaDonComponent,
     HoaDonComponent,
     TiepNhanDonHangComponent,
-    SuaTiepNhanDonHangComponent
+    SuaTiepNhanDonHangComponent,
+    DemoComponent,
+    DanhGiaSanPhamComponent
   ],
   imports: [
     BrowserModule,

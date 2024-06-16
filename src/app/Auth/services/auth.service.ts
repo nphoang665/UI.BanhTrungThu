@@ -82,11 +82,13 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId)) {
       const email = localStorage.getItem('user-email');
       const roles = localStorage.getItem('user-roles');
+      const nguoiDung = localStorage.getItem('NguoiDung');
 
-      if (email && roles) {
+      if (email && roles && nguoiDung) {
         const user: User = {
           email: email,
-          roles: roles.split(',')
+          roles: roles.split(','),
+          ...JSON.parse(nguoiDung)
         };
         return user;
       }

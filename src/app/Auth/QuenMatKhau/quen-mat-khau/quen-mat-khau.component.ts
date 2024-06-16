@@ -4,7 +4,7 @@ import { KhachHangService } from '../../../ADMIN/services/KhachHang/khach-hang.s
 import { MaXacNhan } from '../../../ADMIN/models/ma-xac-nhan.model';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
@@ -68,10 +68,23 @@ export class QuenMatKhauComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = this.formBuilder.group({
-            email: [''],
-            otp: [''],
-            password: [''],
-            confirmPassword: ['']
+            email: ['', [
+                Validators.required,
+                Validators.minLength(4),
+                Validators.maxLength(200),
+                Validators.pattern(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
+            ]],
+            otp: ['',[Validators.required]],
+            password: ['', [
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(50)
+            ]],
+            confirmPassword: ['', [
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(50)
+            ]]
         });
     }
 

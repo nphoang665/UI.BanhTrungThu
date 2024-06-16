@@ -1,0 +1,102 @@
+<!-- <div class="max-w-2xl mx-auto py-8">
+    <h3 class="text-2xl font-bold mb-4">Đánh giá</h3>
+    <ul class="divide-y divide-gray-200">
+      <li *ngFor="let danhGia of danhGias" class="py-4">
+        <div class="flex items-center">
+          <div class="mr-4">
+            <div class="flex items-center">
+              <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                <svg *ngIf="danhGia.diemDanhGia > i" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927C9.355 2.302 10.645 2.302 10.951 2.927L12.184 5.423L15.041 6.044C15.721 6.188 16.002 7.022 15.545 7.547L13.651 9.686L14.082 12.812C14.147 13.489 13.412 13.978 12.82 13.648L10 12.347L7.18 13.648C6.588 13.978 5.853 13.489 5.918 12.812L6.349 9.686L4.455 7.547C3.998 7.022 4.279 6.188 4.959 6.044L7.816 5.423L9.049 2.927Z"/>
+                </svg>
+                <svg *ngIf="danhGia.diemDanhGia <= i" class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927C9.355 2.302 10.645 2.302 10.951 2.927L12.184 5.423L15.041 6.044C15.721 6.188 16.002 7.022 15.545 7.547L13.651 9.686L14.082 12.812C14.147 13.489 13.412 13.978 12.82 13.648L10 12.347L7.18 13.648C6.588 13.978 5.853 13.489 5.918 12.812L6.349 9.686L4.455 7.547C3.998 7.022 4.279 6.188 4.959 6.044L7.816 5.423L9.049 2.927Z"/>
+                </svg>
+              </ng-container>
+            </div>
+            <p class="text-sm text-gray-500">{{ danhGia.ngayDanhGia | date:'short' }}</p>
+          </div>
+          <div>
+            <p class="text-lg font-medium text-gray-900">{{ danhGia.binhLuan }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  
+    <div class="mt-6">
+      <h4 class="text-lg font-medium mb-2">Viết bình luận</h4>
+      <div class="flex items-center mb-4">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+          <svg (click)="setRating(i + 1)" [ngClass]="{'text-yellow-400': diemDanhGia > i, 'text-gray-300': diemDanhGia <= i}" class="w-6 h-6 cursor-pointer" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927C9.355 2.302 10.645 2.302 10.951 2.927L12.184 5.423L15.041 6.044C15.721 6.188 16.002 7.022 15.545 7.547L13.651 9.686L14.082 12.812C14.147 13.489 13.412 13.978 12.82 13.648L10 12.347L7.18 13.648C6.588 13.978 5.853 13.489 5.918 12.812L6.349 9.686L4.455 7.547C3.998 7.022 4.279 6.188 4.959 6.044L7.816 5.423L9.049 2.927Z"/>
+          </svg>
+        </ng-container>
+      </div>
+      <textarea [(ngModel)]="noiDung" rows="4" class="w-full p-2 border border-gray-300 rounded-md mb-4" placeholder="Viết bình luận..."></textarea>
+      <button (click)="addDanhGia()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Gửi</button>
+    </div>
+  </div>
+   -->
+  
+   <div class="mt-8 p-6 bg-gray-50 rounded-lg shadow-md">
+    <h1 class="text-xl font-semibold text-gray-800 mb-4">Đánh giá sản phẩm</h1>
+
+<article>
+    <div *ngFor="let danhGia of danhGias">
+
+
+    <div class="flex items-center mb-4 mt-2">
+        <img class="w-10 h-10 me-4 rounded-full" src="	https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="">
+        <div class="font-medium dark:text-white">
+            <p>{{danhGia.maKhachHang}}</p>
+            <div class="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                    <svg *ngIf="danhGia.diemDanhGia > i" class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg *ngIf="danhGia.diemDanhGia <= i" class="w-4 h-4 text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>                 
+                  </ng-container>
+            </div>
+             <time datetime="2017-03-03 19:00"class="block text-sm text-gray-500 dark:text-gray-400">{{danhGia.ngayDanhGia | date:'dd/MM/yyy hh:mm'}}</time>
+        </div>
+    </div>
+    <!-- <footer class="mb-3 text-sm text-gray-500 dark:text-gray-400"><p>Được đánh giá <time datetime="2017-03-03 19:00">{{danhGia.ngayDanhGia | date:'dd/MM/yyy hh:mm'}}</time></p></footer> -->
+    <p class="mb-2  dark:text-gray-400">{{danhGia.binhLuan}}</p>
+    <!-- <a href="#" class="block mb-5 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Read more</a> -->
+    <!-- <aside>
+        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">19 people found this helpful</p>
+        <div class="flex items-center mt-3">
+            <a href="#" class="px-2 py-1.5 text-xs font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Helpful</a>
+            <a href="#" class="ps-4 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500 border-gray-200 ms-4 border-s md:mb-0 dark:border-gray-600">Report abuse</a>
+        </div>
+    </aside> -->
+    <hr>
+</div>
+    <div *ngIf="daMuaHang==true && daDanhGia==false" class="mt-6">
+      <h4 class="text-xl font-bold mb-2">Viết đánh giá của bạn</h4>
+      <div class="mb-4">
+        <label for="rating" class="block text-sm font-medium text-gray-700">Đánh giá</label>
+        <div class="flex">
+          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+            <svg (click)="setRating(i + 1)" class="w-6 h-6 cursor-pointer" [ngClass]="{'text-yellow-400': diemDanhGia > i, 'text-gray-300': diemDanhGia <= i}" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927C9.355 2.302 10.645 2.302 10.951 2.927L12.184 5.423L15.041 6.044C15.721 6.188 16.002 7.022 15.545 7.547L13.651 9.686L14.082 12.812C14.147 13.489 13.412 13.978 12.82 13.648L10 12.347L7.18 13.648C6.588 13.978 5.853 13.489 5.918 12.812L6.349 9.686L4.455 7.547C3.998 7.022 4.279 6.188 4.959 6.044L7.816 5.423L9.049 2.927Z"/>
+            </svg>
+          </ng-container>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="comment" class="block text-sm font-medium text-gray-700">Bình luận</label>
+        <textarea [(ngModel)]="noiDung" id="comment" rows="3" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+      </div>
+      <button (click)="addDanhGia()" class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Gửi đánh giá</button>
+    </div>
+    <div *ngIf="daMuaHang==false" class="mt-6">
+      <p class="text-sm text-gray-500">Bạn cần mua sản phẩm này trước khi có thể đánh giá.</p>
+    </div>
+    <div *ngIf="daDanhGia==true && daMuaHang==true" class="mt-6">
+      <p class="text-sm text-gray-500">Bạn đã đánh giá sản phẩm này.</p>
+    </div>
+</article>
+</div>

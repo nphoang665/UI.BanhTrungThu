@@ -23,6 +23,8 @@ import { adminGuard, guestOrCustomerGuard } from './Auth/Guard/auth.guard';
 import { HoaDonComponent } from './ADMIN/QuanLy/hoa-don/hoa-don.component';
 import { TiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/tiep-nhan-don-hang.component';
 import { SuaTiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/sua-tiep-nhan-don-hang/sua-tiep-nhan-don-hang.component';
+import { DemoComponent } from './USER/demo/demo.component';
+import { DanhGiaSanPhamComponent } from './USER/danh-gia-san-pham/danh-gia-san-pham.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -54,6 +56,7 @@ const routes: Routes = [
   { path: 'thong-tin', component: ThongTinCaNhanComponent },
   { path: 'lich-su', component: LichSuDatHangComponent },
   { path: 'xem-hoa-don', component: XemHoaDonComponent },
+  { path: 'demo', component: DemoComponent },
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div class="container">
       <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
           <div class="row w-100 container-fluid">
@@ -79,4 +79,129 @@
 
       </div>
   </div>
-</div>
+</div> -->
+
+
+
+
+
+
+
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <h2 class="text-2xl font-bold mb-6 text-center">Quên mật khẩu</h2>
+      <!-- <span>Lấy lại mật khẩu của bạn</span> -->
+      <form [formGroup]="form">
+        <div class="mb-4">
+          <label for="email" class="block mb-2 text-sm font-medium"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': form.get('email')?.valid,
+            'text-red-700 dark:text-red-500': form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)
+          }">
+            Email
+          </label>
+          <input type="email" id="email" formControlName="email" class="mt-1 px-3 py-2 bg-white border shadow-sm rounded-md w-full"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': form.get('email')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)
+          }"
+            placeholder="Nhập email của bạn..." [readonly]="buttonState !=0"/>
+            <div *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)" class="mt-2 text-sm">
+                <p *ngIf="form.get('email')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+                  Email là bắt buộc.
+                </p>
+                <!-- <p *ngIf="form.get('email')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+                  Email phải có ít nhất 4 ký tự.
+                </p> -->
+                <p *ngIf="form.get('email')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+                  Email không được vượt quá 200 ký tự.
+                </p>
+                <p *ngIf="form.get('email')?.errors?.['pattern']" class="text-red-600 dark:text-red-500">
+                  Email không hợp lệ.
+                </p>
+              </div>
+        </div>
+        
+        <div class="mb-4" *ngIf="buttonState==1 || buttonState==2">
+          <label for="password" class="block mb-2 text-sm font-medium"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': form.get('email')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)
+          }">
+            Mã OTP
+          </label>
+          <input type="number" formControlName="otp" class="mt-1 px-3 py-2 bg-white border shadow-sm rounded-md w-full"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': form.get('email')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)
+          }"
+            placeholder="Nhập mã OTP của bạn..." [readonly]="buttonState !=1"/>
+            <div *ngIf="form.get('otp')?.invalid && (form.get('otp')?.dirty || form.get('otp')?.touched)" class="mt-2 text-sm">
+                <p *ngIf="form.get('otp')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+                  OTP là bắt buộc.
+                </p>
+               
+              </div>
+        </div>
+
+        <div class="mb-4" *ngIf="buttonState==2">
+            <label for="password" class="block mb-2 text-sm font-medium"
+             >
+              Mật khẩu mới
+            </label>
+            <input type="password" formControlName="password" class="mt-1 px-3 py-2 bg-white border shadow-sm rounded-md w-full"
+             
+              placeholder="Nhập mật khẩu mới của bạn..." />
+           
+          </div>
+          <div class="mb-4" *ngIf="buttonState==2">
+            <label for="password" class="block mb-2 text-sm font-medium"
+             >
+              Nhập lại mật khẩu
+            </label>
+            <input type="password" formControlName="confirmPassword" class="mt-1 px-3 py-2 bg-white border shadow-sm rounded-md w-full"
+             
+              placeholder="Nhập lại mật khẩu của bạn..." />
+           
+          </div>
+          
+          <div class="mt-2">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"  [disabled]="isLoading" *ngIf="buttonState === 0"
+                (click)="GuiEmail()">
+                <span *ngIf="isLoading == false">Quên mật khẩu</span>
+                <span *ngIf="isLoading == true">
+                    <span class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                    Đang gửi mail...
+                </span>
+
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"  [disabled]="isLoadingOtp" *ngIf="buttonState === 1"
+                (click)="KiemTraMaOTP()">
+                <span *ngIf="isLoadingOtp == false">Xác nhận</span>
+                <span *ngIf="isLoadingOtp == true">
+                    <span class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                    Kiểm tra otp...
+                </span>
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" [disabled]="isLoadingLayLaiMk"
+                *ngIf="buttonState === 2" (click)="LayLaiMatKhau()">
+                <span *ngIf="isLoadingLayLaiMk == false">Lấy lại mật khẩu</span>
+                <span *ngIf="isLoadingLayLaiMk == true">
+                    <span class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                    Đang lấy lại mật khẩu...
+                </span>
+            </button>
+        </div>
+        
+        <div class="mt-4 text-center">
+          <span class="text-gray-700">Bạn đã có tài khoản? <a routerLink="/login" class="text-blue-500 hover:text-blue-700">Đăng nhập</a></span>
+        </div>
+      </form>
+      
+      
+    </div>
+  </div>

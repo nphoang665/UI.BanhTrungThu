@@ -17,11 +17,27 @@ const icon_close = `
 })
 export class LichSuDatHangComponent implements OnInit{
   hangDaMua: any[] = [];
+  page: number = 1;
 
   constructor(private donHangService: DonHangService, private iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer,private dialog: MatDialog) {
     this.iconRegistry.addSvgIconLiteral('icon_eye', this.sanitizer.bypassSecurityTrustHtml(icon_eye));
     this.iconRegistry.addSvgIconLiteral('icon_close', this.sanitizer.bypassSecurityTrustHtml(icon_close));
    }
+
+   getStatusClass(tinhTrang: string): string {
+    switch (tinhTrang) {
+      case 'Đang xử lý':
+        return 'text-yellow-500';
+      case 'Đang giao hàng':
+        return 'text-green-500';
+      case 'Đã hoàn thành':
+        return 'text-blue-500';
+        case 'Đã hủy đơn hàng':
+        return 'text-red-500';
+      default:
+        return '';
+    }
+  }
 
   ngOnInit(): void {
     const nguoiDungString = localStorage.getItem('NguoiDung');

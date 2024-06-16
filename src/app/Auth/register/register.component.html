@@ -214,14 +214,15 @@
           <p *ngIf="register.get('confirmPassword')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
             Nhập lại mật khẩu không được vượt quá 100 ký tự.
           </p>
-          <p *ngIf="register.get('confirmPassword')?.errors?.['passwordMismatch']" class="text-red-600 dark:text-red-500">
+          <p *ngIf="register.errors?.['passwordMismatch']" class="text-red-600 dark:text-red-500">
             Mật khẩu không khớp.
           </p>
         </div>
       </div>
+      
     
       <div class="mt-6">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" type="submit">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" type="submit" [disabled]="register.invalid">
           Đăng ký
         </button>
       </div>
