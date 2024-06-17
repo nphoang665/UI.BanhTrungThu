@@ -87,6 +87,9 @@ export class DanhGiaSanPhamComponent implements OnInit {
         timeOut: 2000,
       });
     }, error => {
+      this.toastr.error('Lỗi khi thêm đánh giá, Vui lòng tải lại trang', 'Thông báo', {
+        timeOut: 2000,
+      });
       console.error('Lỗi khi thêm đánh giá:', error);
     });
   }

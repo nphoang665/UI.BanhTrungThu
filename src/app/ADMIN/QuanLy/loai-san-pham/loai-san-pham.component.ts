@@ -9,6 +9,7 @@ import { SuaLoaiSanPhamComponent } from './sua-loai-san-pham/sua-loai-san-pham.c
 import { LoaiSanPhamService } from '../../services/LoaiSanPham/loai-san-pham.service';
 import { environment } from '../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { XacNhanXoaComponent } from '../../xac-nhan-xoa/xac-nhan-xoa.component';
 
 @Component({
   selector: 'app-loai-san-pham',
@@ -85,15 +86,56 @@ export class LoaiSanPhamComponent implements AfterViewInit, OnInit  {
     
   }
 
-  xoaLoaiSanPham(id:string){
-    this.loaiSanPhamServices.xoaLoaiSanPham(id).subscribe((data: any) => {
-      this.toastr.success('Xóa loại sản phẩm thành công', 'Thông báo', {
-        timeOut: 1000,
-      });
-      this.getLoaiSanPhamData();
+  xoaLoaiSanPham(element:any){
+    const message = `Bạn có chắc muốn xóa ${element.maLoai} - ${element.tenLoai} không?`;
+    const dialogRef = this.dialog.open(XacNhanXoaComponent, {
+      width: '500px',
+      data: { message: message }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.loaiSanPhamServices.xoaLoaiSanPham(element.maLoai).subscribe(
+          (data: any) => {
+            this.toastr.success('Xóa loại sản phẩm thành công', 'Thông báo', {
+              timeOut: 2000,
+            });
+            this.getLoaiSanPhamData();
+          },
+          (error) => {
+            this.toastr.error('Loại sản phẩm này còn sản phẩm không thể xóa', 'Thông báo', {
+              timeOut: 2000,
+            });
+          }
+        );
+      }
     });
   }
 
+  // xoaLoaiSanPham(id: string) {
+  //   const dialogRef = this.dialog.open(XacNhanXoaComponent, {
+  //     width: '300px',
+  //     data: { message: 'Bạn có chắc chắn muốn xóa loại sản phẩm này không?' }
+  //   });
+  
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result === true) {
+  //       this.loaiSanPhamServices.xoaLoaiSanPham(id).subscribe(
+  //         (data: any) => {
+  //           this.toastr.success('Xóa loại sản phẩm thành công', 'Thông báo', {
+  //             timeOut: 2000,
+  //           });
+  //           this.getLoaiSanPhamData();
+  //         },
+  //         (error) => {
+  //           this.toastr.error('Loại sản phẩm này còn sản phẩm không thể xóa', 'Thông báo', {
+  //             timeOut: 2000,
+  //           });
+  //         }
+  //       );
+  //     }
+  //   });
+  // }
 
   getLoaiSanPhamData(){
     this.loaiSanPhamServices.getAllLoaiSanPham().subscribe(

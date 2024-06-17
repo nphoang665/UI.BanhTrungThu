@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SanPhamService } from '../../services/SanPham/san-pham.service';
 import { ThemSanPhamComponent } from './them-san-pham/them-san-pham.component';
 import { SuaSanPhamComponent } from './sua-san-pham/sua-san-pham.component';
+import { XacNhanXoaComponent } from '../../xac-nhan-xoa/xac-nhan-xoa.component';
 
 @Component({
   selector: 'app-san-pham',
@@ -75,7 +76,7 @@ export class SanPhamComponent implements AfterViewInit, OnInit {
       },
     });
     _popup.afterClosed().subscribe((item) => {
-      console.log(item);
+      // console.log(item);
       this.getSanPhamData(); 
     });
   }
@@ -87,19 +88,30 @@ export class SanPhamComponent implements AfterViewInit, OnInit {
     this.OpenPopupSua(id, 'Sửa sản phẩm');
   }
   
-  xoaSanPham(id:string){
-    this.sanPhamServices.xoaSanPham(id).subscribe((data:any)=>{
-      this.toastr.success('Xóa sản phẩm thành công', 'Thông báo', {
-        timeOut: 1000,
-      });
-      this.getSanPhamData();
+  xoaSanPham(element:any){
+   
+    const message = `Bạn có chắc muốn xóa ${element.maSanPham} - ${element.tenSanPham} không?`;
+    const dialogRef = this.dialog.open(XacNhanXoaComponent, {
+      width: '500px',
+      data: { message: message }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.sanPhamServices.xoaSanPham(element.maSanPham).subscribe((data:any)=>{
+          this.toastr.success('Xóa sản phẩm thành công', 'Thông báo', {
+            timeOut: 2000,
+          });
+          this.getSanPhamData();
+        });
+      }
     });
   }
 
   getSanPhamData(){
     this.sanPhamServices.getAllSanPham().subscribe(
       (data:SanPham[])=>{
-        this.dataSource.data = data.filter(sp=>sp.tinhTrang!="Ngưng hoạt động");
+        this.dataSource.data = data.filter(sp=>sp.tinhTrang!="Ngưng bán");
       },
       (error) => {
         console.error('Error fetching SanPham data: ', error);

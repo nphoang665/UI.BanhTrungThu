@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit{
   }
   onFacebookLogin(){
     this.toastr.warning('Tính năng đang được cập nhật', 'Thông báo', {
-      timeOut: 1000,
+      timeOut: 2000,
     });
   }
   onGoogleLogin(): void {
@@ -178,14 +178,14 @@ export class LoginComponent implements OnInit{
         }
 
         this.toastr.success('Đăng nhập thành công', 'Thông báo', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
       },
       error: (error) => {
         // Handle error
         console.error(error);
         this.toastr.error('Đăng nhập thất bại', 'Lỗi', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
       }
     });

@@ -40,22 +40,42 @@ export class SanPhamService {
 }
 
 
+  // getSanPhamMoi(): Observable<SanPham[]> {
+  //   return this.getAllSanPham().pipe(
+  //     map(sanPhams => {
+  //       // Lấy ngày hiện tại
+  //       const ngayHienTai = new Date();
+  //       // Lọc các sản phẩm có ngày nhập gần đây (ví dụ: trong vòng 7 ngày)
+  //       return sanPhams.filter(sp => {
+  //         const ngayThem = new Date(sp.ngayThem);
+  //         const thoiGianToiDa = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+  //         return ngayHienTai.getTime() - ngayThem.getTime() <= thoiGianToiDa;
+  //       });
+  //     })
+  //   );
+  // }
   getSanPhamMoi(): Observable<SanPham[]> {
     return this.getAllSanPham().pipe(
       map(sanPhams => {
         // Lấy ngày hiện tại
         const ngayHienTai = new Date();
-        // Lọc các sản phẩm có ngày nhập gần đây (ví dụ: trong vòng 7 ngày)
+        // Lọc các sản phẩm có ngày nhập gần đây và tình trạng "Đang hoạt động"
         return sanPhams.filter(sp => {
           const ngayThem = new Date(sp.ngayThem);
-          const thoiGianToiDa = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
-          return ngayHienTai.getTime() - ngayThem.getTime() <= thoiGianToiDa;
+          const thoiGianToiDa = 7 * 24 * 60 * 60 * 1000; // 7 ngày tính bằng milliseconds
+          const isActive = sp.tinhTrang === 'Đang hoạt động';
+          const isRecent = ngayHienTai.getTime() - ngayThem.getTime() <= thoiGianToiDa;
+          return isActive && isRecent;
         });
       })
     );
   }
+  
 
   getSanPhamNoiBat(): Observable<SanPham[]> {
     return this.http.get<SanPham[]>(`${environment.apiBaseUrl}/api/SanPham/noibat`);
+  }
+  getSanPhamBanChayByLoai(maLoai: string): Observable<SanPham[]> {
+    return this.http.get<SanPham[]>(`${environment.apiBaseUrl}/api/sanpham/banchaynhat/${maLoai}`);
   }
 }

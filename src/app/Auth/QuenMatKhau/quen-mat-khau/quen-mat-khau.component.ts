@@ -106,7 +106,7 @@ export class QuenMatKhauComponent implements OnInit {
 
                     if (!khachHangExists) {
                         this.toastr.warning('Email không tồn tại trong hệ thống', 'Thông báo', {
-                            timeOut: 1000,
+                            timeOut: 2000,
                         });
                         this.isLoading = false;
                     } else {
@@ -135,7 +135,7 @@ export class QuenMatKhauComponent implements OnInit {
             this.isLoadingOtp = false;
         } else {
             this.toastr.warning('OTP không hợp lệ', 'Thông báo', {
-                timeOut: 1000,
+                timeOut: 2000,
             });
             this.isLoadingOtp = false;
         }
@@ -148,7 +148,7 @@ export class QuenMatKhauComponent implements OnInit {
 
         if (this.form.get('password')?.value !== this.form.get('confirmPassword')?.value) {
             this.toastr.warning('Mật khẩu không khớp', 'Thông báo', {
-                timeOut: 1000,
+                timeOut: 2000,
             });
             return;
         }
@@ -163,7 +163,7 @@ export class QuenMatKhauComponent implements OnInit {
 
             if (!khachHangEmail) {
                 this.toastr.warning('Không tìm thấy email hoặc số điện thoại', 'Thông báo', {
-                    timeOut: 1000,
+                    timeOut: 2000,
                 });
                 return;
             }
@@ -177,14 +177,14 @@ export class QuenMatKhauComponent implements OnInit {
             this.authServices.LayLaiMatKhau(requestData).subscribe(
                 (result: any) => {
                     this.toastr.success(result.message, 'Thông báo', {
-                        timeOut: 1000,
+                        timeOut: 2000,
                     });
                     this.isLoadingLayLaiMk = false;
                     this.router.navigateByUrl('/login');
                 },
                 (error: any) => {
                     this.toastr.error(error.error.error, 'Thông báo', {
-                        timeOut: 1000,
+                        timeOut: 2000,
                     });
                     console.error('Error:', error);
                 },

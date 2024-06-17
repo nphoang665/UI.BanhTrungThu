@@ -47,7 +47,7 @@ export class ThemSanPhamComponent implements OnInit{
   themSanPham(){
     if(this.previewingFileImg.length ===0){
       this.toastr.warning('Bạn chưa chọn ảnh', 'Thông báo', {
-        timeOut: 1000,
+        timeOut: 2000,
       });
       return;
     }
@@ -56,7 +56,7 @@ export class ThemSanPhamComponent implements OnInit{
       next:(response)=>{
         console.log(response);
         this.toastr.success('Thêm sản phẩm thành công', 'Thông báo', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
         this.ClosePopup();
       }, error: (error) => {

@@ -1,43 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-
+interface Product {
+  name: string;
+  imageUrl: string;
+}
 @Component({
   selector: 'app-demo',
   templateUrl: './demo.component.html',
   styleUrl: './demo.component.css'
 })
 export class DemoComponent implements OnInit {
-  orders: Order[] = [
-    { id: '12345', customerName: 'Nguyen Van A', status: 'Đang giao' },
-    { id: '67890', customerName: 'Tran Thi B', status: 'Đã giao' },
-    { id: '11223', customerName: 'Le Van C', status: 'Chờ xử lý' },
-  ];
-
-  constructor() { }
-
+ 
   ngOnInit(): void {
   }
-  steps = [
-    'Đặt hàng',
-    'Xác nhận đơn hàng',
-    'Đang vận chuyển',
-    'Đã giao hàng'
+  searchTerm: string = '';
+  products: Product[] = [
+    { name: 'Trăng vàng pha lê', imageUrl: 'https://www.banhngoncaocap.com/cache/resized/829724613c5fd3145693197a44e64032.png' },
+    { name: 'Trăng vàng bạch kim', imageUrl: 'https://www.banhngoncaocap.com/cache/resized/829724613c5fd3145693197a44e64032.png' },
+    { name: 'Bánh Trứng Vi Cá', imageUrl: 'https://www.banhngoncaocap.com/cache/resized/829724613c5fd3145693197a44e64032.png' },
+    { name: 'Khoai Môn Hạt Sen', imageUrl: 'https://www.banhngoncaocap.com/cache/resized/829724613c5fd3145693197a44e64032.png' },
+    { name: 'Bánh Xanh Mè Đen Hạt Dưa', imageUrl: 'https://www.banhngoncaocap.com/cache/resized/829724613c5fd3145693197a44e64032.png' },
+    { name: 'Bánh Xanh Hạt Sen Hạt Chia', imageUrl: 'https://www.banhngoncaocap.com/cache/resized/829724613c5fd3145693197a44e64032.png' },
+    { name: 'Bánh Trung Thu Oreo 2 Bánh', imageUrl: 'https://www.banhngoncaocap.com/cache/resized/829724613c5fd3145693197a44e64032.png' },
+    { name: 'Bánh Trung Thu Oreo 4 Bánh', imageUrl: 'https://www.banhngoncaocap.com/cache/resized/829724613c5fd3145693197a44e64032.png' },
   ];
 
-  getStatusClass(status: string): string {
-    switch (status) {
-      case 'Đang giao':
-        return 'text-yellow-500';
-      case 'Đã giao':
-        return 'text-green-500';
-      case 'Chờ xử lý':
-        return 'text-red-500';
-      default:
-        return '';
-    }
+  get filteredProducts() {
+    return this.products.filter(product => 
+      product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
-}
-export interface Order{
-  id:string,
-  customerName:string,
-  status:string
 }

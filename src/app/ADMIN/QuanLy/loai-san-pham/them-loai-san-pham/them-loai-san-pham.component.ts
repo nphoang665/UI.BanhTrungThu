@@ -60,7 +60,7 @@ export class ThemLoaiSanPhamComponent implements OnInit{
       next:(response)=>{
         console.log(response);
         this.toastr.success('Thêm loại sản phẩm thành công', 'Thông báo', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
         
         this.ClosePopup();

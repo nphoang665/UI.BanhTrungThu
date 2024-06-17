@@ -88,7 +88,7 @@ export class RegisterComponent {
       next: (response) => {
         this.router.navigateByUrl('/login');
         this.toastr.success('Đăng ký tài khoản thành công', 'Thông báo', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
       },
       error: (error) => {

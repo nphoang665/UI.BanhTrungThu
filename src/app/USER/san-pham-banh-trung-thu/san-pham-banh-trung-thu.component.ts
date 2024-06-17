@@ -23,7 +23,7 @@ export class SanPhamBanhTrungThuComponent implements OnInit{
   loaiSanPhamId: string | null = null;
   apiBaseUrl: string = environment.apiBaseUrl;
   page: number = 1;
-  selectedSortOption: string = '';
+  selectedSortOption: string = 'best-seller';
   
   constructor(
     private route: ActivatedRoute,
@@ -49,8 +49,9 @@ export class SanPhamBanhTrungThuComponent implements OnInit{
   
   loadSanPhams(idLoaiSanPham: string): void {
     this.sanPhamService.getSanPhamByLoai(idLoaiSanPham).subscribe((data: SanPham[]) => {
-      this.sanPhams = data;
+      this.sanPhams = data.filter(x => x.tinhTrang === 'Đang hoạt động');
       this.getAnhSanPham();
+      this.sortProducts();
     });
   }
 
@@ -89,9 +90,14 @@ export class SanPhamBanhTrungThuComponent implements OnInit{
       case 'product-desc':
         this.sanPhams.sort((a, b) => b.gia - a.gia);
         break;
-      // Add any additional sorting logic if needed
+      case 'best-seller':
+        if (this.loaiSanPhamId) {
+          this.sanPhamService.getSanPhamBanChayByLoai(this.loaiSanPhamId).subscribe((data: SanPham[]) => {
+            this.sanPhams = data.filter(x => x.tinhTrang === 'Đang hoạt động'); 
+          });
+        }
+        break;
       default:
-        // Default sorting logic if necessary
         break;
     }
   }

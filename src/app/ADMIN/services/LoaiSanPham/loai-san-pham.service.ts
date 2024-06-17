@@ -40,7 +40,7 @@ export class LoaiSanPhamService {
           this.sanPhamService.getSanPhamByLoai(loaiSanPham.maLoai).pipe(
             map((sanPhams: any[]) => {
               // console.log(`LoaiSanPham: ${loaiSanPham.maLoai}`, sanPhams); 
-              return sanPhams.length;
+              return sanPhams.filter(x=>x.tinhTrang==='Đang hoạt động').length;
             })
           )
         );

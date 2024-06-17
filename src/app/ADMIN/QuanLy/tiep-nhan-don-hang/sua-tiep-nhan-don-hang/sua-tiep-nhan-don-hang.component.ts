@@ -47,7 +47,7 @@ export class SuaTiepNhanDonHangComponent implements OnInit{
       this.donHangService.suaDonHang(id, this.donHang.value).subscribe(response => {
         // console.log('Đơn hàng đã được cập nhật:', response);
         this.toastr.success('Đơn hàng đã được cập nhật', 'Thông báo', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
         this.router.navigateByUrl('/admin/tiep-nhan-don-hang')
       });

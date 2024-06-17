@@ -26,4 +26,7 @@ export class KhachHangService {
   getKhachHangById(id:string):Observable<KhachHang>{
     return this.http.get<KhachHang>(`${environment.apiBaseUrl}/api/KhachHang/${id}`);
   }
+  xoaKhachHang(id:string):Observable<KhachHang>{
+    return this.http.delete<KhachHang>(`${environment.apiBaseUrl}/api/KhachHang/${id}`)
+  }
 }

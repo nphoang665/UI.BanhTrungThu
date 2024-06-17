@@ -61,14 +61,14 @@ export class XemNhanhSanPhamComponent {
        this.router.navigateByUrl('/login');
        this.ClosePopup();
        this.toastr.error('Bạn chưa đăng nhập!', 'Lỗi', {
-        timeOut: 1000,
+        timeOut: 2000,
       });
       return;
     }
 
     if (this.soLuong < 1) {
       this.toastr.error('Số lượng sản phẩm phải lớn hơn 0', 'Lỗi', {
-        timeOut: 1000,
+        timeOut: 2000,
       });
       return;
     }
@@ -76,17 +76,17 @@ export class XemNhanhSanPhamComponent {
       const success = this.gioHangService.addToCart(this.sanPham, this.soLuong);
       if (this.HetHangSP) { 
         this.toastr.error('Sản phẩm hiện đang hết hàng', 'Lỗi', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
         return;
       }
       if (success) {
         this.toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
       } else {
         this.toastr.error('Số lượng sản phẩm vượt quá số lượng trong kho', 'Lỗi', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
       }
     }

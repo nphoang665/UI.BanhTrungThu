@@ -76,34 +76,36 @@ export class SuaLoaiSanPhamComponent implements OnInit {
 
   suaLoaiSanPham(event: Event): void {
     if (this.model && this.id) {
-      const updateData = this.myForm.value;
-      if (this.selectedFile) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64String = (reader.result as string).split(',')[1];
-          updateData.anhLoai = `data:${this.selectedFile?.type};base64,${base64String}`;
-
-          this.updateLoaiSanPham(updateData);
-        };
-        reader.readAsDataURL(this.selectedFile);
-      } else {
-        this.updateLoaiSanPham(updateData);
-      }
+        const updateData = this.myForm.value;
+        if (this.selectedFile) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const base64String = (reader.result as string).split(',')[1];
+                updateData.anhLoai = `data:${this.selectedFile?.type};base64,${base64String}`;
+                this.updateLoaiSanPham(updateData);
+            };
+            reader.readAsDataURL(this.selectedFile);
+        } else {
+            // Kiểm tra nếu không có ảnh mới được chọn, giữ nguyên ảnh cũ
+            updateData.anhLoai = this.model.anhLoai;
+            this.updateLoaiSanPham(updateData);
+        }
     }
-  }
+}
 
-  updateLoaiSanPham(data: any): void {
+updateLoaiSanPham(data: any): void {
     this.loaiSanPhamServices.suaLoaiSanPham(this.id!, data).subscribe({
-      next: (response) => {
-        // console.log(response);
-        this.toastr.success('Sửa loại sản phẩm thành công', 'Thông báo', {
-          timeOut: 1000,
-        });
-        this.ref.close();
-      },
-      error: (err) => {
-        console.error('Lỗi khi sửa loại sản phẩm', err);
-      }
+        next: (response) => {
+            // console.log(response);
+            this.toastr.success('Sửa loại sản phẩm thành công', 'Thông báo', {
+                timeOut: 2000,
+            });
+            this.ref.close();
+        },
+        error: (err) => {
+            console.error('Lỗi khi sửa loại sản phẩm', err);
+        }
     });
-  }
+}
+
 }

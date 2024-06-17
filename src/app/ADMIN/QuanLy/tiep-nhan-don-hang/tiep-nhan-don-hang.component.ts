@@ -94,7 +94,7 @@ export class TiepNhanDonHangComponent implements AfterViewInit, OnInit {
         this.dataSource.data = [...this.dataSource.data];
         console.log(response);
         this.toastr.success('Đơn hàng đang được giao!', 'Thông báo', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
       },
       error: (error) => {
@@ -129,7 +129,7 @@ export class TiepNhanDonHangComponent implements AfterViewInit, OnInit {
         this.dataSource.data = [...this.dataSource.data];
         console.log(response);
         this.toastr.success('Đã hủy đơn hàng thành công!', 'Thông báo', {
-          timeOut: 1000,
+          timeOut: 2000,
         });
       },
       error: (error) => {

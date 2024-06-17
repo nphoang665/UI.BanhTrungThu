@@ -50,7 +50,7 @@ export class TongQuanComponent implements OnInit{
   getDoanhThuTheoThang() {
     this.donHangService.getDoanhThuTheoThang().subscribe(
       (data: any) => {
-        console.log('API data:', data);
+        // console.log('API data:', data);
 
         let transformedData = Array(12).fill(0);
         data.forEach((item: { thang: string; doanhThu: number }) => {
@@ -58,7 +58,7 @@ export class TongQuanComponent implements OnInit{
           transformedData[monthIndex] = item.doanhThu;
         });
         this.sdsd = transformedData;
-        console.log('Transformed data:', transformedData);
+        // console.log('Transformed data:', transformedData);
 
         this.DoanhThuchartsOptions = {
           title: {

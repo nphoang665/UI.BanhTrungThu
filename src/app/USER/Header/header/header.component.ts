@@ -4,11 +4,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { GioHangService } from '../../../ADMIN/services/GioHang/gio-hang.service';
 import { User } from '../../../Auth/models/user.model';
 import { AuthService } from '../../../Auth/services/auth.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LoaiSanPhamService } from '../../../ADMIN/services/LoaiSanPham/loai-san-pham.service';
 import { LoaiSanPham } from '../../../ADMIN/models/loai-san-pham.model';
+import { SanPham } from '../../../ADMIN/models/san-pham.model';
+import { SanPhamService } from '../../../ADMIN/services/SanPham/san-pham.service';
+import { environment } from '../../../../environments/environment';
 
 const icon_Logout = `
 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.90002 7.55999C9.21002 3.95999 11.06 2.48999 15.11 2.48999H15.24C19.71 2.48999 21.5 4.27999 21.5 8.74999V15.27C21.5 19.74 19.71 21.53 15.24 21.53H15.11C11.09 21.53 9.24002 20.08 8.91002 16.54" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15 12H3.62" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M5.85 8.6499L2.5 11.9999L5.85 15.3499" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
@@ -38,7 +41,12 @@ const icon_Manager = `
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit{
+  searchTerm: string = '';
+  products: SanPham[] = [];
+  filteredProducts: SanPham[] = [];
+  apiBaseUrl: string = environment.apiBaseUrl;
   user?: User;
+  showResults: boolean = true;
   loaiSanPhamsWithCounts: { loaiSanPham: LoaiSanPham, count: number }[] = [];
   constructor(
     private dialog: MatDialog,
@@ -47,7 +55,8 @@ export class HeaderComponent implements OnInit{
     private router:Router, 
     iconRegistry: MatIconRegistry,    
     sanitizer: DomSanitizer,
-    private loaiSanPhamService: LoaiSanPhamService
+    private loaiSanPhamService: LoaiSanPhamService,
+    private sanPhamService: SanPhamService
   ){
     iconRegistry.addSvgIconLiteral('icon_Logout', sanitizer.bypassSecurityTrustHtml(icon_Logout));
     iconRegistry.addSvgIconLiteral('icon_User', sanitizer.bypassSecurityTrustHtml(icon_User));
@@ -56,6 +65,12 @@ export class HeaderComponent implements OnInit{
     iconRegistry.addSvgIconLiteral('icon_Us', sanitizer.bypassSecurityTrustHtml(icon_Us));
     iconRegistry.addSvgIconLiteral('icon_History', sanitizer.bypassSecurityTrustHtml(icon_History));
     iconRegistry.addSvgIconLiteral('icon_Manager', sanitizer.bypassSecurityTrustHtml(icon_Manager));
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Đặt lại danh sách sản phẩm lọc khi điều hướng hoàn tất
+        this.showResults = false;
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -66,15 +81,57 @@ export class HeaderComponent implements OnInit{
         this.user = response;
       }
     });
+    this.sanPhamService.getAllSanPham().subscribe(data => {
+      this.products = data;
+    });
 
     this.user = this.authService.getUser();
+  }
+  onSearchChange(): void {
+    if (this.searchTerm) {
+      this.filteredProducts = this.products.filter(product =>
+        product.tenSanPham.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+      this.showResults = true;
+    } else {
+      this.filteredProducts = [];
+      this.showResults = false;
+    }
+  }
+  onMouseEnter(): void {
+    if (this.searchTerm) {
+      this.showResults = true;
+    }
+  }
+
+  onMouseLeave(): void {
+    setTimeout(() => {
+      if (!this.isHoveringOnResults) {
+        this.showResults = false;
+      }
+    }, 300);
+  }
+
+  isHoveringOnResults: boolean = false;
+
+  onResultMouseEnter(): void {
+    this.isHoveringOnResults = true;
+  }
+
+  onResultMouseLeave(): void {
+    this.isHoveringOnResults = false;
+    setTimeout(() => {
+      if (!this.isHoveringOnResults) {
+        this.showResults = false;
+      }
+    }, 300);
   }
   getLoaiSanPhamWithCounts(): void {
     this.loaiSanPhamService.getAllLoaiSanPhamWithCounts()
       .subscribe(
         data => {
           this.loaiSanPhamsWithCounts = data;
-          // console.log(this.loaiSanPhamsWithCounts); // Kiểm tra xem dữ liệu có được lấy thành công không
+          // console.log(this.loaiSanPhamsWithCounts); 
         },
         error => {
           console.error('Error fetching loaiSanPhamsWithCounts:', error);

@@ -5,7 +5,7 @@
     <div class="flex items-center space-x-2 border-t border-b py-2">
       <label for="sortOptions" class="text-gray-700">Sắp xếp theo</label>
       <select id="sortOptions" class="border border-gray-300 rounded p-2" (change)="onSortChange($event)">
-        <option value="">Bán chạy nhất</option>
+        <option value="best-seller">Bán chạy nhất</option>
         <option value="product-asc">Sắp xếp theo giá tăng dần</option>
         <option value="product-desc">Sắp xếp theo giá giảm dần</option>
       </select>
@@ -31,5 +31,6 @@
     </div>
   </section>
 </div>
+
 
 <app-footer></app-footer>

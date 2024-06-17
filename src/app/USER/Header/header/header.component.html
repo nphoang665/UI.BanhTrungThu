@@ -80,19 +80,59 @@
         </div>
       </div>
       
-      <form class="max-w-lg mx-auto">
+      <div class="max-w-lg mx-auto">
         <div class="flex">      
-            <div class="relative w-screen">
-                <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50  border-s-gray-50 border-s-2 border border-gray-300  focus:ring-0 focus:ring-white focus:border-white dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Tìm kiếm bánh trung thu..." required />
-                <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700  border border-blue-700 hover:bg-blue-800 focus:ring-0 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                    </svg>
-                    <span class="sr-only">Search</span>
-                </button>
+          <div class="relative w-screen">
+            <input 
+              type="search" 
+              id="search-dropdown" 
+              [(ngModel)]="searchTerm" 
+              (input)="onSearchChange()" 
+              (mouseenter)="onMouseEnter()"
+              (mouseleave)="onMouseLeave()"
+              class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 border-s-gray-50 border-s-2 border border-gray-300 focus:ring-0 focus:ring-white focus:border-white dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" 
+              placeholder="Tìm kiếm bánh trung thu..." 
+              required 
+            />
+            <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 border border-blue-700 hover:bg-blue-800 focus:ring-0 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+              </svg>
+              <span class="sr-only">Search</span>
+            </button>
+            <div *ngIf="filteredProducts.length > 0 && showResults" class="absolute left-0 w-full bg-white border mt-1 rounded shadow-lg z-10"
+              (mouseenter)="onResultMouseEnter()" (mouseleave)="onResultMouseLeave()">
+              <div *ngFor="let product of filteredProducts" class="hover:bg-gray-100 text-red-800 cursor-pointer">
+                <a [routerLink]="['/chi-tiet-banh-trung-thu', product.maSanPham]" class="flex items-center p-2">
+                  <img [src]="apiBaseUrl + '/images/' + product.anhSanPham[0].tenAnh" alt="{{ product.tenSanPham }}" class="w-10 h-10 object-cover mr-2">
+                  <span>{{ product.tenSanPham }}</span>
+                  <p> - {{ product.gia }}đ</p>
+                </a>
+              </div>
             </div>
+          </div>
         </div>
-      </form>
+      </div>
+      
+      
+      
+      <!-- <div class="p-4 relative">
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          (input)="onSearchChange()" 
+          placeholder="Tìm kiếm bánh trung thu..." 
+          class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50  border-s-gray-50 border-s-2 border border-gray-300  focus:ring-0 focus:ring-white focus:border-white dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Tìm kiếm bánh trung thu..." required
+        />
+        <div *ngIf="filteredProducts.length > 0" class="absolute left-0 w-full bg-white border mt-1 rounded shadow-lg z-10">
+          <div *ngFor="let product of filteredProducts" class="hover:bg-gray-100 text-red-800 cursor-pointer">
+            <a [routerLink]="['/chi-tiet-banh-trung-thu', product.maSanPham]" class="flex items-center p-2">
+              <img [src]="apiBaseUrl + '/images/' +product.anhSanPham[0].tenAnh" alt="{{ product.tenSanPham }}" class="w-10 h-10 object-cover mr-2">
+              <span>{{ product.tenSanPham }}</span>
+            </a>
+          </div>
+        </div>
+      </div> -->
 
     </div>
     <div class="flex items-center space-x-4 bg-[#E7E531] text-[#B9121B] p-3 text-xl">

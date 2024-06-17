@@ -7,6 +7,8 @@ import { KhachHangService } from '../../services/KhachHang/khach-hang.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ThemKhachHangComponent } from './them-khach-hang/them-khach-hang.component';
 import { SuaKhachHangComponent } from './sua-khach-hang/sua-khach-hang.component';
+import { XacNhanXoaComponent } from '../../xac-nhan-xoa/xac-nhan-xoa.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-khach-hang',
@@ -23,6 +25,7 @@ export class KhachHangComponent implements AfterViewInit, OnInit{
   constructor(
     private khachHangServices:KhachHangService,
     private dialog:MatDialog,
+    private toastr:ToastrService
   ){
     this.dataSource = new MatTableDataSource<KhachHang>([]);
   }
@@ -80,11 +83,30 @@ export class KhachHangComponent implements AfterViewInit, OnInit{
     
   }
 
+  xoaKhachHang(element:any){
+   
+    const message = `Bạn có chắc muốn xóa ${element.maKhachHang} - ${element.tenKhachHang} không?`;
+    const dialogRef = this.dialog.open(XacNhanXoaComponent, {
+      width: '500px',
+      data: { message: message }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.khachHangServices.xoaKhachHang(element.maKhachHang).subscribe((data:any)=>{
+          this.toastr.success('Xóa khách hàng thành công', 'Thông báo', {
+            timeOut: 2000,
+          });
+          this.getKhachHangData();
+        });
+      }
+    });
+  }
 
   getKhachHangData(){
     this.khachHangServices.getAllKhachHang().subscribe(
       (data:KhachHang[])=>{
-        this.dataSource.data = data
+        this.dataSource.data = data.filter(x=>x.tinhTrang=="Đang hoạt động");
       },
       (error) => {
         console.error('Error fetching khachHang data: ', error);

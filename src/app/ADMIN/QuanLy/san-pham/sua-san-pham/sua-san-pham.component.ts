@@ -84,7 +84,7 @@ export class SuaSanPhamComponent implements OnInit {
     for (let index = 0; index < this.model?.anhSanPham.length; index++) {
       const stringHttpsImg = environment.apiBaseUrl + '/Images/' + this.model?.anhSanPham[index].tenAnh;
       this.fileImgPreviewFromDb.push(stringHttpsImg);
-      console.log(this.fileImgPreviewFromDb);
+      // console.log(this.fileImgPreviewFromDb);
 
     }
   }
@@ -150,7 +150,7 @@ export class SuaSanPhamComponent implements OnInit {
   suaSanPham(event: Event) {
     if (this.fileImgPreviewFromDb.length === 0 && this.fileImgPreviewFromBrowse.length === 0) {
       this.toastr.warning('Một tour phải có ít nhất 1 ảnh', 'Thông báo', {
-        timeOut: 1000,
+        timeOut: 2000,
       });
       return;
     }
@@ -161,9 +161,9 @@ export class SuaSanPhamComponent implements OnInit {
       suaSanPham.anhSanPhamDb = this.arrImgPreviewClientHandle;
       this.sanPhamServices.suaSanPham(this.id, suaSanPham).subscribe({
         next: (response) => {
-          console.log(response);
+          // console.log(response);
           this.toastr.success('Sửa sản phẩm thành công', 'Thông báo', {
-            timeOut: 1000,
+            timeOut: 2000,
           });
         }
       })

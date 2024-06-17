@@ -43,7 +43,7 @@ export class GioHangComponent implements OnInit {
 
       if (isNaN(qty) || qty <= 0) {
         this.toastr.error('Số lượng sản phẩm phải lớn hơn 0', 'Lỗi', {
-          timeOut: 1500,
+          timeOut: 2000,
         })
         // alert('Số lượng phải là một số nguyên dương hợp lệ');
         const currentCartItem = this.gioHangService.getCartItems().find(item => item.sanPham.maSanPham === sanPham.maSanPham);
@@ -59,7 +59,7 @@ export class GioHangComponent implements OnInit {
       } else {
         // alert('Số lượng sản phẩm vượt quá số lượng trong kho');
         this.toastr.error('Số lượng sản phẩm vượt quá số lượng trong kho', 'Lỗi', {
-          timeOut: 1500,
+          timeOut: 2000,
         })
         const currentCartItem = this.gioHangService.getCartItems().find(item => item.sanPham.maSanPham === sanPham.maSanPham);
         if (currentCartItem) {

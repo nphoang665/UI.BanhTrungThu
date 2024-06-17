@@ -65,7 +65,7 @@ export class SuaKhachHangComponent implements OnInit{
         next:(response)=>{
           console.log(response);
           this.toastr.success('Sửa khách hàng thành công', 'Thông báo', {
-            timeOut: 1000,
+            timeOut: 2000,
           });
         }
       })
