@@ -5,6 +5,7 @@ export interface KhachHang{
     email:string,
     diaChi:string,
     tinhTrang:string,
+    ngayDangKy:Date
 }
 
 export interface ThemKhachHang{
@@ -13,6 +14,7 @@ export interface ThemKhachHang{
     email:string,
     diaChi:string,
     tinhTrang:string,
+    ngayDangKy:Date
 }
 
 export interface SuaKhachHang{
@@ -21,6 +23,7 @@ export interface SuaKhachHang{
     email:string,
     diaChi:string,
     tinhTrang:string,
+    ngayDangKy:Date
 }
 
 export interface SuaKhachHangDto{

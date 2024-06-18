@@ -45,4 +45,7 @@ export class DonHangService {
   getDoanhThuTheoThang():Observable<DoanhThuTheoThang[]>{
     return this.http.get<DoanhThuTheoThang[]>(`${environment.apiBaseUrl}/api/TongQuan/DoanhThuTheoThang`);
   }
+  handleVnPayReturn(params: any): Observable<any> {
+    return this.http.get<any>(`${environment.apiBaseUrl}/api/DonHang/vnpay-return`, { params });
+  }
 }

@@ -52,6 +52,7 @@ export class SuaKhachHangComponent implements OnInit{
     email: new FormControl(this.model?.email,[Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
     diaChi: new FormControl(this.model?.diaChi,[Validators.required, Validators.minLength(3), Validators.maxLength(255)]),
     tinhTrang: new FormControl(this.model?.tinhTrang),
+    ngayDangKy: new FormControl(this.model?.ngayDangKy)
    })
   }
   ClosePopup() {

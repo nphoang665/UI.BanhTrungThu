@@ -3,38 +3,38 @@
     <form [formGroup]="donHang" (ngSubmit)="onSubmit()" class="space-y-4">
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label for="maDonHang" class="block text-sm font-medium text-gray-700">Mã Đơn Hàng</label>
-          <input formControlName="maDonHang" id="maDonHang" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+          <label for="maDonHang" class="block text-sm font-medium text-green-700 dark:text-green-500">Mã Đơn Hàng</label>
+          <input readonly formControlName="maDonHang" id="maDonHang" type="text" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500" required>
         </div>
         <div>
-          <label for="maKhachHang" class="block text-sm font-medium text-gray-700">Mã Khách Hàng</label>
-          <input formControlName="maKhachHang" id="maKhachHang" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+          <label for="maKhachHang" class="block text-sm font-medium text-green-700 dark:text-green-500">Mã Khách Hàng</label>
+          <input readonly formControlName="maKhachHang" id="maKhachHang" type="text" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500" required>
         </div>
       </div>
   
       <div>
-        <label for="thoiGianDatHang" class="block text-sm font-medium text-gray-700">Thời Gian Đặt Hàng</label>
-        <input formControlName="thoiGianDatHang" id="thoiGianDatHang" type="datetime-local" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        <label for="thoiGianDatHang" class="block text-sm font-medium text-green-700 dark:text-green-500">Thời Gian Đặt Hàng</label>
+        <input readonly formControlName="thoiGianDatHang" id="thoiGianDatHang" type="datetime-local" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500" required>
       </div>
   
       <div>
-        <label for="tongTien" class="block text-sm font-medium text-gray-700">Tổng Tiền</label>
-        <input formControlName="tongTien" id="tongTien" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        <label for="tongTien" class="block text-sm font-medium text-green-700 dark:text-green-500">Tổng Tiền</label>
+        <input readonly formControlName="tongTien" id="tongTien" type="text" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500" required>
       </div>
   
       <div>
-        <label for="diaChiGiaoHang" class="block text-sm font-medium text-gray-700">Địa Chỉ Giao Hàng</label>
-        <textarea formControlName="diaChiGiaoHang" id="diaChiGiaoHang" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+        <label for="diaChiGiaoHang" class="block text-sm font-medium text-green-700 dark:text-green-500">Địa Chỉ Giao Hàng</label>
+        <textarea readonly formControlName="diaChiGiaoHang" id="diaChiGiaoHang" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500" required></textarea>
       </div>
   
       <div>
-        <label for="thongTinThanhToan" class="block text-sm font-medium text-gray-700">Thông Tin Thanh Toán</label>
-        <textarea formControlName="thongTinThanhToan" id="thongTinThanhToan" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+        <label for="thongTinThanhToan" class="block text-sm font-medium text-green-700 dark:text-green-500">Thông Tin Thanh Toán</label>
+        <textarea readonly formControlName="thongTinThanhToan" id="thongTinThanhToan" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500" required></textarea>
       </div>
   
       <div>
-        <label for="tinhTrang" class="block text-sm font-medium text-gray-700">Tình Trạng</label>
-        <select formControlName="tinhTrang" id="tinhTrang" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        <label for="tinhTrang" class="block text-sm font-medium text-green-700 dark:text-green-500">Tình Trạng</label>
+        <select formControlName="tinhTrang" id="tinhTrang" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500" required>
           <option value="Đang xử lý">Đang xử Lý</option>
           <option value="Đang giao hàng">Đang giao hàng</option>
           <option value="Đã hoàn thành">Đã hoàn Thành</option>

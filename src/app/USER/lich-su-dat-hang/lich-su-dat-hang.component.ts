@@ -34,6 +34,8 @@ export class LichSuDatHangComponent implements OnInit{
         return 'text-blue-500';
         case 'Đã hủy đơn hàng':
         return 'text-red-500';
+        case 'Thanh toán thất bại':
+          return 'text-red-500';
       default:
         return '';
     }

@@ -56,7 +56,7 @@ export class TiepNhanDonHangComponent implements AfterViewInit, OnInit {
   getDonHangData() {
     this.donHangService.getAllDonHang().subscribe(
       (data: any) => {
-        data = data.filter((s: any) => s.tinhTrang != 'Đã thanh toán' && s.tinhTrang != 'Đã hoàn thành');
+        data = data.filter((s: any) => s.tinhTrang != 'Đã thanh toán' && s.tinhTrang != 'Đã hoàn thành' && s.tinhTrang!='Thanh toán thất bại');
         // console.log(data);
 
         this.dataSource.data = data;
