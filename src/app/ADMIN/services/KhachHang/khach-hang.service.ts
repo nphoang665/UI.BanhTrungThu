@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KhachHang, SuaKhachHang, ThemKhachHang } from '../../models/khach-hang.model';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
@@ -29,4 +29,23 @@ export class KhachHangService {
   xoaKhachHang(id:string):Observable<KhachHang>{
     return this.http.delete<KhachHang>(`${environment.apiBaseUrl}/api/KhachHang/${id}`)
   }
+
+  checkSDT(soDienThoai:string): Observable<boolean> {
+    return this.getAllKhachHang().pipe(
+        map((data: KhachHang[]) => {
+            let existssoDienThoai = data.filter(s => s.soDienThoai == soDienThoai);
+            // console.log(existssoDienThoai);
+            return existssoDienThoai.length > 0;
+        })
+    );
+    }
+    checkEmail(email:string): Observable<boolean> {
+    return this.getAllKhachHang().pipe(
+        map((data: KhachHang[]) => {
+            let existsemail = data.filter(s => s.email == email);
+            // console.log(existsemail);
+            return existsemail.length > 0;
+        })
+    );
+    }
 }

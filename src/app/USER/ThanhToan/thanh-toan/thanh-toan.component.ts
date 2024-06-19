@@ -23,10 +23,10 @@ export class ThanhToanComponent implements OnInit {
 
   constructor(private gioHangService: GioHangService,private khachHangService:KhachHangService, private donHangService: DonHangService,private toastr: ToastrService,private router:Router) {
     this.myForm = new FormGroup({
-      tenKhachHang: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      soDienThoai: new FormControl('', Validators.required),
-      diaChi: new FormControl('', Validators.required),
+      tenKhachHang: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(80)]),
+      soDienThoai: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+      diaChi: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]),
       thongTinThanhToan: new FormControl('COD', Validators.required)
     });
   }

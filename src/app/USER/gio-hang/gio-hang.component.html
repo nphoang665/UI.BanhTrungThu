@@ -1,39 +1,38 @@
 <div class="container mx-auto py-4 px-6">
   <h1 class="text-3xl font-bold mb-6 text-center">Giỏ hàng</h1>
-  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-    <thead class="bg-gray-100">
-      <tr>
-        <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Sản phẩm</th>
-        <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Giá</th>
-        <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Số lượng</th>
-        <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Thành tiền</th>
-        <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Thao tác</th>
-      </tr>
-    </thead>
-    <tbody >
-      <tr *ngFor="let item of cartItems" class="border-b hover:bg-gray-50" style="overflow: scroll; width: 10px;">
-        <td class="px-6 py-4 flex items-center gap-4">
-          <img class="w-20 h-20 object-cover" [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}">
-          <div class="font-medium text-gray-700">
-            <div>{{ item.sanPham?.tenSanPham }}</div>
-          </div>
-        </td>
-        <td class="px-6 py-4 text-gray-700">{{ item.sanPham?.gia | currency:'VND':'symbol' }}</td>
-        <td class="px-6 py-4">
-          <input type="number" [value]="item.quantity" (change)="updateQuantity(item.sanPham, $event)" class="w-20 border rounded px-3 py-2 text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400">
-        </td>
-        <td class="px-6 py-4 text-gray-700">{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</td>
-        <td class="px-6 py-4">
-          <button (click)="removeFromCart(item.sanPham)" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Xóa</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="overflow-y-auto" style="max-height: 400px;">
+    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Sản phẩm</th>
+          <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Giá</th>
+          <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Số lượng</th>
+          <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Thành tiền</th>
+          <th class="px-6 py-4 border-b text-left text-gray-600 font-semibold">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems" class="border-b hover:bg-gray-50">
+          <td class="px-6 py-4 flex items-center gap-4">
+            <img class="w-20 h-20 object-cover" [src]="apiBaseUrl + '/images/' + item.sanPham.anhSanPham[0].tenAnh" alt="{{ item.sanPham.tenSanPham }}">
+            <div class="font-medium text-gray-700">
+              <div>{{ item.sanPham?.tenSanPham }}</div>
+            </div>
+          </td>
+          <td class="px-6 py-4 text-gray-700">{{ item.sanPham?.gia | currency:'VND':'symbol' }}</td>
+          <td class="px-6 py-4">
+            <input type="number" [value]="item.quantity" (change)="updateQuantity(item.sanPham, $event)" class="w-20 border rounded px-3 py-2 text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400">
+          </td>
+          <td class="px-6 py-4 text-gray-700">{{ (item.sanPham?.gia ?? 0) * item.quantity | currency:'VND':'symbol' }}</td>
+          <td class="px-6 py-4">
+            <button (click)="removeFromCart(item.sanPham)" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <div class="flex justify-between items-center mt-6">
     <p class="text-xl font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
-    <!-- <button mat-dialog-close routerLink="/thanh-toan" class="bg-blue-500 text-white px-6 py-3 rounded font-semibold hover:bg-blue-600">
-      Thanh toán
-    </button> -->
     <button *ngIf="cartItems.length > 0" mat-dialog-close routerLink="/thanh-toan" class="bg-blue-500 text-white px-6 py-3 rounded font-semibold hover:bg-blue-600">
       Thanh toán
     </button>

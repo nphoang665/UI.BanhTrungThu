@@ -6,28 +6,100 @@
       <h2 class="text-xl font-semibold mb-4">Thông tin giao hàng</h2>
       <form [formGroup]="myForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': myForm.get('tenKhachHang')?.valid,
+            'text-red-700 dark:text-red-500': myForm.get('tenKhachHang')?.invalid && (myForm.get('tenKhachHang')?.dirty || myForm.get('tenKhachHang')?.touched)
+          }">
             Họ và tên
           </label>
-          <input formControlName="tenKhachHang" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fullname" type="text" placeholder="Họ và tên">
+          <input formControlName="tenKhachHang" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fullname" type="text" 
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': myForm.get('tenKhachHang')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': myForm.get('tenKhachHang')?.invalid && (myForm.get('tenKhachHang')?.dirty || myForm.get('tenKhachHang')?.touched)
+          }"
+          placeholder="Họ và tên">
+          <div *ngIf="myForm.get('tenKhachHang')?.invalid && (myForm.get('tenKhachHang')?.dirty || myForm.get('tenKhachHang')?.touched)" class="mt-2 text-sm">
+            <p *ngIf="myForm.get('tenKhachHang')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+               Tên khách hàng là bắt buộc.
+            </p>
+            <p *ngIf="myForm.get('tenKhachHang')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+               Tên khách hàng phải có ít nhất 3 ký tự.
+            </p>
+            <p *ngIf="myForm.get('tenKhachHang')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+              Tên khách hàng quá dài.
+           </p>
+          </div>
         </div>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="email"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': myForm.get('email')?.valid,
+            'text-red-700 dark:text-red-500': myForm.get('email')?.invalid && (myForm.get('email')?.dirty || myForm.get('email')?.touched)
+          }">
             Email
           </label>
-          <input formControlName="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email" readonly>
+          <input formControlName="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': myForm.get('email')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': myForm.get('email')?.invalid && (myForm.get('email')?.dirty || myForm.get('email')?.touched)
+          }"
+          placeholder="Email" readonly>
         </div>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="phone"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': myForm.get('soDienThoai')?.valid,
+            'text-red-700 dark:text-red-500': myForm.get('soDienThoai')?.invalid && (myForm.get('soDienThoai')?.dirty || myForm.get('soDienThoai')?.touched)
+          }">
             Số điện thoại
           </label>
-          <input formControlName="soDienThoai" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Số điện thoại">
+          <input formControlName="soDienThoai" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" [maxLength]="10"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': myForm.get('soDienThoai')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': myForm.get('soDienThoai')?.invalid && (myForm.get('soDienThoai')?.dirty || myForm.get('soDienThoai')?.touched)
+          }"
+          placeholder="Số điện thoại">
+          <div *ngIf="myForm.get('soDienThoai')?.invalid && (myForm.get('soDienThoai')?.dirty || myForm.get('soDienThoai')?.touched)" class="mt-2 text-sm">
+            <p *ngIf="myForm.get('soDienThoai')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+               Số điện thoại là bắt buộc.
+            </p>
+            <p *ngIf="myForm.get('soDienThoai')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+                Số điện thoại không hợp lệ.
+            </p>
+            <p *ngIf="myForm.get('soDienThoai')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+              Số điện thoại không hợp lệ.
+           </p>
+           <p *ngIf="myForm.get('soDienThoai')?.errors?.['invalidSDT']" class="text-red-600 dark:text-red-500">
+            Số điện thoại đã tồn tại.
+          </p>
+          </div>
         </div>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="address"
+          [ngClass]="{
+            'text-green-700 dark:text-green-500': myForm.get('diaChi')?.valid,
+            'text-red-700 dark:text-red-500': myForm.get('diaChi')?.invalid && (myForm.get('diaChi')?.dirty || myForm.get('diaChi')?.touched)
+          }">
             Địa chỉ
           </label>
-          <input formControlName="diaChi" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" placeholder="Địa chỉ">
+          <input formControlName="diaChi" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text"
+          [ngClass]="{
+            'bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500': myForm.get('diaChi')?.valid,
+            'bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500': myForm.get('diaChi')?.invalid && (myForm.get('diaChi')?.dirty || myForm.get('diaChi')?.touched)
+          }"
+          placeholder="Địa chỉ">
+          <div *ngIf="myForm.get('diaChi')?.invalid && (myForm.get('diaChi')?.dirty || myForm.get('diaChi')?.touched)" class="mt-2 text-sm">
+            <p *ngIf="myForm.get('diaChi')?.errors?.['required']" class="text-red-600 dark:text-red-500">
+               Địa chỉ là bắt buộc.
+            </p>
+            <p *ngIf="myForm.get('diaChi')?.errors?.['minlength']" class="text-red-600 dark:text-red-500">
+               Địa chỉ phải có ít nhất 3 ký tự.
+            </p>
+            <p *ngIf="myForm.get('diaChi')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
+              Địa chỉ quá dài.
+           </p>
+        </div>
         </div>
         <div class="mb-4 flex items-center">
           <label class="block text-gray-700 text-sm font-bold mb-2 mr-4" for="paymentMethod">
@@ -94,7 +166,7 @@
         <div class="mt-4">
           <p class="text-lg font-semibold">Tổng cộng: {{ getTotal() | currency:'VND':'symbol' }}</p>
         </div>
-        <button (click)="thanhToan()" class="mt-4 bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <button (click)="thanhToan()" [disabled]="myForm.invalid" class="mt-4 disabled:bg-red-300 bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
           <p class="text-lg font-semibold">Đặt hàng</p>
         </button>
       </div>

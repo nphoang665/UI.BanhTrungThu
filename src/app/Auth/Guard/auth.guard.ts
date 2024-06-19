@@ -124,8 +124,8 @@ export const guestOrCustomerGuard: CanActivateFn = (route, state) => {
   const user = authService.getUser();
 
   if (!user) {
-    // Allow guests to access
-    return true;
+    authService.logout();
+    return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
   }
 
   let token = cookieService.get('Authorization');

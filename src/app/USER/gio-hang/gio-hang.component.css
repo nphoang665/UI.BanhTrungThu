@@ -1,0 +1,6 @@
+/* Đảm bảo bảng sản phẩm có thể cuộn theo chiều dọc */
+.overflow-y-auto {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
