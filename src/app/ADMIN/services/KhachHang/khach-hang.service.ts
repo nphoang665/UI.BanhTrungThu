@@ -48,4 +48,10 @@ export class KhachHangService {
         })
     );
     }
+
+    ExportExcel() {
+      return this.http.get(`${environment.apiBaseUrl}/api/KhachHang/ExportKhachHang`, {
+        observe: 'response', responseType: 'blob'
+      })
+    }
 }

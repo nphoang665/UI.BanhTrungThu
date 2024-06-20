@@ -78,4 +78,10 @@ export class SanPhamService {
   getSanPhamBanChayByLoai(maLoai: string): Observable<SanPham[]> {
     return this.http.get<SanPham[]>(`${environment.apiBaseUrl}/api/sanpham/banchaynhat/${maLoai}`);
   }
+
+  ExportExcel() {
+    return this.http.get(`${environment.apiBaseUrl}/api/SanPham/ExportSanPham`, {
+      observe: 'response', responseType: 'blob'
+    })
+  }
 }

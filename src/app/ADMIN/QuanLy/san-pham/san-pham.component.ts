@@ -118,4 +118,16 @@ export class SanPhamComponent implements AfterViewInit, OnInit {
       }
     )
   }
+  ExportFile(): void {
+      this.sanPhamServices.ExportExcel()
+        .subscribe(response => {
+          let fileName = response.headers.get('content-disposition')
+            ?.split(';')[1].split('=')[1];
+          let blob: Blob = response.body as Blob;
+          let a = document.createElement('a');
+          a.download = fileName ?? "";
+          a.href = window.URL.createObjectURL(blob);
+          a.click();
+        });
+  }
 }

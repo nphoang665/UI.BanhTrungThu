@@ -50,5 +50,11 @@ export class LoaiSanPhamService {
       })
     );
   }
+
+  ExportExcel() {
+    return this.http.get(`${environment.apiBaseUrl}/api/LoaiSanPham/ExportLoaiSanPham`, {
+      observe: 'response', responseType: 'blob'
+    })
+  }
   
 }

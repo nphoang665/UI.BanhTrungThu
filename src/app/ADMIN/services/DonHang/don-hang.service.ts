@@ -58,4 +58,9 @@ export class DonHangService {
   handleVnPayReturn(params: any): Observable<any> {
     return this.http.get<any>(`${environment.apiBaseUrl}/api/DonHang/vnpay-return`, { params });
   }
+  ExportExcel() {
+    return this.http.get(`${environment.apiBaseUrl}/api/DonHang/ExportDonHang`, {
+      observe: 'response', responseType: 'blob'
+    })
+  }
 }
