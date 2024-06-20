@@ -108,74 +108,77 @@
             margin-top: 20px;
         }
     </style>
+    <!-- xem-hoa-don.component.html -->
+<div *ngIf="donHang && khachHang">
     <div class="invoice">
-        <div class="header">
-            <img src="https://i.ibb.co/t3SJ1QF/Designer-preview-rev-1.png" alt="BanhTrungThuNgon Logo" class="logo">
-            <div class="company-info">
-                <h1>BÁNH TRUNG THU NGON</h1>
-                <p>Buôn Ma Thuột, ĐakLak</p>
-                <p>Mã số thuế: 0123456789</p>
-            </div>
+      <div class="header">
+        <img src="https://i.ibb.co/t3SJ1QF/Designer-preview-rev-1.png" alt="BanhTrungThuNgon Logo" class="logo">
+        <div class="company-info">
+          <h1>BÁNH TRUNG THU NGON</h1>
+          <p>Buôn Ma Thuột, ĐakLak</p>
+          <p>Mã số thuế: 0123456789</p>
         </div>
-        <h2>HÓA ĐƠN THANH TOÁN</h2>
-
-        <div style="text-align: center;">
-            <p>Ngày: </p>
-            <p>Mã hóa đơn: </p>
+      </div>
+      <h2>HÓA ĐƠN THANH TOÁN</h2>
+  
+      <div style="text-align: center;">
+        <p>Ngày: {{ donHang.thoiGianDatHang | date:'dd/MM/yyyy hh:mm' }}</p>
+        <p>Mã hóa đơn: {{ donHang.maDonHang }}</p>
+      </div>
+  
+      <div class="buyer-info">
+        <h3>THÔNG TIN KHÁCH HÀNG</h3>
+        <p>Tên khách hàng: {{ khachHang.tenKhachHang }}</p>
+        <p>Số điện thoại: {{ khachHang.soDienThoai }}</p>
+        <p>Email: {{ khachHang.email }}</p>
+        <p>Địa chỉ: {{ khachHang.diaChi }}</p>
+        <p>Phương thức thanh toán: {{ donHang.thongTinThanhToan }}</p>
+        <p>Tình trạng: {{ donHang.tinhTrang }}</p>
+      </div>
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of chiTietDonHangs; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.sanPham }}</td>
+            <td>{{ item.soLuong }}</td>
+            <td>{{ item.gia | number }}</td>
+            <td>{{ (item.soLuong * item.gia) | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="totals">
+        <p style="font-weight: bold; font-size: 1.5em;">Tổng tiền</p>
+        <p>Tổng cộng tiền thanh toán: <b>{{ donHang.tongTien | number }}</b> VNĐ</p>
+      </div>
+      <div class="signature">
+        <div class="signatures">
+          <div>
+            <p style="font-size: 15px;"><b>Người mua hàng</b></p>
+            <p>(Ký, ghi rõ họ tên)</p>
+          </div>
+          <div>
+            <p style="font-size: 15px;"><b>Người bán hàng</b></p>
+            <p>(Ký, đóng dấu, ghi rõ họ tên)</p>
+            <img src="https://img.upanh.tv/2024/06/06/download_preview_rev_1.png" alt="">
+          </div>
         </div>
-
-        <div class="buyer-info">
-            <h3>Thông tin khách hàng:</h3>
-            <p>Tên khách hàng: </p>
-            <p>Số điện thoại: </p>
-            <p>Email: </p>
-            <p>Địa chỉ: </p>
-            <p>Phương thức thanh toán: </p>
-            <p>Tình trạng: Đã hoàn thành</p>
-        </div>
-        <table class="invoice-table">
-            <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Đơn giá</th>
-                    <th>Thành tiền</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="tr_item_SanPham">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="totals">
-            <p style="font-weight: bold; font-size: 1.5em;">Tổng tiền</p>
-            <!--<p>Phí vận chuyển: <b>{{PhiVanChuyen}}</b> VNĐ</p>-->
-            <p>Tổng cộng tiền thanh toán:<b> </b> VNĐ</p>
-        </div>
-        <div class="signature">
-            <div class="signatures">
-                <div>
-                    <p style="font-size: 15px;"><b>Người mua hàng</b></p>
-                    <p>(Ký, ghi rõ họ tên)</p>
-                </div>
-                <div>
-                    <p style="font-size: 15px;"><b>Người bán hàng</b></p>
-                    <p>(Ký, đóng dấu, ghi rõ họ tên)</p>
-                    <img src="https://img.upanh.tv/2024/06/06/download_preview_rev_1.png" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <h3>LIÊN HỆ CHÚNG TÔI</h3>
-            <p>Hotline: 0123123123</p>
-            <p>Email: banhtrungthungonxgmail.com</p>
-        </div>
+      </div>
+      <div class="footer">
+        <h3>LIÊN HỆ CHÚNG TÔI</h3>
+        <p>Hotline: 0123123123</p>
+        <p>Email: banhtrungthungon{{email}}gmail.com</p>
+      </div>
     </div>
+  </div>
+  
 </body>
 </html>

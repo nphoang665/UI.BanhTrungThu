@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DonHang, SuaDonHang, ThemDonHang } from '../../models/don-hang.model';
 import { environment } from '../../../../environments/environment';
-import { ChiTietDonhang, ThemChiTietDonhang } from '../../models/chi-tiet-don-hang.model';
+import { ChiTietDonhang, ChiTietDonhangDto, ThemChiTietDonhang } from '../../models/chi-tiet-don-hang.model';
 import { DoanhThuTheoThang } from '../../models/DoanhThuThang.models';
+import { KhachHang } from '../../models/khach-hang.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,15 @@ export class DonHangService {
   getDonHangById(id:string):Observable<DonHang>{
     return this.http.get<DonHang>(`${environment.apiBaseUrl}/api/DonHang/${id}`);
   }
+
+  getKhachHangById(id: string): Observable<KhachHang> {
+    return this.http.get<KhachHang>(`${environment.apiBaseUrl}/api/khachhang/${id}`);
+  }
+
+  getChiTietDonHang(maDonHang: string): Observable<ChiTietDonhangDto[]> {
+    return this.http.get<ChiTietDonhangDto[]>(`${environment.apiBaseUrl}/api/ChiTietDonHang/donhang/${maDonHang}`);
+  }
+
   themChiTietDonHang(data: ThemChiTietDonhang): Observable<ChiTietDonhang> {
     return this.http.post<ChiTietDonhang>(`${environment.apiBaseUrl}/api/ChiTietDonHang`, data);
   }

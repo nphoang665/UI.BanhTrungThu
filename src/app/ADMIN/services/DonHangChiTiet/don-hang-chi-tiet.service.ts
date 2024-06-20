@@ -14,4 +14,7 @@ export class DonHangChiTietService {
   getAllDonHangChiTiet():Observable<ChiTietDonhang[]>{
     return this.http.get<ChiTietDonhang[]>(`${environment.apiBaseUrl}/api/ChiTietDonHang`);
   }
+  getChiTietDonHangById(id:string):Observable<ChiTietDonhang>{
+    return this.http.get<ChiTietDonhang>(`${environment.apiBaseUrl}/api/ChiTietDonHang/${id}`);
+  }
 }
