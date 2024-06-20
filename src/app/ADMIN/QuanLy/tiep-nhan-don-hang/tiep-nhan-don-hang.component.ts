@@ -69,7 +69,7 @@ export class TiepNhanDonHangComponent implements AfterViewInit, OnInit {
   }
 
   chapNhanDonHang(id: string): void {
-    console.log(id);
+    // console.log(id);
 
     // Tìm đơn hàng với id được chọn
     const selectedDonHang = this.dataSource.data.find(dh => dh.maDonHang === id);
@@ -92,7 +92,7 @@ export class TiepNhanDonHangComponent implements AfterViewInit, OnInit {
       next: (response) => {
         selectedDonHang.tinhTrang = 'Đang giao hàng';
         this.dataSource.data = [...this.dataSource.data];
-        console.log(response);
+        // console.log(response);
         this.toastr.success('Đơn hàng đang được giao!', 'Thông báo', {
           timeOut: 2000,
         });
@@ -104,7 +104,7 @@ export class TiepNhanDonHangComponent implements AfterViewInit, OnInit {
     });
   }
   huyDonHang(id:string):void{
-    console.log(id);
+    // console.log(id);
 
     // Tìm đơn hàng với id được chọn
     const selectedDonHang = this.dataSource.data.find(dh => dh.maDonHang === id);
@@ -127,7 +127,7 @@ export class TiepNhanDonHangComponent implements AfterViewInit, OnInit {
       next: (response) => {
         selectedDonHang.tinhTrang = 'Đã hủy đơn hàng';
         this.dataSource.data = [...this.dataSource.data];
-        console.log(response);
+        // console.log(response);
         this.toastr.success('Đã hủy đơn hàng thành công!', 'Thông báo', {
           timeOut: 2000,
         });

@@ -38,8 +38,8 @@ export class PaymentResultComponent implements OnInit {
         next: (response) => {
           this.paymentStatus = response.status;
           this.paymentMessage = response.message;
-          console.log('zzzzz');
-          console.log(response);
+          // console.log('zzzzz');
+          // console.log(response);
 
           if (response.status === 'success') {
             this.handlePostPaymentSuccess(response.maDonHang);
@@ -66,8 +66,8 @@ export class PaymentResultComponent implements OnInit {
   }
 
   handlePostPaymentSuccess(maDonHang: string): void {
-    console.log(123444);
-    console.log(maDonHang);
+    // console.log(123444);
+    // console.log(maDonHang);
     
     
     // Send invoice email

@@ -74,5 +74,7 @@ export class HoaDonComponent implements AfterViewInit, OnInit{
     }
     xemHoaDon(id:string):void{
       this.OpenPopup(id,'Xem hóa đơn')
+      // console.log(id);
+      
     }
 }

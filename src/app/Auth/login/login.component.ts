@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit{
             console.error('Đăng nhập bằng Google thất bại:', error);
           }
         );
-        console.log(result);
+        // console.log(result);
 
       },
       error: (err) => {
@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit{
     });
   }
   onGoogleLogin(): void {
-    console.log('demo');
+    // console.log('demo');
 
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       user => {
@@ -126,7 +126,7 @@ export class LoginComponent implements OnInit{
 
           this.authService.googleLogin(googleLoginDto).subscribe(
             response => {
-              console.log(response);
+              // console.log(response);
               this.router.navigateByUrl('/')
             },
             error => {

@@ -44,7 +44,7 @@ export class SuaKhachHangComponent implements OnInit{
   }
 
   initalizeForm():void{
-    console.log('Model:', this.model);
+    // console.log('Model:', this.model);
    this.myForm = new FormGroup({
     maKhachHang: new FormControl(this.model?.maKhachHang),
     tenKhachHang: new FormControl(this.model?.tenKhachHang,[Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
@@ -64,7 +64,7 @@ export class SuaKhachHangComponent implements OnInit{
     if(this.model && this.id){
       this.khachHangServices.suaKhachHang(this.id,this.myForm.value).subscribe({
         next:(response)=>{
-          console.log(response);
+          // console.log(response);
           this.toastr.success('Sửa khách hàng thành công', 'Thông báo', {
             timeOut: 2000,
           });

@@ -103,7 +103,7 @@ export const GuestGuard: CanActivateFn = (route, state) => {
       authService.logout();
       return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } })
     } else {
-      console.log(user.roles);
+      // console.log(user.roles);
 
       if (user.roles.some(role => role === null)) {
         return true;
@@ -141,7 +141,7 @@ export const guestOrCustomerGuard: CanActivateFn = (route, state) => {
       authService.logout();
       return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } })
     } else {
-      console.log(user.roles);
+      // console.log(user.roles);
 
       if (user.roles.some(role => role === null || role === 'Khách hàng')) {
         // Allow guests or customers to access

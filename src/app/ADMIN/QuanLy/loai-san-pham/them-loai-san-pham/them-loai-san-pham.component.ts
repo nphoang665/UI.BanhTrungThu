@@ -58,7 +58,7 @@ export class ThemLoaiSanPhamComponent implements OnInit{
 
     this.loaiSanPhamServices.themLoaiSanPham(request).subscribe({
       next:(response)=>{
-        console.log(response);
+        // console.log(response);
         this.toastr.success('Thêm loại sản phẩm thành công', 'Thông báo', {
           timeOut: 2000,
         });

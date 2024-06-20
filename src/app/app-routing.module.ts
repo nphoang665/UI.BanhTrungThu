@@ -18,13 +18,13 @@ import { QuenMatKhauComponent } from './Auth/QuenMatKhau/quen-mat-khau/quen-mat-
 import { PaymentResultComponent } from './USER/ThanhToan/payment-result/payment-result.component';
 import { ThongTinCaNhanComponent } from './USER/thong-tin-ca-nhan/thong-tin-ca-nhan.component';
 import { LichSuDatHangComponent } from './USER/lich-su-dat-hang/lich-su-dat-hang.component';
-import { XemHoaDonComponent } from './USER/xem-hoa-don/xem-hoa-don.component';
 import { adminGuard, guestOrCustomerGuard } from './Auth/Guard/auth.guard';
 import { HoaDonComponent } from './ADMIN/QuanLy/hoa-don/hoa-don.component';
 import { TiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/tiep-nhan-don-hang.component';
 import { SuaTiepNhanDonHangComponent } from './ADMIN/QuanLy/tiep-nhan-don-hang/sua-tiep-nhan-don-hang/sua-tiep-nhan-don-hang.component';
 import { DemoComponent } from './USER/demo/demo.component';
 import { DanhGiaSanPhamComponent } from './USER/danh-gia-san-pham/danh-gia-san-pham.component';
+import { XemHoaDonComponent } from './ADMIN/QuanLy/hoa-don/xem-hoa-don/xem-hoa-don.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },

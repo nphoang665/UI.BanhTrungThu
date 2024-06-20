@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   login(request: LoginRequest): Observable<LoginResponse> {
-    console.log(request);
+    // console.log(request);
 
 
 
@@ -50,7 +50,7 @@ export class AuthService {
   googleLogin(data: GoogleLoginDto): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${environment.apiBaseUrl}/api/auth/google-login`, data).pipe(
       tap(result => {
-        console.log(result);
+        // console.log(result);
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('user-email', result.email);
           localStorage.setItem('user-roles', result.roles.join(','));

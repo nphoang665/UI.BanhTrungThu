@@ -25,7 +25,7 @@ export class BanhTrungThuComponent implements OnInit {
       .subscribe(
         data => {
           this.loaiSanPhamsWithCounts = data;
-          console.log(this.loaiSanPhamsWithCounts); // Kiểm tra xem dữ liệu có được lấy thành công không
+          // console.log(this.loaiSanPhamsWithCounts); 
         },
         error => {
           console.error('Error fetching loaiSanPhamsWithCounts:', error);

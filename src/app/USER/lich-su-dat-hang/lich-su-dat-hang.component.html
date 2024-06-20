@@ -48,7 +48,7 @@
           </td>
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ sp.tongTien | currency:'VND':'symbol' }}</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm " [ngClass]="getStatusClass(sp.tinhTrang)">{{ sp.tinhTrang }}</td>
-          <button mat-icon-button >
+          <button mat-icon-button (click)="xemHoaDon(sp.maDonHang)">
             <mat-icon svgIcon="icon_eye"></mat-icon>
         </button>
         <button mat-icon-button *ngIf="sp.tinhTrang != 'Đã hủy đơn hàng'&&sp.tinhTrang!='Thanh toán thất bại'&&sp.tinhTrang!='Đã hoàn thành'" (click)="huyDatHang(sp.maDonHang)">

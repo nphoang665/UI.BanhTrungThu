@@ -82,7 +82,7 @@ export class LoaiSanPhamComponent implements AfterViewInit, OnInit  {
   }
   suaLoaiSanPham(id: any): void {
     this.OpenPopupSua(id, 'Sửa loại sản phẩm');
-    console.log(id);
+    // console.log(id);
     
   }
 
