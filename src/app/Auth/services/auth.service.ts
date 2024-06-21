@@ -10,6 +10,7 @@ import { LoginRequest } from '../models/login-request.model';
 import { GoogleLoginDto } from '../models/login-google.model';
 import { isPlatformBrowser } from '@angular/common';
 import { MaXacNhan } from '../../ADMIN/models/ma-xac-nhan.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class AuthService {
 
   constructor(private http: HttpClient,
     private cookieService: CookieService,
+    private toastr:ToastrService,
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
   }
@@ -51,6 +53,9 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${environment.apiBaseUrl}/api/auth/google-login`, data).pipe(
       tap(result => {
         // console.log(result);
+        this.toastr.success('Đăng nhập băng google thành công', 'Thông báo', {
+          timeOut: 2000,
+        });
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('user-email', result.email);
           localStorage.setItem('user-roles', result.roles.join(','));

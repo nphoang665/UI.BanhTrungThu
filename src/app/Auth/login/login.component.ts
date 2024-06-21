@@ -127,6 +127,9 @@ export class LoginComponent implements OnInit{
           this.authService.googleLogin(googleLoginDto).subscribe(
             response => {
               // console.log(response);
+              this.toastr.success('Đăng nhập băng google thành công', 'Thông báo', {
+                timeOut: 2000,
+              });
               this.router.navigateByUrl('/')
             },
             error => {
