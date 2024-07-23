@@ -49,13 +49,13 @@ export class LoginComponent implements OnInit{
   name!: string;
 
   login: FormGroup = new FormGroup({
-    email: new FormControl('',[
+    email: new FormControl('khachhang@gmail.com',[
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(200),
       Validators.pattern(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/),
     ]),
-    password: new FormControl('',[
+    password: new FormControl('khachhang123',[
       Validators.required,
       Validators.minLength(6),
       Validators.maxLength(50),
