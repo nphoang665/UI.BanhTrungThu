@@ -90,7 +90,7 @@ export class HeaderComponent implements OnInit{
   onSearchChange(): void {
     if (this.searchTerm) {
       this.filteredProducts = this.products.filter(product =>
-        product.tenSanPham.toLowerCase().includes(this.searchTerm.toLowerCase())
+        product.tinhTrang=='Đang hoạt động'&& product.tenSanPham.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
       this.showResults = true;
     } else {

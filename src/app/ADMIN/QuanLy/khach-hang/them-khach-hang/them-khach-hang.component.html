@@ -27,6 +27,9 @@
           <p *ngIf="myForm.get('tenKhachHang')?.errors?.['maxlength']" class="text-red-600 dark:text-red-500">
             Tên khách hàng quá dài.
          </p>
+         <p *ngIf="myForm.get('tenKhachHang')?.errors?.['pattern']" class="text-red-600 dark:text-red-500">
+          Tên khách hàng không được chứa số và ký tự đặc biệt.
+       </p>
         </div>
         </div>
 

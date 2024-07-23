@@ -145,52 +145,86 @@ export class LoginComponent implements OnInit{
       }
     );
   }
+  // onFormSubmit() {
+  //   // console.log(this.login.value);
+  //   this.authService.login(this.login.value).subscribe({
+  //     next: (response) => {
+  //       // Set auth cookie
+  //       this.cookieService.set('Authorization', `Bearer ${response.token}`,
+  //         undefined, '/', undefined, true, 'Strict');
+
+  //       this.authService.setUser(response);
+  //       // Set User
+
+  //       this.authService.setUser({
+  //         email: response.email,
+  //         roles: response.roles
+  //       });
+
+  //       if (isPlatformBrowser(this.platformId)) {
+  //         if (response.khachHang != null) {
+  //           localStorage.setItem('NguoiDung', JSON.stringify(response.khachHang));
+  //         }
+  //       }
+
+  //       // if (isPlatformBrowser(this.platformId)) {
+  //       //   localStorage.setItem('NguoiDung',JSON.stringify(response.khachHang));
+
+  //       // }
+
+
+  //       //Redirect based on user role
+  //       if (response.roles.includes('Khách hàng')) {
+  //         this.router.navigateByUrl('/home');
+  //       } else if (response.roles.includes('Admin')) {
+  //         this.router.navigateByUrl('/admin/TongQuan');
+  //       }
+
+  //       this.toastr.success('Đăng nhập thành công', 'Thông báo', {
+  //         timeOut: 2000,
+  //       });
+  //     },
+  //     error: (error) => {
+  //       // Handle error
+  //       console.error(error);
+  //       this.toastr.error('Đăng nhập thất bại', 'Lỗi', {
+  //         timeOut: 2000,
+  //       });
+  //     }
+  //   });
+  // }
+
   onFormSubmit() {
-    // console.log(this.login.value);
     this.authService.login(this.login.value).subscribe({
-      next: (response) => {
-        // Set auth cookie
-        this.cookieService.set('Authorization', `Bearer ${response.token}`,
-          undefined, '/', undefined, true, 'Strict');
+        next: (response) => {
+            this.cookieService.set('Authorization', `Bearer ${response.token}`,
+                undefined, '/', undefined, true, 'Strict');
 
-        this.authService.setUser(response);
-        // Set User
+            this.authService.setUser(response);
 
-        this.authService.setUser({
-          email: response.email,
-          roles: response.roles
-        });
+            if (isPlatformBrowser(this.platformId)) {
+                if (response.khachHang != null) {
+                    localStorage.setItem('NguoiDung', JSON.stringify(response.khachHang));
+                }
+            }
 
-        if (isPlatformBrowser(this.platformId)) {
-          if (response.khachHang != null) {
-            localStorage.setItem('NguoiDung', JSON.stringify(response.khachHang));
-          }
+            if (response.roles.includes('Khách hàng')) {
+                this.router.navigateByUrl('/home');
+            } else if (response.roles.includes('Admin')) {
+                this.router.navigateByUrl('/admin/TongQuan');
+            }
+
+            this.toastr.success('Đăng nhập thành công', 'Thông báo', {
+                timeOut: 2000,
+            });
+        },
+        error: (error) => {
+            console.error(error);
+            this.toastr.error(error.error.error, 'Lỗi', {
+                timeOut: 2000,
+            });
         }
-
-        // if (isPlatformBrowser(this.platformId)) {
-        //   localStorage.setItem('NguoiDung',JSON.stringify(response.khachHang));
-
-        // }
-
-
-        //Redirect based on user role
-        if (response.roles.includes('Khách hàng')) {
-          this.router.navigateByUrl('/home');
-        } else if (response.roles.includes('Admin')) {
-          this.router.navigateByUrl('/admin/TongQuan');
-        }
-
-        this.toastr.success('Đăng nhập thành công', 'Thông báo', {
-          timeOut: 2000,
-        });
-      },
-      error: (error) => {
-        // Handle error
-        console.error(error);
-        this.toastr.error('Đăng nhập thất bại', 'Lỗi', {
-          timeOut: 2000,
-        });
-      }
     });
-  }
+}
+
 }

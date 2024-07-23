@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ThemKhachHangComponent implements OnInit{
 
   myForm:FormGroup = new FormGroup({
-    tenKhachHang:new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
+    tenKhachHang:new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(70),Validators.pattern('^[a-zA-ZÀ-ỹ ]*$')]),
     // soDienThoai:new FormControl('',[Validators.required, Validators.minLength(7), Validators.maxLength(11)]),
     // email:new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
     soDienThoai: new FormControl('', {
