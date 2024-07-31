@@ -62,7 +62,7 @@ export class SanPhamService {
         // Lọc các sản phẩm có ngày nhập gần đây và tình trạng "Đang hoạt động"
         return sanPhams.filter(sp => {
           const ngayThem = new Date(sp.ngayThem);
-          const thoiGianToiDa = 7 * 24 * 60 * 60 * 1000; // 7 ngày tính bằng milliseconds
+          const thoiGianToiDa = 100 * 24 * 60 * 60 * 1000; // 7 ngày tính bằng milliseconds
           const isActive = sp.tinhTrang === 'Đang hoạt động';
           const isRecent = ngayHienTai.getTime() - ngayThem.getTime() <= thoiGianToiDa;
           return isActive && isRecent;
